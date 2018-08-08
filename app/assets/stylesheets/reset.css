@@ -48,3 +48,10 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.logo {
+	font-size: 28px;
+	font-weight: 600;
+	letter-spacing: -2px;
+	display: inline;
+}

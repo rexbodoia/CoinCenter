@@ -2,9 +2,9 @@
   z-index: 0;
   width: 100%;
   font-weight: 400;
-  font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   margin: 0px;
-  padding: 9px;
+  padding: 10px 9px;
   border-width: 1px;
   border-style: solid;
   border-color: #ddd;
@@ -14,9 +14,11 @@
   font-size: 14px;
   line-height: 20px;
   color: #555;
+  box-sizing: border-box;
+  margin-bottom: 5px;
 }
 
-.signin-header {
+.signin-form-header {
   font-family: 'proxima-nova',helvetica 'neue',Helvetica,Arial,sans-serif;
   margin-bottom: 40px;
   margin: 0 auto;
@@ -26,6 +28,8 @@
   font-size: 30px;
   font-weight: 400;
   line-height: 1.13;
+  letter-spacing: -1px;
+  text-rendering: optimizelegibility;
 }
 
 .signin-input-container {
@@ -42,4 +46,84 @@
   border-radius: 4px;
   margin-bottom: 24px;
   box-shadow: 0 1px 46px -4px rgba(0,0,0,.28);
+  padding-bottom: 37px;
+}
+
+.signup-link {
+  text-decoration: none;
+  display: inline;
+  margin-left: 2px;
+}
+
+.signin-link {
+  text-decoration: none;
+  display: inline;
+  margin-right: 15px;
+}
+
+.nav-links-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 12px;
+  margin-top: -1px;
+}
+
+.signin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 85%;
+  margin: 0 auto;
+  padding: 16px 0;
+  padding-bottom: 17px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: helvetica neue,Helvetica,Arial,sans-serif;
+}
+
+.signup-link-container {
+  border: solid white 2px;
+  text-shadow: none;
+  padding: 8px 10px;
+  border-radius: 2px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+.no-account-container {
+  display: flex;
+  justify-content: center;
+}
+
+.no-account {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.no-account:hover {
+  text-decoration: underline;
+}
+
+.signin-button {
+  color: white;
+  font-weight: 600;
+  border-radius: 2px;
+  border-color: #137dba;
+  font-size: 11px;
+  text-transform: uppercase;
+  height: 42px;
+  letter-spacing: .05em;
+  padding: 1em 2em;
+  transition: all .15s ease;
+  background: #2b71b1;
+}
+
+.signin-button:hover {
+  background-image: linear-gradient(#0e86c4,#0e86c4);
+  box-shadow: 0 2px 1px rgba(0,0,0,.1);
 }

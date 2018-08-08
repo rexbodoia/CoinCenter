@@ -31,7 +31,7 @@ class SigninForm extends React.Component {
     return (
       <div className='auth-container'>
         <div>
-          <h1 className='signin-header'>Sign in to Coincenter</h1>
+          <h1 className='signin-form-header'>Sign in to Coincenter</h1>
 
           <form onSubmit={this.handleSubmit} className='signin-form'>
 
@@ -43,11 +43,11 @@ class SigninForm extends React.Component {
               <input type='password' placeholder='Password' onChange={this.update('password')} className='signin-input'></input>
             </div>
 
-            <input type='submit' value='Sign In'></input>
+            <input class='signin-button' type='submit' value='Sign In'></input>
           </form>
-
-          <Link to='/signup'>Sign Up</Link>
-
+          <div className='no-account-container'>
+            <Link to='/signup' className='no-account'>Don't have an account?</Link>
+          </div>
           <ul>
             {this.props.errors.map(error => {
               <li>{error}</li>
