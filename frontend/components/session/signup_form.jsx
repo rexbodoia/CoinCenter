@@ -37,18 +37,24 @@ class SignupForm extends React.Component {
 
           <form onSubmit={this.handleSubmit} className='auth-form'>
 
-            <div className='name-container'>
-              <input type='text' onChange={this.update('f_name')} placeholder='First Name' className='first-name'></input>
+            <h1 className='form-header first-name-header'>First Name</h1>
+            <h1 className='form-header last-name-header'>Last Name</h1>
 
-              <input type='text' onChange={this.update('l_name')} placeholder='Last Name' className='last-name'></input>
+            <div className='name-container input-container'>
+              <input type='text' onChange={this.update('f_name')} placeholder='First Name' className='first-name-input signup-input'></input>
+
+              <input type='text' onChange={this.update('l_name')} placeholder='Last Name' className='last-name-input signup-input'></input>
             </div>
-            <br/>
 
-            <input type='email' onChange={this.update('email')} placeholder='Email'></input>
-            <br/>
+            <div className='input-container'>
+              <h1 className='form-header'>Email</h1>
+              <input type='email' onChange={this.update('email')} placeholder='Email' className='signup-input'></input>
+            </div>
 
-            <input type='password' onChange={this.update('password')} placeholder='Choose a password'></input>
-            <br/>
+            <div className='input-container'>
+              <h1 className='form-header'>Password</h1>
+              <input type='password' onChange={this.update('password')} placeholder='Choose a password' className='signup-input'></input>
+            </div>
 
             <input type='submit' value='Create account'></input>
           </form>
