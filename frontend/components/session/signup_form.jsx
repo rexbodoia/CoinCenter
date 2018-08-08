@@ -28,9 +28,6 @@ class SignupForm extends React.Component {
   }
 
   render () {
-    // if(currentUser){
-    //   <Redirect to="/"/>
-    // }
     return (
       <div>
         <h1>Sign Up</h1>

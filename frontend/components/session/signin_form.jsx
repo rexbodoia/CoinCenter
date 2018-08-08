@@ -28,9 +28,6 @@ class SigninForm extends React.Component {
   }
 
   render () {
-    // if(currentUser){
-    //   <Redirect to="/"/>
-    // }
     return (
       <div>
         <h1>Sign In</h1>
