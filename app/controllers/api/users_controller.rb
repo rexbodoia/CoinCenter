@@ -5,14 +5,13 @@ class Api::UsersController < ApplicationController
       login(@user)
       render '/api/users/show'
     else
-      flash[:errors] = @user.errors.full_messages, status: 422
-      render '/login'
+      render json: @user.errors.full_messages, status: 422
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :password)
+    params.require(:user).permit(:username, :password, :f_name, :l_name, :email, :image_url, :phone_number, :card_digest)
   end
 end

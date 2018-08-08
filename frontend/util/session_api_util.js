@@ -1,15 +1,15 @@
-export const signup = newUser => (
+export const signup = user => (
   $.ajax({
     method: 'POST',
     url: '/api/users',
-    data: { newUser }
+    data: { user }
   })
 );
 
 export const login = user => (
   $.ajax({
     method: 'POST',
-    url: `api/session`,
+    url: `/api/session`,
     data: { user }
   })
 );
