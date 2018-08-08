@@ -60,7 +60,7 @@ class SignupForm extends React.Component {
           <input type='submit' value='Sign Up'></input>
         </form>
 
-        <Link to='/login'>Log In</Link>
+        <Link to='/signin'>Sign In</Link>
 
         <ul>
           {this.props.errors.map(error => {

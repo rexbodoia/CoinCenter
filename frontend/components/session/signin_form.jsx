@@ -2,7 +2,7 @@ import React from 'react';
 import { merge } from 'lodash';
 import { withRouter, Link, Redirect } from 'react-router-dom';
 
-class LoginForm extends React.Component {
+class SigninForm extends React.Component {
   constructor(props){
     super(props);
 
@@ -33,7 +33,7 @@ class LoginForm extends React.Component {
     // }
     return (
       <div>
-        <h1>Log In</h1>
+        <h1>Sign In</h1>
 
         <form onSubmit={this.handleSubmit}>
 
@@ -45,10 +45,10 @@ class LoginForm extends React.Component {
             <input type='password' onChange={this.update('password')}></input>
           </label>
 
-          <input type='submit' value='Log In'></input>
+          <input type='submit' value='Sign In'></input>
         </form>
 
-        <Link to='/login'>Log In</Link>
+        <Link to='/signup'>Sign Up</Link>
 
         <ul>
           {this.props.errors.map(error => {
@@ -60,4 +60,4 @@ class LoginForm extends React.Component {
   }
 }
 
-export default withRouter(LoginForm);
+export default withRouter(SigninForm);

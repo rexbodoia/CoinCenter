@@ -18,8 +18,8 @@ const receiveErrors = errors => ({
   errors
 });
 
-export const login = user => dispatch => (
-  ApiUtil.login(user).then(currentUser => dispatch(receiveCurrentUser(currentUser)))
+export const signin = user => dispatch => (
+  ApiUtil.signin(user).then(currentUser => dispatch(receiveCurrentUser(currentUser)))
 );
 
 export const logout = () => dispatch => (
