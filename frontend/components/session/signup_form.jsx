@@ -7,7 +7,9 @@ class SignupForm extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      f_name: '',
+      l_name: '',
+      email: '',
       password: ''
     };
 
@@ -18,7 +20,7 @@ class SignupForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = merge({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push('/'));
+    this.props.processForm(user);
   }
 
   update(field){
@@ -29,41 +31,36 @@ class SignupForm extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1>Sign Up</h1>
+      <div className='auth-container'>
+        <div>
+          <h1 className='auth-header'>Create your account</h1>
 
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className='auth-form'>
 
-          <label>Username:
-            <input type='text' onChange={this.update('username')}></input>
-          </label>
+            <div className='name-container'>
+              <input type='text' onChange={this.update('f_name')} placeholder='First Name' className='first-name'></input>
 
-          <label>Password:
-            <input type='password' onChange={this.update('password')}></input>
-          </label>
+              <input type='text' onChange={this.update('l_name')} placeholder='Last Name' className='last-name'></input>
+            </div>
+            <br/>
 
-          <label>First Name:
-            <input type='text' onChange={this.update('f_name')}></input>
-          </label>
+            <input type='email' onChange={this.update('email')} placeholder='Email'></input>
+            <br/>
 
-          <label>Last Name:
-            <input type='text' onChange={this.update('l_name')}></input>
-          </label>
+            <input type='password' onChange={this.update('password')} placeholder='Choose a password'></input>
+            <br/>
 
-          <label>Email:
-            <input type='text' onChange={this.update('email')}></input>
-          </label>
+            <input type='submit' value='Create account'></input>
+          </form>
 
-          <input type='submit' value='Sign Up'></input>
-        </form>
+          <Link to='/signin'>Sign In</Link>
 
-        <Link to='/signin'>Sign In</Link>
-
-        <ul>
-          {this.props.errors.map(error => {
-            <li>{error}</li>
-          })}
-        </ul>
+          <ul>
+            {this.props.errors.map(error => {
+              <li>{error}</li>
+            })}
+          </ul>
+        </div>
       </div>
     );
   }

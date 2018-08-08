@@ -7,7 +7,7 @@ class SigninForm extends React.Component {
     super(props);
 
     this.state = {
-      username: '',
+      email: '',
       password: ''
     };
 
@@ -18,7 +18,7 @@ class SigninForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = merge({}, this.state);
-    this.props.processForm(user).then(() => this.props.history.push('/'));
+    this.props.processForm(user);
   }
 
   update(field){
@@ -29,29 +29,29 @@ class SigninForm extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1>Sign In</h1>
+      <div className='auth-container'>
+        <div>
+          <h1 className='auth-header'>Sign in to CoinCenter</h1>
 
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className='auth-form'>
 
-          <label>Username:
-            <input type='text' onChange={this.update('username')}></input>
-          </label>
+            <input type='email' placeholder='Email' onChange={this.update('email')}></input>
+            <br/>
 
-          <label>Password:
-            <input type='password' onChange={this.update('password')}></input>
-          </label>
+            <input type='password' placeholder='Password' onChange={this.update('password')}></input>
+            <br/>
 
-          <input type='submit' value='Sign In'></input>
-        </form>
+            <input type='submit' value='Sign In'></input>
+          </form>
 
-        <Link to='/signup'>Sign Up</Link>
+          <Link to='/signup'>Sign Up</Link>
 
-        <ul>
-          {this.props.errors.map(error => {
-            <li>{error}</li>
-          })}
-        </ul>
+          <ul>
+            {this.props.errors.map(error => {
+              <li>{error}</li>
+            })}
+          </ul>
+        </div>
       </div>
     );
   }
