@@ -8,7 +8,7 @@ import NavHeader from './default/nav_header';
 
 const App = () => (
   <div>
-    <h1>CoinCenter</h1>
+    <h1>coincenter</h1>
     {/* <Switch>
       <Route exact path='/' component={HomePage} />
       <Route path='/' component={NavHeader} />

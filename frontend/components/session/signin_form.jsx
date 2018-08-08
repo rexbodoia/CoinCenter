@@ -31,15 +31,17 @@ class SigninForm extends React.Component {
     return (
       <div className='auth-container'>
         <div>
-          <h1 className='auth-header'>Sign in to CoinCenter</h1>
+          <h1 className='signin-header'>Sign in to Coincenter</h1>
 
-          <form onSubmit={this.handleSubmit} className='auth-form'>
+          <form onSubmit={this.handleSubmit} className='signin-form'>
 
-            <input type='email' placeholder='Email' onChange={this.update('email')}></input>
-            <br/>
+            <div className='signin-input-container'>
+              <input type='email' placeholder='Email' onChange={this.update('email')} className='signin-input'></input>
+            </div>
 
-            <input type='password' placeholder='Password' onChange={this.update('password')}></input>
-            <br/>
+            <div className='signin-input-container'>
+              <input type='password' placeholder='Password' onChange={this.update('password')} className='signin-input'></input>
+            </div>
 
             <input type='submit' value='Sign In'></input>
           </form>
