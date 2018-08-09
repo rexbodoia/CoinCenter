@@ -18,6 +18,7 @@ class SignupForm extends React.Component {
     this.update = this.update.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
     this.errors = this.errors.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
   }
 
   handleSubmit(e) {
@@ -38,16 +39,32 @@ class SignupForm extends React.Component {
   }
 
   errors() {
-    console.log(this.props.errors);
     if(this.props.errors.length !== 0) {
       return (
         <ul className='errors'>
-        {this.props.errors.map((error, idx) => {
-          return <li key={idx}>{error}</li>
-        })}
+          {/* <span className='x-button' onClick={this.clearErrors}>x</span> */}
+          {this.props.errors.map((error, idx) => {
+            if(error === "F name can't be blank"){
+              error = "First name can't be blank";
+            } else if (error === "L name can't be blank") {
+              error = "Last name can't be blank";
+            } else if (error === "Password is too short (minimum is 8 characters)") {
+              error = "Password is too short";
+            }
+            if (idx === 0) {
+              return <li key={idx}>{error}<span className='x-button' onClick={this.clearErrors}>x</span></li>
+            } else {
+              return <li key={idx}>{error}</li>
+            }
+          })}
         </ul>
       );
     }
+  }
+
+  clearErrors(e) {
+    e.preventDefault();
+    this.props.clearErrors();
   }
 
   update(field){

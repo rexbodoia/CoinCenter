@@ -23,19 +23,28 @@ input {
 	text-align: center;
 	font-size: 18px;
 	font-weight: 600;
-	margin-top: 60px;
-	margin-bottom: -20px;
 	background-color: #f2dede;
 	border-color: #eed3d7;
 	color: #b94a48;
-	padding: 8px 35px 8px 14px;
-  margin-bottom: 20px;
+	padding: 4px 14px 8px 14px;
 	text-shadow: 0 1px 0 rgba(255,255,255,.5);
   border: 1px solid #fbeed5;
   border-radius: 4px;
 	font-family: helvetica neue,Helvetica,Arial,sans-serif;
   font-size: 14px;
   line-height: 20px;
-	width: 35%;
+	width: 25%;
 	margin: 0 auto;
+}
+
+.x-button {
+	float: right;
+	font-weight: 600;
+	color: #B3B3B3;
+	font-size: 20px;
+	opacity: .8;
+}
+
+.x-button:hover {
+	cursor: pointer;
 }
