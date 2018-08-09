@@ -2,6 +2,7 @@ import React from 'react';
 import { merge } from 'lodash';
 import { withRouter, Link, Redirect } from 'react-router-dom';
 import SigninHeader from './signin_header';
+import AuthErrors from './auth_errors';
 
 class SigninForm extends React.Component {
   constructor(props){
@@ -15,6 +16,12 @@ class SigninForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+    this.errors = this.errors.bind(this);
+    this.clearErrors = this.clearErrors.bind(this);
+  }
+
+  componentWillUnmount(){
+    this.props.clearErrors();
   }
 
   handleSubmit(e) {
@@ -34,6 +41,19 @@ class SigninForm extends React.Component {
     this.props.demoLogin(user);
   }
 
+  errors() {
+    if(this.props.errors.length !== 0) {
+      return (
+        <AuthErrors errors={this.props.errors} clearErrors={this.clearErrors}/>
+      );
+    }
+  }
+
+  clearErrors(e) {
+    e.preventDefault();
+    this.props.clearErrors();
+  }
+
   update(field){
     return (e) => {
       this.setState({[field]: e.target.value});
@@ -44,6 +64,8 @@ class SigninForm extends React.Component {
     return (
       <div>
         <SigninHeader history={this.props.history} />
+
+        {this.errors()}
         <div className='auth-container'>
           <div>
             <h1 className='signin-form-header'>Sign in to Coincenter</h1>
@@ -65,12 +87,6 @@ class SigninForm extends React.Component {
             <div className='no-account-container'>
               <Link to='/signup' className='no-account'>Don't have an account?</Link>
             </div>
-
-            <ul>
-              {this.props.errors.map(error => {
-                <li>{error}</li>
-              })}
-            </ul>
           </div>
         </div>
       </div>
