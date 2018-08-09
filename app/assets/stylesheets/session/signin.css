@@ -132,7 +132,6 @@
   transition: all .15s ease;
   background: #2b71b1;
   background-image: linear-gradient(#1d90cb,#0e86c4);
-  /* 137DBA */
   margin-bottom: 15px;
 }
 
@@ -157,10 +156,6 @@
 }
 
 .signin-demo-button:hover {
-	/* background-color: rgb(56, 129, 57); */
-	/* background-color: rgb(10, 146, 12); */
-	/* background-color: rgb(11, 155, 13); */
-  /*transition: 0.25s ease 0s; */
   background-image: linear-gradient(#02B808,#02B808);
   box-shadow: 0 2px 1px rgba(0,0,0,.1);
 }
