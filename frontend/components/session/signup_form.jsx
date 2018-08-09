@@ -36,7 +36,6 @@ class SignupForm extends React.Component {
           <h1 className='signup-form-header'>Create your account</h1>
 
           <form onSubmit={this.handleSubmit} className='signup-form'>
-
             <h1 className='form-header first-name-header'>First Name</h1>
             <h1 className='form-header last-name-header'>Last Name</h1>
 

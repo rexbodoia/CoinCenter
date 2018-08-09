@@ -18,7 +18,7 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 	color: white;
-	font-family: "Avenir Next", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+	/* font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; */
   -webkit-font-smoothing: antialiased;
 }
 /* HTML5 display-role reset for older browsers */
@@ -50,8 +50,9 @@ table {
 }
 
 .logo {
-	font-size: 28px;
-	font-weight: 600;
+	font-size: 27px;
+	font-weight: 500;
 	letter-spacing: -2px;
 	display: inline;
+	margin-bottom: 5px;
 }

@@ -17,14 +17,9 @@ class SignupHeader extends React.Component {
         <h1 className='logo'>coincenter</h1>
 
         <div className='nav-links-container'>
-          <Link className='signup-other-link' to='/signin'>Log In</Link>
+          <Link className='signup-other-link' to='/signin'>Log in</Link>
 
-          {/* <div className='signup-same-container'> */}
-
-            <button className='signup-same-button' onClick={() => this.forceUpdate()}>Sign up</button>
-
-          {/* </div> */}
-
+          <button className='signup-same-button' onClick={() => this.forceUpdate()}>Sign up</button>
         </div>
       </div>
     );

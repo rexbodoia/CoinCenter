@@ -14,7 +14,7 @@
   background: none;
 }
 
- .first-name-input {
+.first-name-input {
 	margin-right: 14px;
 	margin-bottom: 0;
 }
@@ -52,6 +52,7 @@
 	margin: 0 auto;
 	text-align: center;
 	margin-bottom: 40px;
+	font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .form-header {
@@ -106,9 +107,10 @@
 .signup-other-link {
   text-decoration: none;
   display: inline;
-  margin-right: 15px;
+  margin-right: 18px;
 	font-size: 16px;
 	font-weight: 500;
+	font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .signup-nav-links-container {
@@ -132,6 +134,8 @@
 }
 
 .signup-same-button {
+	text-decoration: none;
+	display: inline;
   border: solid white 1px;
   text-shadow: none;
   padding: 10px 16px;
@@ -142,21 +146,19 @@
   vertical-align: middle;
   margin-top: 0;
   margin-bottom: 2px;
+	margin-left: 2px;
 	color: white;
 	background-color: inherit;
   transition: all 150ms ease 0s;
 	font-weight: 500;
 	cursor: pointer;
 	font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
 }
 
 .signup-same-button:hover {
 	background-color: white;
 	color: rgb(6, 103, 208);
 }
-
-
 
 .no-account-container {
   display: flex;
@@ -176,7 +178,7 @@
 .signup-button {
   color: white;
   font-weight: 600;
-	    font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   border-radius: 2px;
   border-color: rgb(46, 123, 196);
   font-size: 18px;

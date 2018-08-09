@@ -49,16 +49,35 @@
   padding-bottom: 37px;
 }
 
-.signin-other-link {
-  text-decoration: none;
-  display: inline;
-  margin-left: 2px;
-}
-
 .signin-same-link {
   text-decoration: none;
   display: inline;
   margin-right: 15px;
+}
+
+.signin-other-button {
+  text-decoration: none;
+	display: inline;
+  border: solid white 1px;
+  text-shadow: none;
+  border-radius: 2px;
+  line-height: 1.15;
+  text-align: center;
+  vertical-align: middle;
+  margin-top: 0;
+  margin-bottom: 2px;
+	margin-left: 2px;
+	color: white;
+	background-color: inherit;
+  transition: all 150ms ease 0s;
+	font-weight: 600;
+	cursor: pointer;
+  line-height: 20px;
+  padding: 8px 10px;
+  font-size: 13px;
+  margin: 0 0 0 5px;
+  border: 2px solid #fff;
+  font-family: helvetica 'neue',Helvetica,Arial,sans-serif;
 }
 
 .signin-nav-links-container {
@@ -75,23 +94,10 @@
   align-items: center;
   width: 85%;
   margin: 0 auto;
-  padding: 16px 0;
-  padding-bottom: 17px;
+  padding: 14px 0 18px 0;
   font-size: 13px;
   font-weight: 600;
   font-family: helvetica neue,Helvetica,Arial,sans-serif;
-}
-
-.signin-other-container {
-  border: solid white 2px;
-  text-shadow: none;
-  padding: 8px 10px;
-  border-radius: 2px;
-  line-height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  margin-top: 0;
-  margin-bottom: 2px;
 }
 
 .no-account-container {
