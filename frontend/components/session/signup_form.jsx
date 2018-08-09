@@ -15,11 +15,23 @@ class SignupForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = merge({}, this.state);
+    this.props.processForm(user);
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    const user = {
+      f_name: 'guest',
+      l_name: 'user',
+      email: 'guest@user.com',
+      password: '123456'
+    }
     this.props.processForm(user);
   }
 
@@ -30,6 +42,7 @@ class SignupForm extends React.Component {
   }
 
   render () {
+    console.log(this.props);
     return (
       <div className='auth-container'>
         <div>
@@ -55,7 +68,9 @@ class SignupForm extends React.Component {
               <input type='password' onChange={this.update('password')} placeholder='Choose a password' className='signup-input'></input>
             </div>
 
-            <input type='submit' value='Create account' className='signup-button'></input>
+            <input type='submit' name='action' value='Create account' className='signup-button'></input>
+
+            <input onClick={this.handleDemo} type='submit' name='action' value='Demo login'></input>
           </form>
 
           <div className='have-account'>

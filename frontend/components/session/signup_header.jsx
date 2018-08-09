@@ -19,11 +19,11 @@ class SignupHeader extends React.Component {
         <div className='nav-links-container'>
           <Link className='signup-other-link' to='/signin'>Log in</Link>
 
-          <button className='signup-same-button' onClick={() => this.forceUpdate()}>Sign up</button>
+          <span className='signup-same-button' onClick={(e) => e.preventDefault()}>Sign up</span>
         </div>
       </div>
     );
   }
 }
 
-export default withRouter(SignupHeader);
+export default SignupHeader;

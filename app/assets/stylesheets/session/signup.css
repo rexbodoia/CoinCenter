@@ -98,12 +98,6 @@
 	text-decoration: inherit;
 }
 
-.signup-same-button {
-  text-decoration: none;
-  display: inline;
-  margin-left: 2px;
-}
-
 .signup-other-link {
   text-decoration: none;
   display: inline;
@@ -147,12 +141,13 @@
   margin-top: 0;
   margin-bottom: 2px;
 	margin-left: 2px;
-	color: white;
-	background-color: inherit;
   transition: all 150ms ease 0s;
 	font-weight: 500;
 	cursor: pointer;
 	font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  margin-left: 2px;
+	background-color: inherit;
+	color: white;
 }
 
 .signup-same-button:hover {
