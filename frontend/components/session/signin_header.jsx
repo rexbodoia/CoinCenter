@@ -17,7 +17,8 @@ class SigninHeader extends React.Component {
         <h1 className='logo'>coincenter</h1>
 
         <div className='signin-nav-links-container'>
-          <Link className='signin-same-link' to='/signin'>Sign In</Link>
+          {/* <Link className='signin-same-link' to='/signin'>Sign In</Link> */}
+          <span className='signin-same-link' onClick={(e) => e.preventDefault()}>Sign In</span>
 
           <button className='signin-other-button' onClick={() => this.signupRedirect()}>Sign Up</button>
         </div>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { signup, signin } from '../../actions/session_actions';
 
 const mapStateToProps = state => ({
-  errors: Object.values(state.errors),
+  errors: state.errors.session,
   currentUser: state.entities.users[1]
 });
 

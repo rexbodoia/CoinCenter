@@ -56,9 +56,9 @@ class SignupForm extends React.Component {
               <h1 className='form-header last-name-header'>Last Name</h1>
 
               <div className='name-container signup-input-container'>
-                <input type='text' onChange={this.update('f_name')} placeholder='First Name' className='first-name-input signup-input'></input>
+                <input type='text' onChange={this.update('f_name')} placeholder='First Name' className='first-name-input signup-input' required></input>
 
-                <input type='text' onChange={this.update('l_name')} placeholder='Last Name' className='last-name-input signup-input'></input>
+                <input type='text' onChange={this.update('l_name')} placeholder='Last Name' className='last-name-input signup-input' required></input>
               </div>
 
               <div className='signup-input-container'>
@@ -68,12 +68,12 @@ class SignupForm extends React.Component {
 
               <div className='signup-input-container'>
                 <h1 className='form-header'>Password</h1>
-                <input type='password' onChange={this.update('password')} placeholder='Choose a password' className='signup-input'></input>
+                <input type='password' onChange={this.update('password')} placeholder='Choose a password' className='signup-input' required></input>
               </div>
 
               <input type='submit' value='Create account' className='signup-button'></input>
 
-              <input onClick={this.handleDemo} type='submit' className='demo-button' value='Demo login'></input>
+              <input onClick={this.handleDemo} type='submit' className='signup-demo-button' value='Demo login'></input>
             </form>
 
             <div className='have-account'>
@@ -82,8 +82,8 @@ class SignupForm extends React.Component {
             </div>
 
             <ul>
-              {this.props.errors.map(error => {
-                <li>{error}</li>
+              {this.props.errors.map((error, idx) => {
+                return <li key={idx}>{error}</li>
               })}
             </ul>
           </div>

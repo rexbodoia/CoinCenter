@@ -14,12 +14,24 @@ class SigninForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
     const user = merge({}, this.state);
     this.props.processForm(user);
+  }
+
+  handleDemo(e) {
+    e.preventDefault();
+    const user = {
+      f_name: 'guest',
+      l_name: 'user',
+      email: 'guest@user.com',
+      password: '123456'
+    }
+    this.props.demoLogin(user);
   }
 
   update(field){
@@ -46,6 +58,8 @@ class SigninForm extends React.Component {
               </div>
 
               <input className='signin-button' type='submit' value='Sign In'></input>
+
+              <input onClick={this.handleDemo} type='submit' className='signin-demo-button' value='Demo login'></input>
             </form>
 
             <div className='no-account-container'>
