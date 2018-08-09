@@ -10,10 +10,10 @@ class SigninHeader extends React.Component {
     return (
       <div className='signin-header'>
         <h1 className='logo'>coincenter</h1>
-        <div className='nav-links-container'>
-          <Link className='signin-link' to='/signin'>Sign in</Link>
-          <div className='signup-link-container'>
-            <Link className='signup-link' to='/signup'>Sign Up</Link>
+        <div className='signin-nav-links-container'>
+          <Link className='signin-same-link' to='/signin'>Sign In</Link>
+          <div className='signin-other-container'>
+            <Link className='signin-other-link' to='/signup'>Sign Up</Link>
           </div>
         </div>
       </div>

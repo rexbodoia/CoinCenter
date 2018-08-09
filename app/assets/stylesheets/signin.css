@@ -49,19 +49,19 @@
   padding-bottom: 37px;
 }
 
-.signup-link {
+.signin-other-link {
   text-decoration: none;
   display: inline;
   margin-left: 2px;
 }
 
-.signin-link {
+.signin-same-link {
   text-decoration: none;
   display: inline;
   margin-right: 15px;
 }
 
-.nav-links-container {
+.signin-nav-links-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -82,7 +82,7 @@
   font-family: helvetica neue,Helvetica,Arial,sans-serif;
 }
 
-.signup-link-container {
+.signin-other-container {
   border: solid white 2px;
   text-shadow: none;
   padding: 8px 10px;
@@ -121,6 +121,7 @@
   padding: 1em 2em;
   transition: all .15s ease;
   background: #2b71b1;
+  background-image: linear-gradient(#1d90cb,#0e86c4);
 }
 
 .signin-button:hover {

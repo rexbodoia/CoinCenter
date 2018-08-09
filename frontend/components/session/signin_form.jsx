@@ -43,7 +43,7 @@ class SigninForm extends React.Component {
               <input type='password' placeholder='Password' onChange={this.update('password')} className='signin-input'></input>
             </div>
 
-            <input class='signin-button' type='submit' value='Sign In'></input>
+            <input className='signin-button' type='submit' value='Sign In'></input>
           </form>
           <div className='no-account-container'>
             <Link to='/signup' className='no-account'>Don't have an account?</Link>

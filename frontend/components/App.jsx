@@ -6,6 +6,7 @@ import SigninFormContainer from './session/signin_form_container';
 import SignupFormContainer from './session/signup_form_container';
 import NavHeader from './default/nav_header';
 import SigninHeader from './session/signin_header';
+import SignupHeader from './session/signup_header';
 
 const App = () => (
   <div>
@@ -15,6 +16,7 @@ const App = () => (
       <Route path='/' component={NavHeader} />
     </Switch> */}
     <AuthRoute path='/signin' component={SigninHeader} />
+    <AuthRoute path='/signup' component={SignupHeader} />
     <AuthRoute path='/signin' component={SigninFormContainer} />
     <AuthRoute path='/signup' component={SignupFormContainer} />
   </div>

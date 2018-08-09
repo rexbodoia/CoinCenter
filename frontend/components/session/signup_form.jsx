@@ -33,7 +33,7 @@ class SignupForm extends React.Component {
     return (
       <div className='auth-container'>
         <div>
-          <h1 className='signup-header'>Create your account</h1>
+          <h1 className='signup-form-header'>Create your account</h1>
 
           <form onSubmit={this.handleSubmit} className='signup-form'>
 
@@ -48,7 +48,7 @@ class SignupForm extends React.Component {
 
             <div className='signup-input-container'>
               <h1 className='form-header'>Email</h1>
-              <input type='email' onChange={this.update('email')} placeholder='Email' className='signup-input'></input>
+              <input type='email' onChange={this.update('email')} placeholder='Your email address' className='signup-input'></input>
             </div>
 
             <div className='signup-input-container'>
@@ -56,12 +56,12 @@ class SignupForm extends React.Component {
               <input type='password' onChange={this.update('password')} placeholder='Choose a password' className='signup-input'></input>
             </div>
 
-            <input type='submit' value='Create account'></input>
+            <input type='submit' value='Create account' className='signup-button'></input>
           </form>
 
           <div className='have-account'>
             <h1>Already have a Coincenter account?</h1>
-            <Link className='login-link' to='/signin'>Log In</Link>
+            <Link className='login-link' to='/signin'>Log in</Link>
           </div>
 
           <ul>
