@@ -1,6 +1,7 @@
 import React from 'react';
 import { merge } from 'lodash';
 import { withRouter, Link, Redirect } from 'react-router-dom';
+import SigninHeader from './signin_header';
 
 class SigninForm extends React.Component {
   constructor(props){
@@ -29,31 +30,34 @@ class SigninForm extends React.Component {
 
   render () {
     return (
-      <div className='auth-container'>
-        <div>
-          <h1 className='signin-form-header'>Sign in to Coincenter</h1>
+      <div>
+        <SigninHeader history={this.props.history} />
+        <div className='auth-container'>
+          <div>
+            <h1 className='signin-form-header'>Sign in to Coincenter</h1>
 
-          <form onSubmit={this.handleSubmit} className='signin-form'>
-            <div className='signin-input-container'>
-              <input type='email' placeholder='Email' onChange={this.update('email')} className='signin-input'></input>
+            <form onSubmit={this.handleSubmit} className='signin-form'>
+              <div className='signin-input-container'>
+                <input type='email' placeholder='Email' onChange={this.update('email')} className='signin-input'></input>
+              </div>
+
+              <div className='signin-input-container'>
+                <input type='password' placeholder='Password' onChange={this.update('password')} className='signin-input'></input>
+              </div>
+
+              <input className='signin-button' type='submit' value='Sign In'></input>
+            </form>
+
+            <div className='no-account-container'>
+              <Link to='/signup' className='no-account'>Don't have an account?</Link>
             </div>
 
-            <div className='signin-input-container'>
-              <input type='password' placeholder='Password' onChange={this.update('password')} className='signin-input'></input>
-            </div>
-
-            <input className='signin-button' type='submit' value='Sign In'></input>
-          </form>
-
-          <div className='no-account-container'>
-            <Link to='/signup' className='no-account'>Don't have an account?</Link>
+            <ul>
+              {this.props.errors.map(error => {
+                <li>{error}</li>
+              })}
+            </ul>
           </div>
-
-          <ul>
-            {this.props.errors.map(error => {
-              <li>{error}</li>
-            })}
-          </ul>
         </div>
       </div>
     );

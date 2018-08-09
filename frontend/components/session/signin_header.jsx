@@ -15,7 +15,7 @@ class SigninHeader extends React.Component {
     return (
       <div className='signin-header'>
         <h1 className='logo'>coincenter</h1>
-        
+
         <div className='signin-nav-links-container'>
           <Link className='signin-same-link' to='/signin'>Sign In</Link>
 
@@ -26,4 +26,4 @@ class SigninHeader extends React.Component {
   }
 }
 
-export default withRouter(SigninHeader);
+export default SigninHeader;
