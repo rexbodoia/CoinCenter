@@ -4,7 +4,6 @@ import { withRouter } from 'react-router-dom';
 class NavHeader extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
   }
 
   render () {

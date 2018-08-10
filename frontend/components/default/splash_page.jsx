@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-class HomePage extends React.Component {
+class SplashPage extends React.Component {
   render () {
     return (
       <div></div>
@@ -9,4 +9,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default withRouter(HomePage);
+export default SplashPage;
