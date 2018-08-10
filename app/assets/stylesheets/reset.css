@@ -57,3 +57,7 @@ table {
 	display: inline;
 	margin-bottom: 5px;
 }
+
+.logo:hover {
+	cursor: pointer;
+}
