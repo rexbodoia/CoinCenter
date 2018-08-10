@@ -5,7 +5,8 @@ import SignupHeader from '../session/signup_header';
 class SplashPage extends React.Component {
   constructor(props) {
     super(props);
-    this.openModal = this.openModal.bind(this);
+
+    this.signupRedirect = this.signupRedirect.bind(this);
   }
 
   componentDidMount() {
@@ -16,8 +17,9 @@ class SplashPage extends React.Component {
     document.body.style.backgroundColor = null;
   }
 
-  openModal() {
+  signupRedirect(e) {
     e.preventDefault();
+    this.props.history.push('/signup');
   }
 
   render () {
@@ -30,12 +32,12 @@ class SplashPage extends React.Component {
           <p className='splash-text'>Coincenter is the easiest and most trusted place to buy, sell, and manage your digital currency</p>
         </div>
 
-        <form onSubmit={this.openModal} className='splash-form'>
+        <form onSubmit={this.signupRedirect} className='splash-form'>
           <div className='splash-email-container'>
             <input placeholder='Email address' className='splash-email'></input>
           </div>
 
-          <input type='submit' className='splash-button' value='Get Started'></input>
+          <input type='submit' className='splash-button js-modal-open' value='Get Started'></input>
         </form>
       </div>
     );

@@ -48,3 +48,7 @@ input {
 .x-button:hover {
 	cursor: pointer;
 }
+
+.homepage-link:hover {
+	cursor: pointer;
+}

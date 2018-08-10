@@ -15,7 +15,7 @@
 }
 
 .splash-heading {
-  margin-top: 77px;
+  margin-top: 82px;
   font-size: 36px;
   font-weight: 500;
   margin-bottom: 20px;
@@ -45,7 +45,7 @@
   width: 321px;
   font-size: 16px;
   font-family: "Avenir Next", sans-serif;
-  padding-left: 16px; 
+  padding-left: 16px;
 }
 
 .splash-button {
@@ -59,4 +59,10 @@
   border-radius: 4px;
   border-width: 0;
   height: 50px;
+  transition: 0.2s ease 0s;
+}
+
+.splash-button:hover {
+  background-color: rgb(0, 168, 102);
+  cursor: pointer;
 }

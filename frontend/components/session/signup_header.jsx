@@ -5,6 +5,7 @@ class SignupHeader extends React.Component {
   constructor(props) {
     super(props)
     this.signupRedirect = this.signupRedirect.bind(this);
+    this.splashRedirect = this.splashRedirect.bind(this);
   }
 
   signupRedirect(e) {
@@ -14,10 +15,17 @@ class SignupHeader extends React.Component {
     }
   }
 
+  splashRedirect(e) {
+    e.preventDefault();
+    this.props.history.push('/');
+  }
+
   render () {
     return (
       <div className='signup-header'>
-        <h1 className='logo'>coincenter</h1>
+        <span onClick={this.splashRedirect} className='homepage-link'>
+          <h1 className='logo'>coincenter</h1>
+        </span>
 
         <div className='nav-links-container'>
           <Link className='signup-other-link' to='/signin'>Log in</Link>
