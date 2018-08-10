@@ -3,12 +3,13 @@ import { merge } from 'lodash';
 import { withRouter, Link, Redirect } from 'react-router-dom';
 import SignupHeader from './signup_header';
 import AuthErrors from './auth_errors';
-import SigninFormClone from './signin_form_clone';
-import SignupFormClone from './signup_form_clone';
+import SigninForm from './signin_form';
+import SignupForm from './signup_form';
 
 class AuthForms extends React.Component {
   constructor(props){
     super(props);
+    
     if (props.location.pathname === '/signup') {
       this.state = {
         f_name: '',
@@ -78,11 +79,11 @@ class AuthForms extends React.Component {
   showComponent() {
     if (this.pathname === '/signup') {
       return (
-        <SignupFormClone handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
+        <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );
     } else {
       return (
-        <SigninFormClone handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
+        <SigninForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );
     }
   }
