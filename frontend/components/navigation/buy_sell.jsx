@@ -7,9 +7,9 @@ class BuySell extends React.Component {
 
   render () {
     return (
-      <div className='navbar-element'>
+      // <div className='navbar-element'>
         <p className='nav-el-text'>Buy/Sell</p>
-      </div>
+      // </div>
     );
   }
 }

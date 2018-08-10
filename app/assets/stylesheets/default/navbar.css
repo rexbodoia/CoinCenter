@@ -82,3 +82,8 @@
   border-bottom-color: rgb(125, 149, 182);
   cursor: pointer;
 }
+
+.selected-tab:hover {
+  color: rgb(6, 103, 208);
+  border-bottom-color: rgb(6, 103, 208);
+}

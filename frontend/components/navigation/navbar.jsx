@@ -5,6 +5,56 @@ import BuySell from './buy_sell';
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.selectTab = this.selectTab.bind(this);
+    this.renderDashboard = this.renderDashboard.bind(this);
+    this.state = {
+      'dashboard': false,
+      'buySell': false
+    }
+  }
+
+  selectTab(self, other) {
+    return (e) => {
+      if(this.state[other]) {
+        this.setState({[other]: false});
+      }
+      this.setState({[self]: true});
+    };
+  }
+
+  renderDashboard() {
+    if(this.state.dashboard){
+      return(
+        <span className='navbar-element selected-tab' onClick={this.selectTab('dashboard', 'buySell')}>
+          <Dashboard />
+        </span>
+      );
+    }
+    else {
+      return(
+        <span className='navbar-element' onClick={this.selectTab('dashboard', 'buySell')}>
+          <Dashboard />
+        </span>
+      );
+    }
+  }
+
+  renderBuySell() {
+    if(this.state.buySell){
+      return(
+        <span className='navbar-element selected-tab' onClick={this.selectTab('buySell', 'dashboard')}>
+          <BuySell />
+        </span>
+      );
+    }
+    else {
+      return(
+        <span className='navbar-element' onClick={this.selectTab('buySell', 'dashboard')}>
+          <BuySell />
+        </span>
+      );
+    }
   }
 
   render () {
@@ -13,9 +63,13 @@ class Navbar extends React.Component {
         <div className='empty-nav'></div>
         <div className='navbar-inner-container'>
           <div className='navbar-left'>
-              <Dashboard />
+            <span className='navbar-element' onClick={this.selectTab('dashboard', 'buySell')}>
+              {this.renderDashboard()}
+            </span>
             <div className='inner-empty-nav'></div>
-              <BuySell/>
+            <span className='navbar-element' onClick={this.selectTab('buySell', 'dashboard')}>
+              {this.renderBuySell()}
+            </span>
           </div>
           <div className='empty-nav'></div>
         </div>

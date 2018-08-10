@@ -7,9 +7,9 @@ class Dashboard extends React.Component {
 
   render () {
     return (
-      <div className='navbar-element'>
+      // <div className='navbar-element'>
         <p className='nav-el-text'>Dashboard</p>
-      </div>
+      // </div>
     );
   }
 }
