@@ -10,7 +10,7 @@ class SignupForm extends React.Component {
   render () {
     return (
       <div>
-        <SignupHeader history={this.props.history} />
+        <SignupHeader history={this.props.history} location={this.props.location}/>
 
         {this.props.errors()}
         <div className='auth-container'>

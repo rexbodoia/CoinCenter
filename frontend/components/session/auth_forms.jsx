@@ -9,7 +9,7 @@ import SignupForm from './signup_form';
 class AuthForms extends React.Component {
   constructor(props){
     super(props);
-    
+
     if (props.location.pathname === '/signup') {
       this.state = {
         f_name: '',
@@ -32,8 +32,13 @@ class AuthForms extends React.Component {
     this.clearErrors = this.clearErrors.bind(this);
   }
 
+  componentDidMount() {
+    document.body.style.backgroundColor = '#0667d0';
+  }
+
   componentWillUnmount(){
     this.props.clearErrors();
+    document.body.style.backgroundColor = null;
   }
 
   handleSubmit(e) {
@@ -90,7 +95,7 @@ class AuthForms extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className='auth-body'>
         {this.showComponent()}
       </div>
     );

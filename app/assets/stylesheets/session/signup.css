@@ -133,7 +133,7 @@
 	display: inline;
   border: solid white 1px;
   text-shadow: none;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border-radius: 4px;
   line-height: 1.15;
 	font-size: 16px;
@@ -149,6 +149,7 @@
   margin-left: 2px;
 	background-color: inherit;
 	color: white;
+	box-sizing: border-box;
 }
 
 .signup-same-button:hover {

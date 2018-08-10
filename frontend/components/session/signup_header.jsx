@@ -4,12 +4,15 @@ import { withRouter, Link } from 'react-router-dom';
 class SignupHeader extends React.Component {
   constructor(props) {
     super(props)
-    this.signinRedirect = this.signinRedirect.bind(this);
+    this.signupRedirect = this.signupRedirect.bind(this);
   }
 
-  signinRedirect() {
-    this.props.history.push('/signin');
-  };
+  signupRedirect(e) {
+    e.preventDefault();
+    if (this.props.location.pathname === '/') {
+      this.props.history.push('/signup');
+    }
+  }
 
   render () {
     return (
@@ -19,7 +22,7 @@ class SignupHeader extends React.Component {
         <div className='nav-links-container'>
           <Link className='signup-other-link' to='/signin'>Log in</Link>
 
-          <span className='signup-same-button' onClick={(e) => e.preventDefault()}>Sign up</span>
+          <span className='signup-same-button' onClick={this.signupRedirect}>Sign up</span>
         </div>
       </div>
     );

@@ -5,9 +5,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 70px;
 }
 
 .profile-dropdown {
   float: right;
   cursor: pointer;
+}
+
+
+.signed-in {
+  background-color: rgb(244, 247, 250);
+  padding: 0px 24px;
 }
