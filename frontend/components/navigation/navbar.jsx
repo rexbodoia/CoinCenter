@@ -27,14 +27,14 @@ class Navbar extends React.Component {
     if(this.state.dashboard){
       return(
         <span className='navbar-element selected-tab' onClick={this.selectTab('dashboard', 'buySell')}>
-          <Dashboard />
+          <Dashboard selected={true} />
         </span>
       );
     }
     else {
       return(
         <span className='navbar-element' onClick={this.selectTab('dashboard', 'buySell')}>
-          <Dashboard />
+          <Dashboard selected={false} />
         </span>
       );
     }
@@ -43,15 +43,15 @@ class Navbar extends React.Component {
   renderBuySell() {
     if(this.state.buySell){
       return(
-        <span className='navbar-element selected-tab' onClick={this.selectTab('buySell', 'dashboard')}>
-          <BuySell />
+        <span className='navbar-element selected-tab' onClick={this.selectTab('buySell', 'dashboard')} >
+          <BuySell selected={true} />
         </span>
       );
     }
     else {
       return(
-        <span className='navbar-element' onClick={this.selectTab('buySell', 'dashboard')}>
-          <BuySell />
+        <span className='navbar-element' onClick={this.selectTab('buySell', 'dashboard')} >
+          <BuySell selected={false} />
         </span>
       );
     }

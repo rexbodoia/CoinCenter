@@ -102,10 +102,10 @@ div .nav-el-text {
   size: 32px;
 }
 
-.selected-icon {
+.rendered-icon {
   display: block;
 }
 
-.unselected-icon {
+.unrendered-icon {
   display: none;
 }
