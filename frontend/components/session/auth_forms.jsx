@@ -9,7 +9,7 @@ import SignupForm from './signup_form';
 class AuthForms extends React.Component {
   constructor(props){
     super(props);
-    console.log(props.email);
+
     if (props.location.pathname === '/signin') {
       this.state = {
         email: '',
@@ -33,7 +33,9 @@ class AuthForms extends React.Component {
   }
 
   componentDidMount() {
-    document.body.style.backgroundColor = '#0667d0';
+    if(this.pathname !== '/') {
+      document.body.style.backgroundColor = '#0667d0';
+    }
   }
 
   componentWillUnmount(){

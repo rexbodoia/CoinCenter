@@ -39,9 +39,7 @@ class SplashPage extends React.Component {
   }
 
   renderModal() {
-    // console.log('render');
     if (this.state.open) {
-      console.log(this.state.email);
       return (
         <div className='modal'>
           <section className='modal-screen'></section>
@@ -72,6 +70,8 @@ class SplashPage extends React.Component {
 
           <input type='submit' className='splash-button' value='Get Started'></input>
         </form>
+
+        <h1>Create your digital currency portfolio today</h1>
 
         {this.renderModal()}
       </div>
