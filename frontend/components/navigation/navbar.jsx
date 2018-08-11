@@ -9,7 +9,7 @@ class Navbar extends React.Component {
     this.selectTab = this.selectTab.bind(this);
     this.renderDashboard = this.renderDashboard.bind(this);
     this.state = {
-      'dashboard': false,
+      'dashboard': true,
       'buySell': false
     }
   }
