@@ -46,10 +46,10 @@ class AuthForms extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = merge({}, this.state);
-    if (this.pathname === '/signup')  {
-      this.props.signup(user);
-    } else {
+    if (this.pathname === '/signin')  {
       this.props.signin(user);
+    } else {
+      this.props.signup(user);
     }
   }
 

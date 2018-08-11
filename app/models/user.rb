@@ -3,6 +3,16 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :password, length: {minimum: 8, allow_nil: true}
 
+  has_many :cards
+
+  has_many :transactions
+
+  has_many :balances
+
+  has_many :coins,
+    through: :balances,
+    source: :coin
+
   after_initialize :ensure_session_token
   attr_reader :password
 
