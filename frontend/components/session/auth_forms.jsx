@@ -86,10 +86,14 @@ class AuthForms extends React.Component {
       return (
         <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );
-    } else {
+    } else if (this.pathname === '/signin') {
       return (
         <SigninForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );
+    } else {
+      return (
+        <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
+      )
     }
   }
 

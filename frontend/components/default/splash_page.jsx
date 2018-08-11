@@ -1,12 +1,14 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SignupHeader from '../session/signup_header';
+import AuthFormsContainer from '../session/auth_forms_container';
 
 class SplashPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.signupRedirect = this.signupRedirect.bind(this);
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentDidMount() {
@@ -17,10 +19,16 @@ class SplashPage extends React.Component {
     document.body.style.backgroundColor = null;
   }
 
-  signupRedirect(e) {
+  openModal(e) {
     e.preventDefault();
-    this.props.history.push('/signup');
+    [].slice.call(document.getElementsByClassName('modal'))[0].classList.add('is-open');
   }
+
+  closeModal(e) {
+    e.preventDefault();
+    [].slice.call(document.getElementsByClassName('modal'))[0].classList.remove('is-open');
+  }
+
 
   render () {
     return (
@@ -32,13 +40,23 @@ class SplashPage extends React.Component {
           <p className='splash-text'>Coincenter is the easiest and most trusted place to buy, sell, and manage your digital currency</p>
         </div>
 
-        <form onSubmit={this.signupRedirect} className='splash-form'>
+        <form onSubmit={this.openModal} className='splash-form'>
           <div className='splash-email-container'>
             <input placeholder='Email address' className='splash-email'></input>
           </div>
 
-          <input type='submit' className='splash-button js-modal-open' value='Get Started'></input>
+          <input type='submit' className='splash-button' value='Get Started'></input>
         </form>
+
+        <div className='modal'>
+          <section className='modal-screen'></section>
+          <section className='modal-form'>
+            <span className='modal-close' onClick={this.closeModal}>&times;</span>
+            <h1>Create account</h1>
+            <AuthFormsContainer />
+          </section>
+
+        </div>
       </div>
     );
   }
