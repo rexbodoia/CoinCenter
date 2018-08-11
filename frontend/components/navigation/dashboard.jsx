@@ -11,15 +11,15 @@ class Dashboard extends React.Component {
     if (this.props.selected) {
       return (
         <div>
-          <img src='assets/icons/dashboard-blue.png' className='navbar-icon rendered-icon'></img>
-          <img src='assets/icons/dashboard-gray.png' className='navbar-icon unrendered-icon'></img>
+          <img src={window.images.dashboardBlue} className='navbar-icon rendered-icon'></img>
+          <img src={window.images.dashboardGray} className='navbar-icon unrendered-icon'></img>
         </div>
       );
     } else {
       return (
         <div>
-          <img src='assets/icons/dashboard-gray.png' className='navbar-icon rendered-icon'></img>
-          <img src='assets/icons/dashboard-blue.png' className='navbar-icon unrendered-icon'></img>
+          <img src={window.images.dashboardGray} className='navbar-icon rendered-icon'></img>
+          <img src={window.images.dashboardBlue} className='navbar-icon unrendered-icon'></img>
         </div>
       );
     }

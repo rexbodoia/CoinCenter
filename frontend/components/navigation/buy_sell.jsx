@@ -11,15 +11,15 @@ class BuySell extends React.Component {
     if (this.props.selected) {
       return (
         <div>
-          <img src='assets/icons/buy-sell-blue.png' className='navbar-icon rendered-icon'></img>
-          <img src='assets/icons/buy-sell-gray.png' className='navbar-icon unrendered-icon'></img>
+          <img src={window.images.buySellBlue} className='navbar-icon rendered-icon'></img>
+          <img src={window.images.buySellGray} className='navbar-icon unrendered-icon'></img>
         </div>
       );
     } else {
       return (
         <div>
-          <img src='assets/icons/buy-sell-gray.png' className='navbar-icon rendered-icon'></img>
-          <img src='assets/icons/buy-sell-blue.png' className='navbar-icon unrendered-icon'></img>
+          <img src={window.images.buySellGray} className='navbar-icon rendered-icon'></img>
+          <img src={window.images.buySellBlue} className='navbar-icon unrendered-icon'></img>
         </div>
       );
     }
