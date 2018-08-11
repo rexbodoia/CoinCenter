@@ -85,3 +85,9 @@
   margin-top: 16px;
   margin-bottom: 100px;
 }
+
+.modal .modal-errors {
+  width: 70%;
+  margin-bottom: -60px;
+  margin-top: 20px;
+}

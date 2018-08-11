@@ -6,6 +6,18 @@ class AuthErrors extends React.Component {
     this.clearErrors = this.props.clearErrors.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.pathname === '/') {
+      document.getElementsByClassName('errors').item(0).classList.add('modal-errors');
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.props.pathname === '/') {
+      document.getElementsByClassName('errors').item(0).classList.remove('modal-errors');
+    }
+  }
+
   render () {
     return (
       <ul className='errors'>

@@ -68,7 +68,7 @@ class AuthForms extends React.Component {
   errors() {
     if(this.props.errors.length !== 0) {
       return (
-        <AuthErrors errors={this.props.errors} clearErrors={this.clearErrors}/>
+        <AuthErrors errors={this.props.errors} clearErrors={this.clearErrors} pathname={this.pathname}/>
       );
     }
   }
