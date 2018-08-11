@@ -1,7 +1,10 @@
 import React from 'react';
 
 const Dashboard = (props) => (
-  <p className='nav-el-text'>Dashboard</p>
+  <div>
+    <img src='assets/icons/dashboard-gray.png' className='navbar-icon'></img>
+    <p className='nav-el-text'>Dashboard</p>
+  </div>
 );
 
 export default Dashboard;
