@@ -7,3 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 User.create(f_name: 'guest', l_name: 'user', email: 'guest@user.com', password: '12345678')
+
+1000.times do |num|
+  User.create(f_name: 'guest', l_name: 'user', email: "guest#{num}@user.com", password: '12345678')
+end

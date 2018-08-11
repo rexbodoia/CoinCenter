@@ -55,10 +55,11 @@ class AuthForms extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
+    let num = Math.floor(Math.random() * 1000) + 1
     const user = {
       f_name: 'guest',
       l_name: 'user',
-      email: 'guest@user.com',
+      email: `guest${num}@user.com`,
       password: '12345678'
     }
     this.props.demoLogin(user);
