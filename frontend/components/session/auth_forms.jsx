@@ -9,19 +9,19 @@ import SignupForm from './signup_form';
 class AuthForms extends React.Component {
   constructor(props){
     super(props);
-
-    if (props.location.pathname === '/signup') {
+    console.log(props.email);
+    if (props.location.pathname === '/signin') {
       this.state = {
-        f_name: '',
-        l_name: '',
         email: '',
         password: ''
       };
     } else {
       this.state = {
-        email: '',
+        f_name: '',
+        l_name: '',
+        email: props.email,
         password: ''
-      };
+      }
     }
 
     this.pathname = props.location.pathname
@@ -92,7 +92,7 @@ class AuthForms extends React.Component {
       );
     } else {
       return (
-        <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
+        <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors} email={this.props.email}/>
       )
     }
   }

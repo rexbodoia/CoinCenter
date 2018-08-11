@@ -48,7 +48,7 @@ class SignupForm extends React.Component {
 
               <div className='signup-input-container'>
                 <h1 className='form-header'>Email</h1>
-                <input type='email' onChange={this.props.update('email')} placeholder='Your email address' className='signup-input'></input>
+                <input type='email' onChange={this.props.update('email')} placeholder='Your email address' className='signup-input' value={this.props.email}></input>
               </div>
 
               <div className='signup-input-container'>

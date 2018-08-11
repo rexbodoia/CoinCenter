@@ -9,6 +9,11 @@ class SplashPage extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.update = this.update.bind(this);
+    this.state = {
+      open: false,
+      email: ''
+    };
   }
 
   componentDidMount() {
@@ -21,14 +26,34 @@ class SplashPage extends React.Component {
 
   openModal(e) {
     e.preventDefault();
-    [].slice.call(document.getElementsByClassName('modal'))[0].classList.add('is-open');
+    this.setState({open: true});
   }
 
   closeModal(e) {
     e.preventDefault();
-    [].slice.call(document.getElementsByClassName('modal'))[0].classList.remove('is-open');
+    this.setState({open: false});
   }
 
+  update(e) {
+    this.setState({email: e.target.value});
+  }
+
+  renderModal() {
+    // console.log('render');
+    if (this.state.open) {
+      console.log(this.state.email);
+      return (
+        <div className='modal'>
+          <section className='modal-screen'></section>
+          <section className='modal-form'>
+            <span className='modal-close' onClick={this.closeModal}>&times;</span>
+            <h1>Create account</h1>
+            <AuthFormsContainer email={this.state.email}/>
+          </section>
+        </div>
+      );
+    }
+  }
 
   render () {
     return (
@@ -42,21 +67,13 @@ class SplashPage extends React.Component {
 
         <form onSubmit={this.openModal} className='splash-form'>
           <div className='splash-email-container'>
-            <input placeholder='Email address' className='splash-email'></input>
+            <input type='email' placeholder='Email address' className='splash-email' onChange={this.update}></input>
           </div>
 
           <input type='submit' className='splash-button' value='Get Started'></input>
         </form>
 
-        <div className='modal'>
-          <section className='modal-screen'></section>
-          <section className='modal-form'>
-            <span className='modal-close' onClick={this.closeModal}>&times;</span>
-            <h1>Create account</h1>
-            <AuthFormsContainer />
-          </section>
-
-        </div>
+        {this.renderModal()}
       </div>
     );
   }
