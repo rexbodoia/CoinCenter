@@ -1,5 +1,5 @@
 class Api::PricesController < ApplicationController
-  # 
+  #
   # def import
   #   Price.import(params[:file])
   #   render json: ['it worked']
@@ -11,7 +11,23 @@ class Api::PricesController < ApplicationController
   end
 
   def index
-    @prices = Price.all
+    @eth_prices = [];
+    @bch_prices = [];
+    @ltc_prices = [];
+    @btc_prices = [];
+    @all_prices = Price.all
+    @all_prices.each do |price|
+      case price.coin_id
+      when 1
+        @eth_prices.push(price);
+      when 2
+        @bch_prices.push(price);
+      when 3
+        @ltc_prices.push(price);
+      when 4
+        @btc_prices.push(price);
+      end
+    end
     render '/api/prices/index'
   end
 
