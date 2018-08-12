@@ -1,5 +1,10 @@
 class Api::PricesController < ApplicationController
-  
+  # 
+  # def import
+  #   Price.import(params[:file])
+  #   render json: ['it worked']
+  # end
+
   def create
     @price = Price.create(price_params)
     render '/api/prices/show'
