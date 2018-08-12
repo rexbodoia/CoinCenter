@@ -18,6 +18,7 @@ class SplashPage extends React.Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = 'white';
+    this.props.getPrices()
   }
 
   componentWillUnmount() {
@@ -46,7 +47,7 @@ class SplashPage extends React.Component {
           <section className='modal-form'>
             <span className='modal-close' onClick={this.closeModal}>&times;</span>
             <h1>Create account</h1>
-            <AuthFormsContainer email={this.state.email}/>
+            <AuthFormsContainer email={this.state.email} prices={getState().entities.prices} />
           </section>
         </div>
       );
@@ -83,4 +84,4 @@ class SplashPage extends React.Component {
   }
 }
 
-export default SplashPage;
+export default withRouter(SplashPage);

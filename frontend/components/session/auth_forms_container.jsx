@@ -5,7 +5,8 @@ import { signup, signin, clearErrors } from '../../actions/session_actions';
 const mapStateToProps = (state, ownProps) => ({
     errors: state.errors.session,
     currentUser: state.entities.users[1],
-    email: ownProps.email
+    email: ownProps.email,
+    // prices: ownProps.prices
 });
 
 const mapDispatchToProps = dispatch => ({

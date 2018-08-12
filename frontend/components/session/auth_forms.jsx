@@ -24,6 +24,7 @@ class AuthForms extends React.Component {
       }
     }
 
+    // this.prices = props.prices
     this.pathname = props.location.pathname
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);

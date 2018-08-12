@@ -32,6 +32,7 @@ class Navbar extends React.Component {
       );
     }
     else {
+      // this.props.history.push('/dashboard');
       return(
         <span className='navbar-element' onClick={this.selectTab('dashboard', 'buySell')}>
           <Dashboard selected={false} />
@@ -49,6 +50,7 @@ class Navbar extends React.Component {
       );
     }
     else {
+      // this.props.history.push('/buy-sell');
       return(
         <span className='navbar-element' onClick={this.selectTab('buySell', 'dashboard')} >
           <BuySell selected={false} />
