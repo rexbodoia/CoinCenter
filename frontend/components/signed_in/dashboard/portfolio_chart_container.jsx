@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { fetchBalances } from '../../../actions/balances_actions';
 import { fetchPrices } from '../../../actions/prices_actions';
-import Dashboard from './dashboard';
+import PortfolioChart from './portfolio_chart';
 
-const mapStateToProps = state => ({
-  balances: state.entities.balances,
-  prices: state.entities.prices
+const mapStateToProps = (state, ownProps) => ({
+  prices: ownProps.prices,
+  balances: ownProps.balances
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
   getPrices: () => dispatch(fetchPrices())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(PortfolioChart);

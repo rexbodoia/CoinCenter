@@ -1,5 +1,6 @@
 import React from 'react';
 import PortfolioChart from './portfolio_chart';
+import PortfolioChartContainer from './portfolio_chart_container';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -7,19 +8,23 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getBalances(getState().session.id);
-    // if (Object.values(getState().entities.prices).length === 0) {
-    //   this.props.getPrices();
-    // }
-    // this.props.getPrices();
+    if (Object.values(this.props.prices).length !== 0) {
+      let prices = this.props.prices
+    } else {
+      this.props.getPrices();
+    }
+    if (Object.values(this.props.balances).length !== 0) {
+      let balances = this.props.balances
+    } else {
+      this.props.getBalances(getState().session.id);
+    }
   }
 
   render(){
-    console.log(getState().entities);
-    let balances = getState().entities.balances
-    let prices = getState().entities.prices
+    let prices = getState().entities.prices;
+    let balances = getState().entities.balances;
     return (
-      <PortfolioChart balances={balances} prices={prices}/>
+      <PortfolioChartContainer balances={balances} prices={prices}/>
     );
   }
 }

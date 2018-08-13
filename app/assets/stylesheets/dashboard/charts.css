@@ -1,4 +1,7 @@
 .chart-container {
   display: flex;
   justify-content: center;
+  width: 1250px;
+  margin: 60px auto;
+  background-color: white;
 }

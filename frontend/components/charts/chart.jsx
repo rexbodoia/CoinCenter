@@ -15,7 +15,7 @@ class Chart extends React.Component {
   renderChart(data, coin) {
     if (Object.values(data).length !== 0){
       return (
-        <LineChart width={1200} height={250} data={data[coin]} >
+        <LineChart width={1200} height={250} data={data[coin].reverse()} >
           <Line type="natural" dataKey="price" stroke="rgb(6, 103, 208)" dot={false} />
         </LineChart>
       );
@@ -23,7 +23,7 @@ class Chart extends React.Component {
   }
 
   render () {
-    let data = getState().entities.prices
+    let data = getState().entities.prices;
     return (
       <div className='chart-container'>
         {this.renderChart(data, 'bitcoin')}
