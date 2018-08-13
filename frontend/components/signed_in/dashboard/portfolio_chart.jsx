@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line } from 'recharts';
+import { AreaChart, Area, Line } from 'recharts';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class PortfolioChart extends React.Component {
   renderChart(data) {
     if (data.length !== 0){
       return (
-        <LineChart width={1178} height={160} data={data} >
-          <Line type="natural" dataKey="amount" stroke="rgb(6, 103, 208)" dot={false} />
-        </LineChart>
+        <AreaChart width={1188} height={160} data={data} >
+          <Area type="monotone" dataKey="amount" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
+        </AreaChart>
       );
     }
   }
