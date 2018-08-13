@@ -14,7 +14,7 @@ class SignedIn extends React.Component {
     return (
       <div>
         <NavHeaderContainer />
-        <ChartsContainer />
+        {/* <ChartsContainer /> */}
         <DashboardContainer />
       </div>
     );

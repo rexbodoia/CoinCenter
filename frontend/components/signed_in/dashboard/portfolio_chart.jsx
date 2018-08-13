@@ -22,7 +22,7 @@ class PortfolioChart extends React.Component {
   renderChart(data) {
     if (data.length !== 0){
       return (
-        <LineChart width={1200} height={250} data={data} >
+        <LineChart width={1178} height={160} data={data} >
           <Line type="natural" dataKey="amount" stroke="rgb(6, 103, 208)" dot={false} />
         </LineChart>
       );
@@ -60,12 +60,24 @@ class PortfolioChart extends React.Component {
 
         totalData.push({date: prices.bitcoin[i].date, amount: bitcoinAmount + ethereumAmount + litecoinAmount + bitcoinCashAmount});
       }
-      // totalData = totalData.reverse();
+      totalData = totalData.reverse();
 
     }
     return (
-      <div className='chart-container'>
+      <div className='portfolio-chart-container'>
+        <div className='portfolio-chart-header'><h1>Your portfolio value</h1></div>
         {this.renderChart(totalData)}
+        <div className='portfolio-chart-dates'>
+          <ul>
+            <li>Feb</li>
+            <li>Mar</li>
+            <li>Apr</li>
+            <li>May</li>
+            <li>Jun</li>
+            <li>July</li>
+            <li>Aug</li>
+          </ul>
+        </div>
       </div>
     );
   }
