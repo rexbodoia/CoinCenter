@@ -3,9 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import { AuthRoute } from '../util/auth_route_util';
 import { ProtectedRoute } from '../util/protected_route_util';
 import AuthFormsContainer from './session/auth_forms_container';
-import SignedIn from './default/signed_in';
-import SplashPage from './default/splash_page';
-import SplashPageContainer from './default/splash_page_container';
+import SignedIn from './signed_in/signed_in';
+import SplashPageContainer from './splash/splash_page_container';
 
 const App = () => (
   <div>
