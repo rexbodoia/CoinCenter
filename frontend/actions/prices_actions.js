@@ -8,5 +8,5 @@ const receivePrices = prices => ({
 });
 
 export const fetchPrices = () => dispatch => (
-  ApiUtil.retrievePrices().then(prices => dispatch(receivePrices(prices)))
+  ApiUtil.fetchPrices().then(prices => dispatch(receivePrices(prices)))
 );

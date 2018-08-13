@@ -16,8 +16,8 @@ class Api::BalancesController < ApplicationController
   end
 
   def show
-    @balance = Balance.find_by(id: params[:id])
-    if @balance
+    @balances = Balance.where(user_id: params[:id])
+    unless @balances.empty?
       render '/api/balances/show'
     else
       render json: ['Could not find balance']
