@@ -1,20 +1,40 @@
+@eth = []
+@bch = []
+@ltc = []
+@btc = []
 @balances.each do |balance|
   case balance.coin_id
   when 1
-    json.ethereum do
-      json.extract! balance, :amount
-    end
+    @eth.push(balance)
   when 2
-    json.bitcoinCash do
-      json.extract! balance, :amount
-    end
+    @bch.push(balance)
   when 3
-    json.litecoin do
-      json.extract! balance, :amount
-    end
+    @ltc.push(balance)
   when 4
-    json.bitcoin do
-      json.extract! balance, :amount
-    end
+    @btc.push(balance)
+  end
+end
+
+json.ethereum do
+  json.array! @eth.each do |balance|
+    json.extract! balance, :amount, :date
+  end
+end
+
+json.bitcoinCash do
+  json.array! @bch.each do |balance|
+    json.extract! balance, :amount, :date
+  end
+end
+
+json.litecoin do
+  json.array! @ltc.each do |balance|
+    json.extract! balance, :amount, :date
+  end
+end
+
+json.bitcoin do
+  json.array! @btc.each do |balance|
+    json.extract! balance, :amount, :date
   end
 end

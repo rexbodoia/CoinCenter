@@ -4,18 +4,30 @@ import { AreaChart, Area, Line } from 'recharts';
 class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
+    this.calculateBalanceHistory = this.calculateBalanceHistory.bind(this);
+    this.retrieveBalances = this.retrieveBalances.bind(this);
+    this.totalData = [];
   }
 
   componentDidMount() {
-    if (Object.values(getState().entities.prices).length !== 0) {
-      let prices = this.props.prices
-    } else {
-      this.props.getPrices();
-    }
-    if (Object.values(getState().entities.balances).length !== 0) {
-      let balances = this.props.balances
-    } else {
-      this.props.getBalances();
+    this.balancesInteger = 0;
+    this.balancesDecimal = 0;
+    this.retrieveBalances();
+  }
+
+  retrieveBalances() {
+    this.props.getBalances(this.props.id);
+  }
+
+  calculateBalanceHistory() {
+    let balances = this.props.balances;
+
+    for (let i = 0; i < balances.bitcoin.length; i++){
+      let amount = balances.bitcoin[i].amount + balances.bitcoinCash[i].amount + balances.ethereum[i].amount + balances.litecoin[i].amount;
+
+      let date = balances.bitcoin[i].date;
+
+      this.totalData.push({date, amount});
     }
   }
 
@@ -30,43 +42,20 @@ class PortfolioChart extends React.Component {
   }
 
   render () {
-    let prices = getState().entities.prices;
-    let balances = getState().entities.balances;
-    let totalData = [];
-    if (Object.values(prices).length !== 0 && Object.values(balances).length !== 0) {
-      let currentBalances = balances;
-
-      let currentBitcoin = currentBalances.bitcoin.amount / prices.bitcoin[0].price;
-
-      let currentEthereum = currentBalances.ethereum.amount / prices.ethereum[0].price;
-
-      let currentLitecoin = currentBalances.litecoin.amount / prices.litecoin[0].price;
-
-      let currentBitcoinCash = currentBalances.bitcoinCash.amount / prices.bitcoinCash[0].price;
-
-      let bitcoinData = [];
-      let ethereumData = [];
-      let litecoinData = [];
-      let bitcoinCashData = [];
-
-      for (let i = 0; i < prices.bitcoin.length; i++){
-        let bitcoinAmount = currentBitcoin * prices.bitcoin[i].price;
-
-        let ethereumAmount = currentEthereum * prices.ethereum[i].price;
-
-        let litecoinAmount = currentLitecoin * prices.litecoin[i].price;
-
-        let bitcoinCashAmount = currentBitcoinCash * prices.bitcoinCash[i].price;
-
-        totalData.push({date: prices.bitcoin[i].date, amount: bitcoinAmount + ethereumAmount + litecoinAmount + bitcoinCashAmount});
-      }
-      totalData = totalData.reverse();
-
+    if (Object.values(this.props.balances).length !== 0) {
+      this.calculateBalanceHistory();
     }
     return (
       <div className='portfolio-chart-container'>
-        <div className='portfolio-chart-header'><h1>Your portfolio value</h1></div>
-        {this.renderChart(totalData)}
+        <div className='portfolio-chart-header'>
+          <h1>Your portfolio value</h1>
+          <div className='portfolio-chart-number'>
+            <h3>$</h3>
+            <h2>{this.balancesInteger}</h2>
+            <h3>{this.balancesDecimal}</h3>
+          </div>
+        </div>
+        {this.renderChart(this.totalData)}
         <div className='portfolio-chart-dates'>
           <ul>
             <li>Feb</li>
@@ -84,3 +73,45 @@ class PortfolioChart extends React.Component {
 }
 
 export default PortfolioChart;
+
+
+// if (!this.props.balances && !this.props.prices) {
+//   return null;
+// }
+// let prices = this.props.prices;
+// let balances = this.props.balances;
+// let totalData = [];
+// let totalCurrentBalances = 0;
+//
+// let currentBalances = balances;
+//
+// let currentBitcoin = currentBalances.bitcoin.amount / prices.bitcoin[0].price;
+//
+// let currentEthereum = currentBalances.ethereum.amount / prices.ethereum[0].price;
+//
+// let currentLitecoin = currentBalances.litecoin.amount / prices.litecoin[0].price;
+//
+// let currentBitcoinCash = currentBalances.bitcoinCash.amount / prices.bitcoinCash[0].price;
+//
+// let bitcoinData = [];
+// let ethereumData = [];
+// let litecoinData = [];
+// let bitcoinCashData = [];
+//
+// for (let i = 0; i < prices.bitcoin.length; i++){
+//   let bitcoinAmount = currentBitcoin * prices.bitcoin[i].price;
+//
+//   let ethereumAmount = currentEthereum * prices.ethereum[i].price;
+//
+//   let litecoinAmount = currentLitecoin * prices.litecoin[i].price;
+//
+//   let bitcoinCashAmount = currentBitcoinCash * prices.bitcoinCash[i].price;
+//
+//   totalData.push({date: prices.bitcoin[i].date, amount: bitcoinAmount + ethereumAmount + litecoinAmount + bitcoinCashAmount});
+// }
+// totalData = totalData.reverse();
+//
+// totalCurrentBalances = currentBalances.bitcoin.amount + currentBalances.ethereum.amount + currentBalances.litecoin.amount + currentBalances.bitcoinCash.amount
+//
+// this.balancesInteger = Math.floor(totalCurrentBalances);
+// this.balancesDecimal = (totalCurrentBalances - balancesInteger).toFixed(2);

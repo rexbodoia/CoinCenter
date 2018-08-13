@@ -20,7 +20,7 @@ class Api::BalancesController < ApplicationController
     unless @balances.empty?
       render '/api/balances/show'
     else
-      render json: ['Could not find balance']
+      render json: ['Could not find balances']
     end
   end
 

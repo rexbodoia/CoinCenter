@@ -28,6 +28,7 @@ namespace :import do
 
         row.each_index do |idx|
           next if idx == 0 || idx == 5
+          row[idx] = 0 if row[idx] == nil
           Price.create(date: date, coin_id: idx, price: row[idx])
         end
     end

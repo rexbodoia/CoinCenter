@@ -4,8 +4,9 @@ import { fetchPrices } from '../../../actions/prices_actions';
 import PortfolioChart from './portfolio_chart';
 
 const mapStateToProps = (state, ownProps) => ({
-  prices: ownProps.prices,
-  balances: ownProps.balances
+  prices: state.entities.prices,
+  balances: state.entities.balances,
+  id: state.session.id
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -8,7 +8,7 @@ class Chart extends React.Component {
 
   componentDidMount() {
     if (Object.values(getState().entities.prices).length === 0) {
-      this.props.getPrices();
+      // this.props.getPrices();
     }
   }
 

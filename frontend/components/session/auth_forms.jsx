@@ -55,7 +55,7 @@ class AuthForms extends React.Component {
 
   handleDemo(e) {
     e.preventDefault();
-    let num = Math.floor(Math.random() * 100) + 1
+    let num = Math.floor(Math.random() * 10) + 1
     const user = {
       f_name: 'guest',
       l_name: 'user',
