@@ -52,7 +52,7 @@ class PortfolioChart extends React.Component {
           <div className='portfolio-chart-number'>
             <h3>$</h3>
             <h2>{this.balancesInteger}</h2>
-            <h3>{this.balancesDecimal}</h3>
+            <h3>.{this.balancesDecimal}</h3>
           </div>
         </div>
         {this.renderChart(this.totalData)}

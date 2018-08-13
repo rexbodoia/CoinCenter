@@ -35,6 +35,9 @@
   font-weight: inherit;
   color: inherit;
   font-family: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .portfolio-chart-number h2 {
@@ -47,7 +50,8 @@
 
 .portfolio-chart-number h3 {
   font-size: 30px;
-  color: inherit;
+  color: rgb(78, 92, 110);
+  font-family: inherit;
 }
 
 .portfolio-chart-dates {
