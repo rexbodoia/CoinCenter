@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart, Line } from 'recharts';
 
-class MyChart extends React.Component {
+class Chart extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -12,11 +12,11 @@ class MyChart extends React.Component {
     }
   }
 
-  renderChart(data) {
+  renderChart(data, coin) {
     if (Object.values(data).length !== 0){
       return (
-        <LineChart width={1000} height={200} data={data.bitcoin}>
-          <Line type="monotone" dataKey="price" stroke="#8884d8" dot={false} />
+        <LineChart width={1200} height={250} data={data[coin]} >
+          <Line type="natural" dataKey="price" stroke="rgb(6, 103, 208)" dot={false} />
         </LineChart>
       );
     }
@@ -25,11 +25,11 @@ class MyChart extends React.Component {
   render () {
     let data = getState().entities.prices
     return (
-      <div>
-        {this.renderChart(data)}
+      <div className='chart-container'>
+        {this.renderChart(data, 'bitcoin')}
       </div>
     );
   }
 }
 
-export default MyChart;
+export default Chart;
