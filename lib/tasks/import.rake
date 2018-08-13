@@ -9,13 +9,22 @@ namespace :import do
   task prices: :environment do
     filename = File.join Rails.root, 'daily_price_data.csv'
     CSV.foreach(filename) do |row|
-        d, ethereum, bitcoin_cash, litecoin, bitcoin, src = row
+        d, ethereum, bitcoin_cash, litecoin, b_string, src = row
+
+        bitcoin = [];
+        b_string.chars.each do |char|
+          next if char == ','
+          bitcoin.push(char)
+        end
+        bitcoin = bitcoin.join('')
 
         month = MONTHS[d[0..2]]
         day = d[4..5].to_i
         year = d[8..-1].to_i
 
         date = Date.new(year, month, day)
+
+        row = date, ethereum, bitcoin_cash, litecoin, bitcoin, src
 
         row.each_index do |idx|
           next if idx == 0 || idx == 5
