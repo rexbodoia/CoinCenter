@@ -1,5 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip } from 'recharts';
+import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -21,8 +22,6 @@ class PortfolioChart extends React.Component {
   }
 
   componentDidMount() {
-    this.balancesInteger = 0;
-    this.balancesDecimal = 0;
     this.retrieveBalances();
   }
 
@@ -77,7 +76,7 @@ class PortfolioChart extends React.Component {
         <AreaChart width={1188} height={160} data={data}>
 
           <Area type="monotone" dataKey="amount" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
-          <Tooltip labelStyle={{ color: "rgb(125, 149, 182)" }} /*content={<CustomToolTip />}*//>
+          <Tooltip labelStyle={{ color: "rgb(125, 149, 182)" }} content={<PortfolioCustomToolTip />}/>
         </AreaChart>
       );
     }
@@ -100,8 +99,8 @@ class PortfolioChart extends React.Component {
           <h1>Your portfolio value</h1>
           <div className='portfolio-chart-number'>
             <h3>$</h3>
-            <h2>{this.balancesInteger}</h2>
-            <h3>.{this.balancesDecimal}</h3>
+            <h2>0</h2>
+            <h3 id='decimal'>.00</h3>
           </div>
         </div>
         <ul className='portfolio-chart-time-frames'>
