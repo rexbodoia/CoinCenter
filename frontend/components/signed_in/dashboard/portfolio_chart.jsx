@@ -9,6 +9,7 @@ class PortfolioChart extends React.Component {
     this.retrieveBalances = this.retrieveBalances.bind(this);
     this.findSelectedTimeframe = this.findSelectedTimeframe.bind(this);
     this.changeTimeframe = this.changeTimeframe.bind(this);
+    this.renderDates = this.renderDates.bind(this);
     this.totalData = [];
     this.timeframes = ['day', 'week', 'month', 'year', 'all'];
 
@@ -99,6 +100,28 @@ class PortfolioChart extends React.Component {
     }
   }
 
+  renderDates() {
+    let balances = this.props.balances;
+
+    const longestBalance = this.longestBalance(balances);
+
+    const timeframes = {
+      'day': 1,
+      'week': 7,
+      'month': 30,
+      'year': 365,
+      'all': longestBalance
+    }
+
+    let currentTimeframe = timeframes[this.findSelectedTimeframe()];
+    let intervalLength = Math.floor(currentTimeframe / 7);
+
+    $('.portfolio-chart-dates').find('ul').empty();
+    for (let i = 1; i <= 7; i++) {
+        $('.portfolio-chart-dates').find('ul').append(`<li>${intervalLength * i}</li>`);
+    }
+  }
+
   render () {
     return (
       <div className='portfolio-chart-container'>
@@ -121,13 +144,7 @@ class PortfolioChart extends React.Component {
         {this.renderChart(this.totalData)}
         <div className='portfolio-chart-dates'>
           <ul>
-            {/* <li>Feb</li>
-            <li>Mar</li>
-            <li>Apr</li>
-            <li>May</li>
-            <li>Jun</li>
-            <li>July</li>
-            <li>Aug</li> */}
+            {this.renderDates()}
           </ul>
         </div>
       </div>
