@@ -37,20 +37,28 @@ class PortfolioChart extends React.Component {
   retrieveBalances() {
     let [selectedTime] = this.findSelectedTimeframe();
 
-    this.props.getBalances(this.props.id).then(() => this.calculateBalanceHistory(selectedTime));
+    this.props.getBalances(this.props.id).then(() => this.changeTimeframe(selectedTime));
   }
 
   changeTimeframe(period) {
     let others = this.timeframes.filter(timeframe => timeframe !== period);
 
-    this.setState({[period]: true, [others[0]]: false, [others[1]]: false, [others[2]]: false, [others[3]]: false});
+    this.setState({
+      [period]: true,
+      [others[0]]: false,
+      [others[1]]: false,
+      [others[2]]: false,
+      [others[3]]: false
+    });
+
+    this.calculateBalanceHistory(period);
   }
 
   longestBalance(balances) {
     let balanceValues = Object.values(balances);
     let lengths = balanceValues.map(balance => balance.length);
 
-    return Math.max(lengths);
+    return Math.max(...lengths);
   }
 
   calculateBalanceHistory(timeframe) {
@@ -59,11 +67,11 @@ class PortfolioChart extends React.Component {
     const longestBalance = this.longestBalance(balances);
 
     const timeframes = {
-      day: 1,
-      week: 7,
-      month: 30,
-      year: 365,
-      all: longestBalance
+      'day': 1,
+      'week': 7,
+      'month': 30,
+      'year': 365,
+      'all': longestBalance
     }
 
     this.totalData = [];
@@ -80,7 +88,6 @@ class PortfolioChart extends React.Component {
   }
 
   renderChart(data) {
-    console.log(data);
     if (data.length !== 0){
       return (
         <AreaChart width={1188} height={160} data={data}>
@@ -104,7 +111,7 @@ class PortfolioChart extends React.Component {
           </div>
         </div>
         <ul className='portfolio-chart-time-frames'>
-          <li>1H</li>
+          {/* <li>1H</li> */}
           <li onClick={(e) => this.changeTimeframe('day')}>1D</li>
           <li onClick={(e) => this.changeTimeframe('week')}>1W</li>
           <li onClick={(e) => this.changeTimeframe('month')}>1M</li>
@@ -114,13 +121,13 @@ class PortfolioChart extends React.Component {
         {this.renderChart(this.totalData)}
         <div className='portfolio-chart-dates'>
           <ul>
-            <li>Feb</li>
+            {/* <li>Feb</li>
             <li>Mar</li>
             <li>Apr</li>
             <li>May</li>
             <li>Jun</li>
             <li>July</li>
-            <li>Aug</li>
+            <li>Aug</li> */}
           </ul>
         </div>
       </div>
@@ -129,45 +136,3 @@ class PortfolioChart extends React.Component {
 }
 
 export default PortfolioChart;
-
-
-// if (!this.props.balances && !this.props.prices) {
-//   return null;
-// }
-// let prices = this.props.prices;
-// let balances = this.props.balances;
-// let totalData = [];
-// let totalCurrentBalances = 0;
-//
-// let currentBalances = balances;
-//
-// let currentBitcoin = currentBalances.bitcoin.amount / prices.bitcoin[0].price;
-//
-// let currentEthereum = currentBalances.ethereum.amount / prices.ethereum[0].price;
-//
-// let currentLitecoin = currentBalances.litecoin.amount / prices.litecoin[0].price;
-//
-// let currentBitcoinCash = currentBalances.bitcoinCash.amount / prices.bitcoinCash[0].price;
-//
-// let bitcoinData = [];
-// let ethereumData = [];
-// let litecoinData = [];
-// let bitcoinCashData = [];
-//
-// for (let i = 0; i < prices.bitcoin.length; i++){
-//   let bitcoinAmount = currentBitcoin * prices.bitcoin[i].price;
-//
-//   let ethereumAmount = currentEthereum * prices.ethereum[i].price;
-//
-//   let litecoinAmount = currentLitecoin * prices.litecoin[i].price;
-//
-//   let bitcoinCashAmount = currentBitcoinCash * prices.bitcoinCash[i].price;
-//
-//   totalData.push({date: prices.bitcoin[i].date, amount: bitcoinAmount + ethereumAmount + litecoinAmount + bitcoinCashAmount});
-// }
-// totalData = totalData.reverse();
-//
-// totalCurrentBalances = currentBalances.bitcoin.amount + currentBalances.ethereum.amount + currentBalances.litecoin.amount + currentBalances.bitcoinCash.amount
-//
-// this.balancesInteger = Math.floor(totalCurrentBalances);
-// this.balancesDecimal = (totalCurrentBalances - balancesInteger).toFixed(2);
