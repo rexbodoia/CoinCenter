@@ -16,7 +16,7 @@ class PortfolioChart extends React.Component {
   }
 
   retrieveBalances() {
-    this.props.getBalances(this.props.id);
+    this.props.getBalances(this.props.id).then(() => this.calculateBalanceHistory());
   }
 
   calculateBalanceHistory() {
@@ -29,16 +29,13 @@ class PortfolioChart extends React.Component {
 
       this.totalData.push({date, amount});
     }
-  }
-
-  updateHeader() {
-
+    this.setState({ balances })
   }
 
   renderChart(data) {
     if (data.length !== 0){
       return (
-        <AreaChart width={1188} height={160} data={data} onMouseMove={this.updateHeader()}>
+        <AreaChart width={1188} height={160} data={data}>
 
           <Area type="monotone" dataKey="amount" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
           <Tooltip labelStyle={{ color: "rgb(125, 149, 182)" }} /*content={<CustomToolTip />}*//>
@@ -48,9 +45,6 @@ class PortfolioChart extends React.Component {
   }
 
   render () {
-    if (Object.values(this.props.balances).length !== 0) {
-      this.calculateBalanceHistory();
-    }
     return (
       <div className='portfolio-chart-container'>
         <div className='portfolio-chart-header'>

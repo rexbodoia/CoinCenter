@@ -21,8 +21,8 @@ class Navbar extends React.Component {
           this.props.history.push('/dashboard');
         }
       } else {
-        if(this.props.history.location.pathname !== '/buy-sell'){
-          this.props.history.push('/buy-sell');
+        if(this.props.history.location.pathname !== '/buy'){
+          this.props.history.push('/buy');
         }
       }
       if(this.state[other]) {

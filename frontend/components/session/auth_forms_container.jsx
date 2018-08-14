@@ -1,6 +1,7 @@
 import AuthForms from './auth_forms';
 import { connect } from 'react-redux';
 import { signup, signin, clearErrors } from '../../actions/session_actions';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = (state, ownProps) => ({
     errors: state.errors.session,
@@ -15,4 +16,4 @@ const mapDispatchToProps = dispatch => ({
   clearErrors: () => dispatch(clearErrors())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthForms);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthForms));
