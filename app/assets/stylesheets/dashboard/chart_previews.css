@@ -1,16 +1,36 @@
 .chart-previews-container {
-  width: 1178px;
+  width: 1180px;
   background-color: white;
-  height: 200px;
+  height: 212px;
   margin: 0 auto;
   border-left: 1px solid rgb(218, 225, 233);
   display: flex;
 }
 
 .chart-preview-container {
-  height: 212px;
-  width: 294px;
+  height: 210px;
   border: 1px solid rgb(218, 225, 233);
-  border-right: none;
+  border-left: none;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-preview-header {
+  height: 50px;
+  padding: 20px;
+}
+
+.chart-preview-title > h1 {
+  font-size: 16px;
+  color: rgb(90, 90, 90);
+  font-weight: 500;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.chart-preview-number > h1 {
+  color: black;
+  font-size: 28px;
+  font-weight: 500;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }

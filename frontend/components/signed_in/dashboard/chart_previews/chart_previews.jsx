@@ -12,17 +12,10 @@ class ChartPreviews extends React.Component {
 
   componentDidMount() {
     this.props.getPrices().then(prices => this.setState({ prices }));
-    // .then(() => {
-    //   this.renderChart('bitcoin');
-    //   this.renderChart('bitcoinCash');
-    //   this.renderChart('ehtereum');
-    //   this.renderChart('litecoin');
-    // });
   }
 
   render () {
     if(!this.state.prices){
-      console.log('hello');
       return (
         <div className='chart-previews-container'>
           <div className='chart-preview-container'></div>
@@ -34,10 +27,10 @@ class ChartPreviews extends React.Component {
     } else {
       return (
         <div className='chart-previews-container'>
-          <ChartPreviewItem coin={'bitcoin'} prices={this.state.prices.bitcoin} />
-          <ChartPreviewItem coin={'bitcoinCash'} prices={this.props.prices.bitcoinCash} />
-          <ChartPreviewItem coin={'ethereum'} prices={this.state.prices.ethereum} />
-          <ChartPreviewItem coin={'litecoin'} prices={this.state.prices.litecoin} />
+          <ChartPreviewItem coin={'Bitcoin'} prices={this.props.prices.bitcoin} />
+          <ChartPreviewItem coin={'Bitcoin Cash'} prices={this.props.prices.bitcoinCash} />
+          <ChartPreviewItem coin={'Ethereum'} prices={this.props.prices.ethereum} />
+          <ChartPreviewItem coin={'Litecoin'} prices={this.props.prices.litecoin} />
         </div>
       );
     }
