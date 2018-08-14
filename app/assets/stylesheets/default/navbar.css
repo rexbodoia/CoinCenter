@@ -13,12 +13,6 @@
   background-color: rgb(6, 103, 208);
 }
 
-.profile-dropdown {
-  float: right;
-  cursor: pointer;
-  font-weight: 500;
-}
-
 .signed-in {
   background-color: rgb(244, 247, 250);
   padding: 0px 24px;

@@ -10,6 +10,7 @@
   font-weight: 500;
   color: rgb(125, 149, 182);
   font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  /* position: absolute; */
 }
 
 .portfolio-chart-header {
@@ -76,4 +77,20 @@
   font-weight: inherit;
   color: inherit;
   font-family: inherit;
+}
+
+.portfolio-chart-time-frames {
+  display: flex;
+  flex-direction: row;
+  /* float: right; */
+  position: relative;
+  bottom: 90px;
+  left: 490px;
+}
+
+.portfolio-chart-time-frames > li {
+  color: rgb(78, 92, 110);
+  padding: 0 4px;
+  font-size: 13px;
+  color: rgb(155, 166, 178);
 }

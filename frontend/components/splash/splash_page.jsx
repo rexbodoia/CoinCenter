@@ -18,7 +18,6 @@ class SplashPage extends React.Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = 'white';
-    // this.props.getPrices()
   }
 
   componentWillUnmount() {

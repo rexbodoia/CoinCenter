@@ -1,0 +1,74 @@
+.profile-dropdown {
+  float: right;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.dropdown {
+  width: 230px;
+  background-color: white;
+  position: absolute;
+  left: 1084px;
+  top: 56px;
+  color: rgb(78, 92, 110);
+  text-align: center;
+  z-index: 3;
+  border: 1px solid rgb(218, 225, 233);
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.dropdown-modal-screen {
+  position: fixed;
+  background-color: rgba(121, 134, 150, 0.2);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.dropdown-modal-screen:hover {
+  cursor: pointer;
+}
+
+.user-name {
+  color: inherit;
+  text-align: inherit;
+  font-size: 24px;
+  margin-bottom: 2px;
+  font-weight: inherit;
+  margin-top: 14px;
+}
+
+.user-email {
+  color: rgb(155, 166, 178);
+  text-align: inherit;
+  font-size: 14px;
+  font-weight: inherit;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgb(218, 225, 233);
+}
+
+.sign-out {
+  color: inherit;
+  text-align: inherit;
+  font-weight: inherit;
+  padding: 20px auto;
+}
+
+.sign-out-button {
+  color: inherit;
+  text-align: inherit;
+  font-weight: inherit;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  transition: 0.2s ease 0s;
+}
+
+.sign-out-button:hover {
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+}

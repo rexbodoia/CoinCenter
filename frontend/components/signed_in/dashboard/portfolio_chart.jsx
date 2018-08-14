@@ -55,6 +55,14 @@ class PortfolioChart extends React.Component {
             <h3>.{this.balancesDecimal}</h3>
           </div>
         </div>
+        <ul className='portfolio-chart-time-frames'>
+          <li>1H</li>
+          <li>1D</li>
+          <li>1W</li>
+          <li>1M</li>
+          <li>1Y</li>
+          <li>ALL</li>
+        </ul>
         {this.renderChart(this.totalData)}
         <div className='portfolio-chart-dates'>
           <ul>
