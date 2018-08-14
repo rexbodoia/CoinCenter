@@ -1,28 +1,23 @@
 import React from 'react';
-import { AreaChart, Area, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { AreaChart, Area, Tooltip } from 'recharts';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
     super(props);
 
-    this.calculateBalanceHistory = this.calculateBalanceHistory.bind(this);
-    this.retrieveBalances = this.retrieveBalances.bind(this);
-    this.findSelectedTimeframe = this.findSelectedTimeframe.bind(this);
-    this.changeTimeframe = this.changeTimeframe.bind(this);
-    this.renderDates = this.renderDates.bind(this);
-    this.totalData = [];
-    this.timeframes = ['day', 'week', 'month', 'year', 'all'];
-
     this.state = {
       balances: props.balances,
       prices: props.prices,
       id: props.id,
-      'day': false,
-      'week': false,
-      'month': true,
-      'year': false,
-      'all': false
+      timeframe: 'month'
     }
+
+    this.calculateBalanceHistory = this.calculateBalanceHistory.bind(this);
+    this.retrieveBalances = this.retrieveBalances.bind(this);
+    this.changeTimeframe = this.changeTimeframe.bind(this);
+    this.renderDates = this.renderDates.bind(this);
+    this.getTimeframeLength = this.getTimeframeLength.bind(this);
+    this.totalData = [];
   }
 
   componentDidMount() {
@@ -31,57 +26,45 @@ class PortfolioChart extends React.Component {
     this.retrieveBalances();
   }
 
-  findSelectedTimeframe() {
-    return this.timeframes.filter(timeframe => this.state[timeframe] == true);
+  changeTimeframe(timeframe) {
+    this.setState({ timeframe });
+    let length = this.getTimeframeLength(timeframe);
+    this.calculateBalanceHistory(length);
   }
 
   retrieveBalances() {
-    let [selectedTime] = this.findSelectedTimeframe();
-
-    this.props.getBalances(this.props.id).then(() => this.changeTimeframe(selectedTime));
-  }
-
-  changeTimeframe(period) {
-    let others = this.timeframes.filter(timeframe => timeframe !== period);
-
-    this.setState({
-      [period]: true,
-      [others[0]]: false,
-      [others[1]]: false,
-      [others[2]]: false,
-      [others[3]]: false
-    });
-
-    this.calculateBalanceHistory(period);
+    this.props.getBalances(this.props.id).then(() => this.changeTimeframe(this.state.timeframe));
   }
 
   longestBalance(balances) {
     let balanceValues = Object.values(balances);
     let lengths = balanceValues.map(balance => balance.length);
-
     return Math.max(...lengths);
   }
 
-  calculateBalanceHistory(timeframe) {
-    let balances = this.props.balances;
+  getTimeframeLength(timeframe) {
+    if (timeframe === 'all') {
+      return this.longestBalance(this.state.balances);
+    }
 
-    const longestBalance = this.longestBalance(balances);
-
-    const timeframes = {
+    const timeframeLengths = {
+      'hour': 0,
       'day': 1,
       'week': 7,
       'month': 30,
-      'year': 365,
-      'all': longestBalance
+      'year': 365
     }
+    return timeframeLengths[timeframe];
+  }
 
+  calculateBalanceHistory(length) {
+    let balances = this.props.balances;
     this.totalData = [];
 
-    for (let i = 0; i < timeframes[timeframe]; i++){
+    for (let i = 0; i < length; i++){
       let amount = balances.bitcoin[i].amount + balances.bitcoinCash[i].amount + balances.ethereum[i].amount + balances.litecoin[i].amount;
 
       let date = balances.bitcoin[i].date;
-
       this.totalData.push({date, amount});
     }
 
@@ -100,21 +83,9 @@ class PortfolioChart extends React.Component {
     }
   }
 
-  renderDates() {
-    let balances = this.props.balances;
-
-    const longestBalance = this.longestBalance(balances);
-
-    const timeframes = {
-      'day': 1,
-      'week': 7,
-      'month': 30,
-      'year': 365,
-      'all': longestBalance
-    }
-
-    let currentTimeframe = timeframes[this.findSelectedTimeframe()];
-    let intervalLength = Math.floor(currentTimeframe / 7);
+  renderDates(timeframe) {
+    let length = this.getTimeframeLength(timeframe);
+    let intervalLength = Math.floor(length / 7);
 
     $('.portfolio-chart-dates').find('ul').empty();
     for (let i = 1; i <= 7; i++) {
@@ -134,7 +105,7 @@ class PortfolioChart extends React.Component {
           </div>
         </div>
         <ul className='portfolio-chart-time-frames'>
-          {/* <li>1H</li> */}
+          <li onClick={(e) => this.changeTimeframe('hour')}>1H</li>
           <li onClick={(e) => this.changeTimeframe('day')}>1D</li>
           <li onClick={(e) => this.changeTimeframe('week')}>1W</li>
           <li onClick={(e) => this.changeTimeframe('month')}>1M</li>
@@ -144,7 +115,7 @@ class PortfolioChart extends React.Component {
         {this.renderChart(this.totalData)}
         <div className='portfolio-chart-dates'>
           <ul>
-            {this.renderDates()}
+            {this.renderDates(this.state.timeframe)}
           </ul>
         </div>
       </div>
