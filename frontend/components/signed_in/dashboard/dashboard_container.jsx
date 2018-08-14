@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { fetchBalances } from '../../../actions/balances_actions';
 import { fetchPrices } from '../../../actions/prices_actions';
 import Dashboard from './dashboard';
+import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
   balances: state.entities.balances,
@@ -13,4 +14,4 @@ const mapDispatchToProps = dispatch => ({
   getPrices: () => dispatch(fetchPrices())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));

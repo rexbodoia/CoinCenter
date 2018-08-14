@@ -1,5 +1,5 @@
 import React from 'react';
-import { AreaChart, Area, Line } from 'recharts';
+import { AreaChart, Area, Line, XAxis, YAxis, Tooltip } from 'recharts';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -31,11 +31,17 @@ class PortfolioChart extends React.Component {
     }
   }
 
+  updateHeader() {
+
+  }
+
   renderChart(data) {
     if (data.length !== 0){
       return (
-        <AreaChart width={1188} height={160} data={data} >
+        <AreaChart width={1188} height={160} data={data} onMouseMove={this.updateHeader()}>
+
           <Area type="monotone" dataKey="amount" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
+          <Tooltip labelStyle={{ color: "rgb(125, 149, 182)" }} /*content={<CustomToolTip />}*//>
         </AreaChart>
       );
     }

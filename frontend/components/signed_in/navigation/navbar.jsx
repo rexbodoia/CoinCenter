@@ -16,6 +16,15 @@ class Navbar extends React.Component {
 
   selectTab(self, other) {
     return (e) => {
+      if (self === 'dashboard'){
+        if(this.props.history.location.pathname !== '/dashboard'){
+          this.props.history.push('/dashboard');
+        }
+      } else {
+        if(this.props.history.location.pathname !== '/buy-sell'){
+          this.props.history.push('/buy-sell');
+        }
+      }
       if(this.state[other]) {
         this.setState({[other]: false});
       }
