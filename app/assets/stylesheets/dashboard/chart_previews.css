@@ -1,7 +1,16 @@
-.chart-preview-container {
+.chart-previews-container {
   width: 1178px;
   background-color: white;
   height: 200px;
   margin: 0 auto;
+  border-left: 1px solid rgb(218, 225, 233);
+  display: flex;
+}
+
+.chart-preview-container {
+  height: 212px;
+  width: 294px;
   border: 1px solid rgb(218, 225, 233);
+  border-right: none;
+  flex-grow: 1;
 }
