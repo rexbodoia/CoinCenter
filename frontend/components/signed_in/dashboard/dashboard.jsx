@@ -1,28 +1,25 @@
 import React from 'react';
 import PortfolioChart from './portfolio_chart';
 import PortfolioChartContainer from './portfolio_chart_container';
+import ChartPreviews from './chart_previews/chart_previews';
+import Portfolio from './portfolio/portfolio';
+import RecentActivity from './recent_activity/recent_activity';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentDidMount() {
-    // if (Object.values(this.props.prices).length !== 0) {
-    //   let prices = this.props.prices
-    // } else {
-    //   this.props.getPrices();
-    // }
-    // if (Object.values(this.props.balances).length !== 0) {
-    //   let balances = this.props.balances
-    // } else {
-    //   this.props.getBalances(getState().session.id);
-    // }
-  }
-
   render(){
     return (
-      <PortfolioChartContainer />
+      <div className='dashboard-background'>
+        <PortfolioChartContainer />
+        <ChartPreviews />
+        <div className='dashboard-bottom'>
+          <Portfolio />
+          <RecentActivity />
+        </div>
+      </div>
     );
   }
 }

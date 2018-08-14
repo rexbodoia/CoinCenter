@@ -1,0 +1,10 @@
+.dashboard-background {
+
+}
+
+.dashboard-bottom {
+  width: 1178px;
+  display: flex;
+  justify-content: space-between;
+  margin: 25px auto;
+}
