@@ -82,13 +82,28 @@ class PortfolioChart extends React.Component {
     }
   }
 
+  stringifyDate(date) {
+    let string = date.toString()
+    return [string.slice(4, 7), string.slice(8, 10)];
+  }
+
   renderDates(timeframe) {
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    const today = new Date();
+    let stringified = this.stringifyDate(today);
+
     let length = this.getTimeframeLength(timeframe);
-    let intervalLength = Math.floor(length / 7);
+    let intervalLength = Math.ceil(length / 7);
 
     $('.portfolio-chart-dates').find('ul').empty();
-    for (let i = 1; i <= 7; i++) {
-        $('.portfolio-chart-dates').find('ul').append(`<li>${intervalLength * i}</li>`);
+    $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+
+    for (let i = 0; i < 6; i++) {
+      let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
+      let stringified = this.stringifyDate(nextDate);
+
+      $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
     }
   }
 
