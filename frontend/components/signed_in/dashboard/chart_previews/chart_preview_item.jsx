@@ -14,18 +14,26 @@ class ChartPreviewItem extends React.Component {
     }
   }
 
+  handleHover(e) {
+    $('chart-preview-container').addClass('chart-preview-hovered');
+    $('chart-preview-container').removeClass('chart-preview-unhovered');
+    $('chart-preview-button').addClass('button-displayed');
+  }
+
   render() {
     const data = this.props.prices.slice(0, 30).reverse();
     const first = data[29].price;
     const last = data[0].price;
     const diff = (first - last) / first;
+
     let percentDiff = (diff * 100).toFixed(2);
-    console.log('here');
+
     if (percentDiff >= 0) {
       percentDiff = '+' + percentDiff;
     }
     return (
       <div className='chart-preview-container'>
+        {/* <button className='chart-preview-button'>View asset</button> */}
         <div className='chart-preview-header'>
           <div className='chart-preview-title'>
             <h1>{this.coin}</h1>
@@ -36,7 +44,7 @@ class ChartPreviewItem extends React.Component {
           </div>
         </div>
 
-        <AreaChart width={294} height={120} data={data}>
+        <AreaChart width={294} height={120} data={data} onMouseEnter={this.handleHover}>
 
           <Area type="monotone" dataKey="price" fill="white" fillOpacity={1} stroke={this.colors[this.coin]} strokeWidth={1.6}/>
           <YAxis hide={true} domain={[dataMin => dataMin / 2, dataMax => (dataMax * 2)]} />
