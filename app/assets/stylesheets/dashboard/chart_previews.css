@@ -21,6 +21,10 @@
   padding: 20px;
 }
 
+.chart-preview-title {
+  padding-bottom: 8px;
+}
+
 .chart-preview-title > h1 {
   font-size: 16px;
   color: rgb(90, 90, 90);
@@ -29,8 +33,18 @@
 }
 
 .chart-preview-number > h1 {
-  color: black;
+  color: rgb(45, 45, 45);
   font-size: 28px;
   font-weight: 500;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  display: inline;
+}
+
+.chart-preview-number > h2 {
+  color: rgb(75, 75, 75);
+  display: inline;
+  font-size: 14px;
+  font-weight: 500;
+  padding-left: 6px;
   font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }

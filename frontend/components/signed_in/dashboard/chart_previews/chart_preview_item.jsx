@@ -16,6 +16,14 @@ class ChartPreviewItem extends React.Component {
 
   render() {
     const data = this.props.prices.slice(0, 30).reverse();
+    const first = data[29].price;
+    const last = data[0].price;
+    const diff = (first - last) / first;
+    let percentDiff = (diff * 100).toFixed(2);
+    console.log('here');
+    if (percentDiff >= 0) {
+      percentDiff = '+' + percentDiff;
+    }
     return (
       <div className='chart-preview-container'>
         <div className='chart-preview-header'>
@@ -23,7 +31,8 @@ class ChartPreviewItem extends React.Component {
             <h1>{this.coin}</h1>
           </div>
           <div className='chart-preview-number'>
-            <h1>$</h1>
+            <h1>${data[29].price}</h1>
+            <h2>{percentDiff}%</h2>
           </div>
         </div>
 
