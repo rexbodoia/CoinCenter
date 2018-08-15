@@ -1,5 +1,5 @@
 class Coin < ApplicationRecord
-  validates :name, :ticker_symbol, :current_price, presence: true
+  validates :name, :ticker_symbol, presence: true
 
   has_many :transactions
 
