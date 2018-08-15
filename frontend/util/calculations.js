@@ -1,5 +1,65 @@
 export const filterPrices = (prices) => {
-  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(24).reverse();
+  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] }));
+}
+
+export const calculateCoinValues = (coinAmounts, prices) => {
+  let coinValues = [];
+
+  if (coinAmounts.length === 0) {
+    return coinValues;
+  }
+
+  let v = 0;
+  let lastBalanceTime = coinAmounts[v].date;
+  let nextBalanceTime = lastBalanceTime;
+
+  for (let p = prices.length - 1; p > 0; p--) {
+    let priceTime = prices[p].time;
+
+    if (v + 1 < coinAmounts.length) {
+      nextBalanceTime = coinAmounts[v + 1].date;
+    }
+
+    if (nextBalanceTime < priceTime) {
+      lastBalanceTime = nextBalanceTime;
+      v += 1;
+    }
+
+    let amount = coinAmounts[v].amount;
+    coinValues.push({ time: prices[p].time, value: amount * prices[p].price});
+  }
+  return coinValues;
+}
+
+export const findNextTimeIdx = (array, currentTime) => {
+  let lastTime = [array[0].time, 0];
+
+  for(let idx = 1; idx < array.length; idx++) {
+    if (array[idx].time > currentTime) {
+      return lastTime[1];
+    } else {
+      lastTime[0] = array[idx].time;
+      lastTime[1] += 1;
+    }
+  }
+  return lastTime[1];
+}
+
+export const compileBalanceValues = coinValuesArray => {
+  let portfolioValues = [];
+
+  for (let i = 0; i < coinValuesArray[0].length; i++){
+    let sum = coinValuesArray[0][i].value;
+    let time = coinValuesArray[0][i].time;
+
+    for(let coin = 1; coin < 4; coin++) {
+      let nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
+      sum += coinValuesArray[coin][nextTimeIdx].value;
+    }
+    portfolioValues.push({ time, value: sum });
+  }
+
+  return portfolioValues;
 }
 
 // export const calculateBalanceAmounts = transactions => {
@@ -55,104 +115,3 @@ export const filterPrices = (prices) => {
 //
 //   return balanceValues;
 // }
-
-export const calculateCoinValues = (coinAmounts, prices) => {
-  let coinValues = [];
-
-  if (coinAmounts.length === 0) {
-    return coinValues;
-  }
-
-  let v = 0;
-  let lastBalanceTime = coinAmounts[v].date;
-
-  for (let p = prices.length - 1; p > 0; p--) {
-    let priceTime = prices[p].time;
-    let nextBalanceTime = coinAmounts[v + 1].date;
-
-    if (nextBalanceTime < priceTime) {
-      lastBalanceTime = nextBalanceTime;
-      v += 1;
-    }
-
-    let amount = coinAmounts[v].amount;
-    coinValues.push({ time: prices[p].time, value: amount * prices[p].price});
-  }
-  return coinValues;
-}
-
-export const findNextTimeIdx = (array, currentTime) => {
-  let lastTime = [array[0].time, 0];
-
-  for(let idx = 1; idx < array.length; idx++) {
-    if (array[idx].time > currentTime) {
-      return lastTime[1];
-    } else {
-      lastTime[0] = array[idx].time;
-      lastTime[1] += 1;
-    }
-  }
-  return lastTime[1];
-}
-
-export const compileBalanceValues = coinValuesArray => {
-  let portfolioValues = [];
-
-  console.log('coin values array');
-  console.log(coinValuesArray);
-
-  for (let i = 0; i < coinValuesArray[0].length; i++){
-    let sum = coinValuesArray[0][i].value;
-    let time = coinValuesArray[0][i].time;
-
-    for(let coin = 1; coin < 4; coin++) {
-      let nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
-      sum += coinValuesArray[coin][nextTimeIdx].value;
-    }
-    portfolioValues.push({ time, value: sum });
-  }
-
-  console.log('portfolio value data');
-  console.log(portfolioValues);
-
-  return portfolioValues;
-}
-// for (let coin = 0; coin < coinValuesArray.length; coin++) {
-//   let sum = 0;
-//   let coinValues = coinValuesArray[coin];
-//
-//   for (let i = 0; i < coinValues.length; i++) {
-//
-//   }
-// }
-// coinValuesArray
-
-export const TimeframeToGranularity = (timeframe) => {
-  if (timeframe === 'all') {
-    return this.longestBalance(this.state.balances);
-  }
-
-  const timeframeGranularities = {
-    'hour': 'oneMinute',
-    'day': 'fifteenMinutes',
-    'week': 'oneHour',
-    'month': 'sixHours',
-    'year': 'oneDay'
-  }
-  return timeframeGranularities[timeframe];
-}
-
-export const getTimeframeLength = (timeframe) => {
-  if (timeframe === 'all') {
-    return this.longestBalance(this.state.balances);
-  }
-
-  const timeframeLengths = {
-    'hour': 60,
-    'day': 96,
-    'week': 168,
-    'month': 120,
-    'year': 365
-  }
-  return timeframeLengths[timeframe];
-}

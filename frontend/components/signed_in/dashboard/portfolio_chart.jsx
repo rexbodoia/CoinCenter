@@ -1,7 +1,8 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
-import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices, TimeframeToGranularity, getTimeframeLength } from '../../../util/calculations';
+import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices } from '../../../util/calculations';
+import { timeGranConverter, getTimeframeLength, stringifyDate, changeTimeframe, renderDates } from '../../../util/timeframe_manipulation';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -15,48 +16,46 @@ class PortfolioChart extends React.Component {
 
     // this.changeTimeframe = this.changeTimeframe.bind(this);
     // this.renderDates = this.renderDates.bind(this);
-    this.retrievePrices = this.retrievePrices.bind(this);
+    // this.retrievePrices = this.retrievePrices.bind(this);
     this.renderChart = this.renderChart.bind(this);
     this.calculatePortfolioHistory = this.calculatePortfolioHistory.bind(this);
   }
 
   componentDidMount() {
-    this.props.getTransactions(this.props.id).then(transactions => {
-      this.setState({ amounts: transactions.transactions });
+    this.props.getTransactions(this.props.id);
+
+      // setTimeout(() => this.props.getPrices('BTC', 'sixHours'), 500);
+      // setTimeout(() => this.props.getPrices('BCH', 'sixHours'), 1000);
+      // setTimeout(() => this.props.getPrices('ETH', 'sixHours'), 1500);
+      // setTimeout(() => this.props.getPrices('LTC', 'sixHours'), 2000);
+    if (!Object.keys(this.props.prices).includes('sixHours')) {
       this.retrievePrices();
-    });
+    };
   }
 
   retrievePrices() {
-    setTimeout(() => this.props.getPrices('BTC', 'sixHours').then(btcPrices => this.setState({ btcPrices: btcPrices.prices })), 500);
+    setTimeout(() => this.props.getPrices('BTC', 'sixHours'), 500);
 
-    setTimeout(() => this.props.getPrices('BCH', 'sixHours').then(bchPrices => this.setState({ bchPrices: bchPrices.prices })), 1000);
+    setTimeout(() => this.props.getPrices('BCH', 'sixHours'), 1000);
 
-    setTimeout(() => this.props.getPrices('ETH', 'sixHours').then(ethPrices => this.setState({ ethPrices: ethPrices.prices })), 1500);
+    setTimeout(() => this.props.getPrices('ETH', 'sixHours'), 1500);
 
-    setTimeout(() => this.props.getPrices('LTC', 'sixHours').then(ltcPrices => this.setState({ ltcPrices: ltcPrices.prices })), 2000);
+    setTimeout(() => this.props.getPrices('LTC', 'sixHours'), 2000);
   }
 
-  // changeTimeframe(timeframe) {
-  //   this.setState({ timeframe });
-  //   let granularity = TimeframeToGranularity(timeframe);
-  //   let amounts = calculateBalanceAmounts(this.props.transactions);
-  //   console.log(amounts);
-  //   let values = calculateBalanceValues(amounts, this.props.prices);
-  //   this.totalData = values;
-  // }
-
   calculatePortfolioHistory() {
-    if (Object.values(this.props.prices.sixHours).length >= 4) {
+    if (Object.keys(this.props.prices).includes('sixHours') && Object.values(this.props.prices.sixHours).length >= 4 && Object.values(this.props.amounts).length >= 4) {
+      // debugger
+
       let bchData = filterPrices(this.props.prices.sixHours.BCH);
       let btcData = filterPrices(this.props.prices.sixHours.BTC);
       let ethData = filterPrices(this.props.prices.sixHours.ETH);
       let ltcData = filterPrices(this.props.prices.sixHours.LTC);
 
-      let bchValues = calculateCoinValues(this.state.amounts.BCH, bchData);
-      let btcValues = calculateCoinValues(this.state.amounts.BTC, btcData);
-      let ethValues = calculateCoinValues(this.state.amounts.ETH, ethData);
-      let ltcValues = calculateCoinValues(this.state.amounts.LTC, ltcData);
+      let bchValues = calculateCoinValues(this.props.amounts.BCH, bchData);
+      let btcValues = calculateCoinValues(this.props.amounts.BTC, btcData);
+      let ethValues = calculateCoinValues(this.props.amounts.ETH, ethData);
+      let ltcValues = calculateCoinValues(this.props.amounts.LTC, ltcData);
 
       return compileBalanceValues([bchValues, btcValues, ethValues, ltcValues]);
     }
@@ -64,7 +63,7 @@ class PortfolioChart extends React.Component {
   }
 
   renderChart() {
-    if(Object.values(this.props.prices).length !== 0) {
+    if(Object.keys(this.props.prices).includes('sixHours') && Object.values(this.props.prices.sixHours).length >= 4 && Object.values(this.props.amounts).length >= 4) {
       let data = this.calculatePortfolioHistory();
       if (data.length !== 0) {
         return (
@@ -77,31 +76,6 @@ class PortfolioChart extends React.Component {
       }
     }
   }
-
-  // stringifyDate(date) {
-  //   let string = date.toString()
-  //   return [string.slice(4, 7), string.slice(8, 10)];
-  // }
-  //
-  // renderDates(timeframe) {
-  //   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  //
-  //   const today = new Date();
-  //   let stringified = this.stringifyDate(today);
-  //
-  //   let length = getTimeframeLength(timeframe);
-  //   let intervalLength = Math.ceil(length / 7);
-  //
-  //   $('.portfolio-chart-dates').find('ul').empty();
-  //   $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
-  //
-  //   for (let i = 0; i < 6; i++) {
-  //     let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
-  //     let stringified = this.stringifyDate(nextDate);
-  //
-  //     $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
-  //   }
-  // }
 
   render () {
     return (

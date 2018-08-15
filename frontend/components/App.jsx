@@ -8,10 +8,10 @@ import SplashPageContainer from './splash/splash_page_container';
 
 const App = () => (
   <div>
-    <AuthRoute path='/signin' component={AuthFormsContainer} />
-    <AuthRoute path='/signup' component={AuthFormsContainer} />
-    <AuthRoute path='/' exact component={SplashPageContainer} />
     <Switch>
+      <AuthRoute path='/signin' component={AuthFormsContainer} />
+      <AuthRoute path='/signup' component={AuthFormsContainer} />
+      <AuthRoute path='/' exact component={SplashPageContainer} />
       <ProtectedRoute path='/' component={SignedIn} />
     </Switch>
   </div>

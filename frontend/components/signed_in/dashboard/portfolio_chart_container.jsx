@@ -7,7 +7,7 @@ import PortfolioChart from './portfolio_chart';
 const mapStateToProps = (state, ownProps) => ({
   prices: state.entities.prices,
   balances: state.entities.balances,
-  transactions: state.entities.transactions,
+  amounts: state.entities.transactions,
   id: state.session.id
 });
 

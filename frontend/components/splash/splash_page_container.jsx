@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  getPrices: () => dispatch(fetchPrices())
+  getPrices: (symbol, granularity) => dispatch(fetchPrices(symbol, granularity))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SplashPage);

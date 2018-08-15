@@ -10,19 +10,44 @@ class SplashPage extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.update = this.update.bind(this);
+    this.retrievePrices = this.retrievePrices.bind(this);
     this.state = {
       open: false,
-      email: ''
+      email: '',
+      coins: ['BTC', 'BCH' ,'ETH', 'LTC'],
+      granularities: ['fifteenMinutes', 'sixHours', 'oneHour', 'oneMinute', 'oneDay']
     };
   }
 
   componentDidMount() {
     document.body.style.backgroundColor = 'white';
+    if(Object.values(this.props.prices).length === 0){
+      // this.retrievePrices();
+    }
   }
 
   componentWillUnmount() {
     document.body.style.backgroundColor = null;
   }
+
+  retrievePrices() {
+    for (let coin = 0; coin < 4; coin++) {
+
+      for (let granularity = 0; granularity < 5; granularity++) {
+
+        setTimeout(() => this.props.getPrices(this.state.coins[coin], this.state.granularities[granularity]), (coin + 1) * (granularity + 1) * 1000);
+
+      }
+    }
+    // setTimeout(() => this.props.getPrices('BTC', 'fifteenMinutes'), 500);
+    //
+    // setTimeout(() => this.props.getPrices('BCH', 'fifteenMinutes'), 1000);
+    //
+    // setTimeout(() => this.props.getPrices('ETH', 'fifteenMinutes'), 1500);
+    //
+    // setTimeout(() => this.props.getPrices('LTC', 'fifteenMinutes'), 2000);
+  }
+
 
   openModal(e) {
     e.preventDefault();
