@@ -11,17 +11,34 @@ Coin.create(name: 'Bitcoin Cash', ticker_symbol: :BCH)
 Coin.create(name: 'Litecoin', ticker_symbol: :LTC)
 Coin.create(name: 'Bitcoin', ticker_symbol: :BTC)
 
-times_gen = Random.new;
+# times_gen = Random.new;
+# date_gen = Random.new
 amount_gen = Random.new;
-date_gen = Random.new
 
-10.times do |user_num|
+30.times do |user_num|
   User.create(f_name: 'guest', l_name: 'user', email: "guest#{user_num}@user.com", password: '12345678')
+
+  prob_gen = Random.new
+  match_gen = Random.new
+
+  marker = prob_gen.rand(30)
+  today = Date.new(2018,8,17)
+
+  (0..500).each do |days_back|
+    if match_gen.rand(30) == marker
+      new_date = (today - days_back).to_datetime
+      Transaction.create!(date: new_date, coin_id: prob_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(5.0))
+    end
+  end
 end
 
-times_gen.rand(100).times do |time|
-  Transaction.create(date: Date.new - date_gen.rand(600), coin_id: times_gen.rand(4) + 1), user_id: times_gen.rand(10), amount: amount_gen.rand(5000)) 
-end
+# times_gen.rand(120).times do |time|
+#   Transaction.create!(date: DateTime.new([2018, 2017, 2016].sample, date_gen.rand(1..12), date_gen.rand(1..28)), coin_id: times_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(5.0))
+# end
+
+
+
+
 
   # date = Date.new(2018,8,11);
   # bitcoin = rand_gen.rand(1.0)

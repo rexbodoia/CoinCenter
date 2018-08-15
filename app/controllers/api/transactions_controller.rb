@@ -16,11 +16,11 @@ class Api::TransactionsController < ApplicationController
   end
 
   def show
-    @transaction = Transaction.find_by(id: params[:id])
-    if @transaction
+    @transactions = Transaction.where(user_id: params[:id])
+    unless @transactions.empty?
       render '/api/transactions/show'
     else
-      render json: ['Transaction could not be found']
+      render json: ['Could not find transactions']
     end
   end
 

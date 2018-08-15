@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_055922) do
+ActiveRecord::Schema.define(version: 2018_08_15_070559) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_055922) do
     t.float "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "date"
+    t.datetime "date"
     t.index ["coin_id"], name: "index_balances_on_coin_id"
     t.index ["date"], name: "index_balances_on_date"
     t.index ["user_id"], name: "index_balances_on_user_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2018_08_15_055922) do
   end
 
   create_table "prices", force: :cascade do |t|
-    t.date "date", null: false
+    t.datetime "date", null: false
     t.integer "coin_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
