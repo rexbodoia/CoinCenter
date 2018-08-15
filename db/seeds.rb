@@ -11,10 +11,16 @@ Coin.create(name: 'Bitcoin Cash', ticker_symbol: :BCH)
 Coin.create(name: 'Litecoin', ticker_symbol: :LTC)
 Coin.create(name: 'Bitcoin', ticker_symbol: :BTC)
 
-rand_gen = Random.new;
+times_gen = Random.new;
+amount_gen = Random.new;
+date_gen = Random.new
 
 10.times do |user_num|
   User.create(f_name: 'guest', l_name: 'user', email: "guest#{user_num}@user.com", password: '12345678')
+end
+
+times_gen.rand(100).times do |time|
+  Transaction.create(date: Date.new - date_gen.rand(600), coin_id: times_gen.rand(4) + 1), user_id: times_gen.rand(10), amount: amount_gen.rand(5000)) 
 end
 
   # date = Date.new(2018,8,11);
