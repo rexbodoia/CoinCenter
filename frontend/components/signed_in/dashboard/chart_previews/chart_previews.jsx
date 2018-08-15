@@ -6,31 +6,48 @@ class ChartPreviews extends React.Component {
     super(props);
 
     this.state = {
-      prices: null
+      btcPrices: null,
+      bchPrices: null,
+      ethPrices: null,
+      ltcPrices: null,
     }
   }
 
   componentDidMount() {
-    this.props.getPrices().then(prices => this.setState({ prices }));
+    this.props.getPrices('BTC', 'fiveMinutes').then(btcPrices => this.setState({ btcPrices: btcPrices.prices }));
+
+    setTimeout(() => this.props.getPrices('BCH', 'fiveMinutes').then(bchPrices => this.setState({ bchPrices: bchPrices.prices })), 200);
+
+    setTimeout(() => this.props.getPrices('ETH', 'fiveMinutes').then(ethPrices => this.setState({ ethPrices: ethPrices.prices })), 200);
+
+    setTimeout(() => this.props.getPrices('LTC', 'fiveMinutes').then(ltcPrices => this.setState({ ltcPrices: ltcPrices.prices })), 200);
+  }
+
+  filterPrices(prices) {
+    return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).reverse();
   }
 
   render () {
-    if(!this.state.prices){
+    if(this.state.btcPrices && this.state.bchPrices && this.state.ethPrices && this.state.ltcPrices){
+      const btcPrices = this.filterPrices(this.state.btcPrices);
+      const bchPrices = this.filterPrices(this.state.bchPrices);
+      const ethPrices = this.filterPrices(this.state.ethPrices);
+      const ltcPrices = this.filterPrices(this.state.ltcPrices);
       return (
         <div className='chart-previews-container'>
-          <div className='chart-preview-container'></div>
-          <div className='chart-preview-container'></div>
-          <div className='chart-preview-container'></div>
-          <div className='chart-preview-container'></div>
+          <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} />
+          <ChartPreviewItem coin={'Bitcoin Cash'} prices={bchPrices} />
+          <ChartPreviewItem coin={'Ethereum'} prices={ethPrices} />
+          <ChartPreviewItem coin={'Litecoin'} prices={ltcPrices} />
         </div>
       );
     } else {
       return (
         <div className='chart-previews-container'>
-          <ChartPreviewItem coin={'Bitcoin'} prices={this.props.prices.bitcoin} />
-          <ChartPreviewItem coin={'Bitcoin Cash'} prices={this.props.prices.bitcoinCash} />
-          <ChartPreviewItem coin={'Ethereum'} prices={this.props.prices.ethereum} />
-          <ChartPreviewItem coin={'Litecoin'} prices={this.props.prices.litecoin} />
+          <div className='chart-preview-container'></div>
+          <div className='chart-preview-container'></div>
+          <div className='chart-preview-container'></div>
+          <div className='chart-preview-container'></div>
         </div>
       );
     }

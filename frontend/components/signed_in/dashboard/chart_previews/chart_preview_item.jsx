@@ -14,23 +14,28 @@ class ChartPreviewItem extends React.Component {
     }
   }
 
-  handleHover(e) {
-    $('chart-preview-container').addClass('chart-preview-hovered');
-    $('chart-preview-container').removeClass('chart-preview-unhovered');
-    $('chart-preview-button').addClass('button-displayed');
+  componentDidMount() {
+
   }
 
+  // handleHover(e) {
+  //   $('chart-preview-container').addClass('chart-preview-hovered');
+  //   $('chart-preview-container').removeClass('chart-preview-unhovered');
+  //   $('chart-preview-button').addClass('button-displayed');
+  // }
+
   render() {
-    const data = this.props.prices.slice(0, 30).reverse();
-    const first = data[29].price;
-    const last = data[0].price;
-    const diff = (first - last) / first;
+    const data = this.props.prices;
+    const first = data[0].price;
+    const last = data[data.length - 1].price;
+    const diff = (first - last) / last;
 
     let percentDiff = (diff * 100).toFixed(2);
 
     if (percentDiff >= 0) {
       percentDiff = '+' + percentDiff;
     }
+    // console.log(this.props.prices);
     return (
       <div className='chart-preview-container'>
         {/* <button className='chart-preview-button'>View asset</button> */}
@@ -39,15 +44,15 @@ class ChartPreviewItem extends React.Component {
             <h1>{this.coin}</h1>
           </div>
           <div className='chart-preview-number'>
-            <h1>${data[29].price}</h1>
+            <h1>${first.toFixed(2)}</h1>
             <h2>{percentDiff}%</h2>
           </div>
         </div>
 
-        <AreaChart width={294} height={120} data={data} onMouseEnter={this.handleHover}>
+        <AreaChart width={294} height={120} data={this.props.prices} /*onMouseEnter={this.handleHover}*/>
 
           <Area type="monotone" dataKey="price" fill="white" fillOpacity={1} stroke={this.colors[this.coin]} strokeWidth={1.6}/>
-          <YAxis hide={true} domain={[dataMin => dataMin / 2, dataMax => (dataMax * 2)]} />
+          <YAxis hide={true} domain={[dataMin => dataMin, dataMax => dataMax]} />
         </AreaChart>
       </div>
     );
