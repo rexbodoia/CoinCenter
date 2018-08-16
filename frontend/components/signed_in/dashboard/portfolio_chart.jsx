@@ -25,7 +25,7 @@ class PortfolioChart extends React.Component {
   }
 
   retrievePrices(granularity) {
-    if (Object.values(this.props.prices.oneHour.length < 4)) {
+    if (Object.values(this.props.prices.oneHour).length < 4) {
       this.props.getPrices('BTC', granularity)
         .then(() => setTimeout(() => this.props.getPrices('BTC', 'oneHour')
         .then(() => setTimeout(() => this.props.getPrices('BCH', granularity)
@@ -34,7 +34,7 @@ class PortfolioChart extends React.Component {
         .then(() => setTimeout(() => this.props.getPrices('ETH', 'oneHour')
         .then(() => setTimeout(() => this.props.getPrices('LTC', granularity)
         .then(() => setTimeout(() => this.props.getPrices('LTC', 'oneHour'), 334)), 334)), 334)), 334)), 334)), 334)), 334));
-    } else if (Object.values(this.props.prices[granularity].length < 4)) {
+    } else if (Object.values(this.props.prices[granularity]).length < 4) {
         this.props.getPrices('BTC', granularity)
           .then(() => setTimeout(() => this.props.getPrices('BCH', granularity)
           .then(() => setTimeout(() => this.props.getPrices('ETH', granularity)
