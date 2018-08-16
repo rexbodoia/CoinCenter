@@ -1,6 +1,5 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
-// import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
 import { filterPrices } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 
@@ -50,7 +49,7 @@ class AssetChart extends React.Component {
 
             <Area type="monotone" dataKey="price" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
             <YAxis hide={true} domain={[dataMin => dataMin, dataMax => dataMax]} />
-            <Tooltip labelStyle={{ display: 'none' }} itemStyle={{ backgroundColor: "rgb(80, 80, 100)", padding: 8, textAlign: 'center', fontSize: 18 }} /*content={<PortfolioCustomToolTip />}*//>
+            <Tooltip labelStyle={{ display: 'none' }} itemStyle={{ backgroundColor: "rgb(80, 80, 100)", padding: 8, textAlign: 'center', fontSize: 18 }} />
           </AreaChart>
         );
       }
@@ -87,27 +86,32 @@ class AssetChart extends React.Component {
     let decimal = this.calculateDec(price, integer);
 
     return (
-      <div className='portfolio-chart-container'>
-        <div className='portfolio-chart-header'>
-          <h1>{this.coins[this.coin]}</h1>
-          <div className='portfolio-chart-number'>
-            <h3>$</h3>
-            <h2>{integer}</h2>
-            <h3>{decimal}</h3>
-          </div>
+      <div style={{ width: '82%', margin: '0 auto' }}>
+        <div className='asset-header'>
+          <img src={window.images[this.coin]}></img>
+            <div><h1>{this.coins[this.coin]}</h1><h2>{this.coin}</h2></div>
         </div>
-        <ul className='portfolio-chart-time-frames'>
-          <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
-          <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
-          <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
-          <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
-          <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
-        </ul>
-        {this.renderChart(granularity)}
-        <div className='asset-chart-dates'>
-          <ul>
-            {timeframeFunctions.renderDates(this.state.timeframe, '.asset-chart-dates')}
+        <div className='asset-chart-container'>
+          <div className='asset-chart-header'>
+            <div className='asset-chart-number'>
+              <h3>$</h3>
+              <h2>{integer}</h2>
+              <h3>{decimal}</h3>
+            </div>
+          </div>
+          <ul className='portfolio-chart-time-frames'>
+            <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
+            <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
+            <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
+            <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
+            <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
           </ul>
+          {this.renderChart(granularity)}
+          <div className='asset-chart-dates'>
+            <ul>
+              {timeframeFunctions.renderDates(this.state.timeframe, '.asset-chart-dates')}
+            </ul>
+          </div>
         </div>
       </div>
     );
