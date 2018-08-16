@@ -19,6 +19,7 @@ class PortfolioChart extends React.Component {
   }
 
   componentDidMount() {
+    $('#month').css('color', 'rgb(6, 103, 208)');
     this.props.getTransactions(this.props.id);
     this.retrievePrices('sixHours');
   }
@@ -70,7 +71,10 @@ class PortfolioChart extends React.Component {
   }
 
   changeTimeframe(timeframe) {
+    $(`#${this.state.timeframe}`).css('color', 'rgb(155, 166, 178)');
     this.setState({ timeframe });
+    $(`#${timeframe}`).css('color', 'rgb(6, 103, 208)');
+
     let granularity = timeGranConverter(timeframe);
     this.retrievePrices(granularity);
   }
@@ -89,12 +93,12 @@ class PortfolioChart extends React.Component {
           </div>
         </div>
         <ul className='portfolio-chart-time-frames'>
-          <li onClick={(e) => this.changeTimeframe('hour')}>1H</li>
-          <li onClick={(e) => this.changeTimeframe('day')}>1D</li>
-          <li onClick={(e) => this.changeTimeframe('week')}>1W</li>
-          <li onClick={(e) => this.changeTimeframe('month')}>1M</li>
-          <li onClick={(e) => this.changeTimeframe('year')}>1Y</li>
-          <li onClick={(e) => this.changeTimeframe('all')}>ALL</li>
+          <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
+          <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
+          <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
+          <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
+          <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
+          <li onClick={(e) => this.changeTimeframe('all')} id='all'>ALL</li>
         </ul>
         {this.renderChart(granularity)}
         <div className='portfolio-chart-dates'>
