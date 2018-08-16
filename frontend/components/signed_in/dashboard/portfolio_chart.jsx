@@ -25,7 +25,7 @@ class PortfolioChart extends React.Component {
   }
 
   retrievePrices(granularity) {
-    if (!Object.keys(this.props.prices).includes(granularity)) {
+    if (Object.values(this.props.prices[granularity].length < 4)) {
       this.props.getPrices('BTC', granularity)
         .then(() => setTimeout(() => this.props.getPrices('BCH', granularity)
         .then(() => setTimeout(() => this.props.getPrices('ETH', granularity)
@@ -34,7 +34,7 @@ class PortfolioChart extends React.Component {
   }
 
   calculatePortfolioHistory(granularity) {
-    if (Object.keys(this.props.prices).includes(granularity) && Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
+    if (Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
       let timeframe = this.state.timeframe;
       let length = timeframeFunctions.findNumDataPoints(timeframe);
 
@@ -54,7 +54,7 @@ class PortfolioChart extends React.Component {
   }
 
   renderChart(granularity) {
-    if(Object.keys(this.props.prices).includes(granularity) && Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
+    if(Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
 
       let data = this.calculatePortfolioHistory(granularity);
       if (data.length !== 0) {
@@ -80,7 +80,6 @@ class PortfolioChart extends React.Component {
   }
 
   render () {
-    console.log('dashboard');
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
 
     return (

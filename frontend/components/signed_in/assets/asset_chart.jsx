@@ -23,13 +23,13 @@ class AssetChart extends React.Component {
   }
 
   retrievePrices(granularity) {
-    if (!Object.keys(this.props.prices).includes(granularity)) {
+    if (!Object.keys(this.props.prices[granularity]).includes(this.coin)) {
       this.props.getPrices(this.coin, granularity);
     }
   }
 
   renderChart(granularity) {
-    if (Object.keys(this.props.prices).includes(granularity) && Object.keys(this.props.prices[granularity]).includes(this.coin)) {
+    if (Object.keys(this.props.prices[granularity]).includes(this.coin)) {
 
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe);
       let data = this.props.prices[granularity][this.coin];
