@@ -31,7 +31,6 @@ class ChartPreviewItem extends React.Component {
     if (percentDiff >= 0) {
       percentDiff = '+' + percentDiff;
     }
-    // console.log(this.props.prices);
     return (
       <div className='chart-preview-container'>
         {/* <button className='chart-preview-button'>View asset</button> */}

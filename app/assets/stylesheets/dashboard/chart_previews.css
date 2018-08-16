@@ -20,8 +20,10 @@
   cursor: pointer;
 }
 
-.chart-preview-hovered {
+/* rgb(97, 202, 0) */
 
+.chart-preview-hovered {
+  /* cursor: pointer; */
 }
 
 .chart-preview-unhovered {
