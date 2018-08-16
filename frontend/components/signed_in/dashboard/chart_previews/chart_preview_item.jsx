@@ -52,7 +52,9 @@ class ChartPreviewItem extends React.Component {
       <div className='chart-preview-container' onClick={this.redirect(this.coins[this.coin])}>
         <div className='chart-preview-header'>
           <div className='chart-preview-title'>
+            <img src={window.images[this.coins[this.coin]]}></img>
             <h1>{this.coin}</h1>
+            <div></div>
           </div>
           <div className='chart-preview-number'>
             <h1>${first.toFixed(2)}</h1>

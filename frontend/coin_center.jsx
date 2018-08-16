@@ -20,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     store = configureStore();
   }
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.logout = logout;
-  window.fetchPriceData = fetchPriceData;
+  // window.getState = store.getState;
+  // window.dispatch = store.dispatch;
+  // window.logout = logout;
+  // window.fetchPriceData = fetchPriceData;
   ReactDOM.render(<Root store={store}/>, root);
 });
