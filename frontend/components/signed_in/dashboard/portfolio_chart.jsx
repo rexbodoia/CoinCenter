@@ -80,6 +80,7 @@ class PortfolioChart extends React.Component {
   }
 
   render () {
+    console.log('dashboard');
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
 
     return (

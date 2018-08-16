@@ -24,15 +24,12 @@ class AssetChart extends React.Component {
 
   retrievePrices(granularity) {
     if (!Object.keys(this.props.prices).includes(granularity)) {
-      this.props.getPrices('BTC', granularity)
-        .then(() => setTimeout(() => this.props.getPrices('BCH', granularity)
-        .then(() => setTimeout(() => this.props.getPrices('ETH', granularity)
-        .then(() => setTimeout(() => this.props.getPrices('LTC', granularity), 334)), 334)), 334));
+      this.props.getPrices(this.coin, granularity);
     }
   }
 
   renderChart(granularity) {
-    if(Object.keys(this.props.prices).includes(granularity) && Object.values(this.props.prices[granularity]).length >= 4) {
+    if (Object.keys(this.props.prices).includes(granularity) && Object.keys(this.props.prices[granularity]).includes(this.coin)) {
 
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe);
       let data = this.props.prices[granularity][this.coin];
@@ -64,17 +61,17 @@ class AssetChart extends React.Component {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
 
     return (
-      <div className='asset-chart-container'>
-        <div>
-          <div className='asset-chart-header'>
+      <div className='portfolio-chart-container'>
+        {/* <div> */}
+          <div className='portfolio-chart-header'>
             <h1>Your portfolio value</h1>
-            <div className='asset-chart-number'>
+            <div className='portfolio-chart-number'>
               <h3>$</h3>
               <h2>0</h2>
               <h3 id='decimal'>.00</h3>
             </div>
           </div>
-        </div>
+        {/* </div> */}
         <ul className='portfolio-chart-time-frames'>
           <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
           <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
