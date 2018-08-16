@@ -10,5 +10,7 @@ const receivePrices = (symbol, granularity, prices) => ({
 });
 
 export const fetchPrices = (symbol, granularity) => dispatch => (
-  ApiUtil.fetchPriceData(symbol, granularities[granularity]).then(prices => dispatch(receivePrices(symbol, granularities[granularity], prices)))
+  ApiUtil.fetchPriceData(symbol, granularities[granularity])
+    .then(prices => dispatch(receivePrices(symbol, granularities[granularity], prices)))
+    .fail((e) => setTimeout(fetchPrices(symbol, granularity), 2000))
 );
