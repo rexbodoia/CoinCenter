@@ -31,14 +31,16 @@ class SplashPage extends React.Component {
   }
 
   retrievePrices() {
-    for (let coin = 0; coin < 4; coin++) {
-
-      for (let granularity = 0; granularity < 5; granularity++) {
-
-        setTimeout(() => this.props.getPrices(this.state.coins[coin], this.state.granularities[granularity]), (coin + 1) * (granularity + 1) * 1000);
-
-      }
-    }
+    // for (let coin = 0; coin < 4; coin++) {
+    //   let coin = this.state.coins[coin]
+    //
+    //   for (let granularity = 0; granularity < 5; granularity++) {
+    //     let granularity = this.state.granularities[granularity];
+    //
+    //     setTimeout(() => this.props.getPrices(coin, granularity), (coin + 1) * (granularity + 1) * 1500);
+    //
+    //   }
+    // }
   }
 
   openModal(e) {
