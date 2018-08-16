@@ -50,7 +50,7 @@ class AssetChart extends React.Component {
 
             <Area type="monotone" dataKey="price" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
             <YAxis hide={true} domain={[dataMin => dataMin, dataMax => dataMax]} />
-            {/* <Tooltip labelStyle={{ color: "rgb(125, 149, 182)" }} content={<PortfolioCustomToolTip />}/> */}
+            <Tooltip labelStyle={{ display: 'none' }} itemStyle={{ backgroundColor: "rgb(80, 80, 100)", padding: 8, textAlign: 'center', fontSize: 18 }} /*content={<PortfolioCustomToolTip />}*//>
           </AreaChart>
         );
       }
