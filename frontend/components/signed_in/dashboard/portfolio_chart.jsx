@@ -13,7 +13,7 @@ class PortfolioChart extends React.Component {
     }
 
     // this.renderDates = this.renderDates.bind(this);
-    // this.retrievePrices = this.retrievePrices.bind(this);
+    this.retrievePrices = this.retrievePrices.bind(this);
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
     this.calculatePortfolioHistory = this.calculatePortfolioHistory.bind(this);
@@ -21,19 +21,16 @@ class PortfolioChart extends React.Component {
 
   componentDidMount() {
     this.props.getTransactions(this.props.id);
-    if (!Object.keys(this.props.prices).includes('sixHours')) {
-      this.retrievePrices();
-    };
+    this.retrievePrices('sixHours');
   }
 
-  retrievePrices() {
-    setTimeout(() => this.props.getPrices('BTC', 'sixHours'), 500);
-
-    setTimeout(() => this.props.getPrices('BCH', 'sixHours'), 1000);
-
-    setTimeout(() => this.props.getPrices('ETH', 'sixHours'), 1500);
-
-    setTimeout(() => this.props.getPrices('LTC', 'sixHours'), 2000);
+  retrievePrices(granularity) {
+    if (!Object.keys(this.props.prices).includes(granularity)) {
+      this.props.getPrices('BTC', granularity);
+      setTimeout(() => this.props.getPrices('BCH', granularity), 400);
+      setTimeout(() => this.props.getPrices('ETH', granularity), 800);
+      setTimeout(() => this.props.getPrices('LTC', granularity), 1200);
+    }
   }
 
   calculatePortfolioHistory(granularity) {
@@ -76,6 +73,8 @@ class PortfolioChart extends React.Component {
 
   changeTimeframe(timeframe) {
     this.setState({ timeframe });
+    let granularity = timeGranConverter(timeframe);
+    this.retrievePrices(granularity);
   }
 
   render () {
