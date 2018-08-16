@@ -57,12 +57,3 @@ export const renderDates = (timeframe) => {
     $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
   }
 }
-
-export const changeTimeframe = (timeframe) => {
-  this.setState({ timeframe });
-  let granularity = TimeframeToGranularity(timeframe);
-  let amounts = calculateBalanceAmounts(this.props.transactions);
-  console.log(amounts);
-  let values = calculateBalanceValues(amounts, this.props.prices);
-  this.totalData = values;
-}

@@ -1,5 +1,5 @@
-export const filterPrices = (prices) => {
-  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] }));
+export const filterPrices = (prices, length) => {
+  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(-length);
 }
 
 export const calculateCoinValues = (coinAmounts, prices) => {

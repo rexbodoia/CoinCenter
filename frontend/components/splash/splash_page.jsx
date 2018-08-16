@@ -39,15 +39,7 @@ class SplashPage extends React.Component {
 
       }
     }
-    // setTimeout(() => this.props.getPrices('BTC', 'fifteenMinutes'), 500);
-    //
-    // setTimeout(() => this.props.getPrices('BCH', 'fifteenMinutes'), 1000);
-    //
-    // setTimeout(() => this.props.getPrices('ETH', 'fifteenMinutes'), 1500);
-    //
-    // setTimeout(() => this.props.getPrices('LTC', 'fifteenMinutes'), 2000);
   }
-
 
   openModal(e) {
     e.preventDefault();

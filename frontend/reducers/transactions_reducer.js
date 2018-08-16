@@ -1,6 +1,6 @@
 import { RECEIVE_TRANSACTIONS } from '../actions/transactions_actions';
 
-const transactionsReducer = (state = [], action) => {
+const transactionsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_TRANSACTIONS:
