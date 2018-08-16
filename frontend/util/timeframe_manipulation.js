@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const timeGranConverter = (arg) => {
   const map = {
     'hour': 'oneMinute',
@@ -48,14 +50,17 @@ const sortDates = (timeframe, className) => {
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
 
-  $(className).find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+  let dates = []
+
+  dates.unshift(<li>{stringified[0]} {stringified[1]}</li>);
 
   for (let i = 0; i < 6; i++) {
     let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
     let stringified = stringifyDate(nextDate);
 
-    $(className).find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+    dates.unshift(<li>{stringified[0]} {stringified[1]}</li>);
   }
+  return dates;
 }
 
 const decrementHour = (hour, amount) => {
@@ -89,6 +94,7 @@ const decrementMinutes = (hour, minutes, amount) => {
 const sortTimes = (timeframe, className) => {
   let d = new Date();
   let hour = d.getHours();
+  let dates = [];
 
   if (hour > 12) {
     hour -= 12;
@@ -103,30 +109,30 @@ const sortTimes = (timeframe, className) => {
       minutes = '0' + minutes;
     }
 
-    $(className).find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+    dates.unshift(<li>{hour} {minutes}</li>)
+
     for(let i = 0; i < 6; i++) {
       [hour, minutes] = decrementMinutes(hour, minutes, 10);
 
-      $(className).find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+      dates.unshift(<li>{hour} {minutes}</li>)
     }
 
   } else {
-    $(className).find('ul').prepend(`<li>${hour}:00</li>`);
+    dates.unshift(<li>{hour}:00</li>)
     for (let i = 0; i < 6; i++) {
       hour = decrementHour(hour, 4);
 
-      $(className).find('ul').prepend(`<li>${hour}:00</li>`);
+      dates.unshift(<li>{hour}:00</li>)
     }
   }
+
+  return dates
 }
 
 export const renderDates = (timeframe, className) => {
-  $(className).find('ul').empty();
-  console.log(timeframe);
-  console.log(className);
   if (['week', 'month', 'year'].includes(timeframe)) {
-    sortDates(timeframe, className);
+    return sortDates(timeframe, className);
   } else{
-    sortTimes(timeframe, className);
+    return sortTimes(timeframe, className);
   }
 }
