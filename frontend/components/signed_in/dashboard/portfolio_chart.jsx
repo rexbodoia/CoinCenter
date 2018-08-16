@@ -12,7 +12,6 @@ class PortfolioChart extends React.Component {
       timeframe: 'month'
     }
 
-    // this.renderDates = this.renderDates.bind(this);
     this.retrievePrices = this.retrievePrices.bind(this);
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
@@ -27,9 +26,9 @@ class PortfolioChart extends React.Component {
   retrievePrices(granularity) {
     if (!Object.keys(this.props.prices).includes(granularity)) {
       this.props.getPrices('BTC', granularity);
-      setTimeout(() => this.props.getPrices('BCH', granularity), 400);
-      setTimeout(() => this.props.getPrices('ETH', granularity), 800);
-      setTimeout(() => this.props.getPrices('LTC', granularity), 1200);
+      setTimeout(() => this.props.getPrices('BCH', granularity), 350);
+      setTimeout(() => this.props.getPrices('ETH', granularity), 700);
+      setTimeout(() => this.props.getPrices('LTC', granularity), 1050);
     }
   }
 
@@ -37,7 +36,6 @@ class PortfolioChart extends React.Component {
     if (Object.keys(this.props.prices).includes(granularity) && Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
       let timeframe = this.state.timeframe;
       let length = getTimeframeLength(timeframe);
-      // let granularity = timeGranConverter(timeframe);
 
       let bchData = filterPrices(this.props.prices[granularity].BCH, length);
       let btcData = filterPrices(this.props.prices[granularity].BTC, length);
