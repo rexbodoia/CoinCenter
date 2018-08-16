@@ -10,8 +10,8 @@ class SplashPage extends React.Component {
     this.state = {
       open: false,
       email: '',
-      coins: ['BTC', 'BCH' ,'ETH', 'LTC'],
-      granularities: ['fifteenMinutes', 'sixHours', 'oneHour', 'oneMinute', 'oneDay']
+      // coins: ['BTC', 'BCH' ,'ETH', 'LTC'],
+      // granularities: ['fifteenMinutes', 'sixHours', 'oneHour', 'oneMinute', 'oneDay']
     };
 
     this.openModal = this.openModal.bind(this);
@@ -22,7 +22,7 @@ class SplashPage extends React.Component {
 
   componentDidMount() {
     document.body.style.backgroundColor = 'white';
-    if(Object.values(this.props.prices).length === 0){
+    if (Object.values(this.props.prices.oneHour.length < 4)) {
       this.retrievePrices();
     }
   }
@@ -32,22 +32,10 @@ class SplashPage extends React.Component {
   }
 
   retrievePrices() {
-    let granularities = this.state.granularities;
-    let coins = this.state.coins;
-
-    let coinGranularities = []
-    for (let g = 0; g < 5; g++) {
-      for (let c = 0; c < 4; c++) {
-        coinGranularities.push({ coin: coins[c], granularity: granularities[g] });
-      }
-    }
-
-    for (let i = 0, p = Promise.resolve(); i < coinGranularities.length; i++) {
-      const coin = coinGranularities[i].coin;
-      const granularity = coinGranularities[i].granularity;
-
-      p = p.then(() => new Promise(resolve => setTimeout(() => resolve(), 350))).then(() => { return this.props.getPrices(coin, granularity);});
-    }
+    this.props.getPrices('BTC', 'oneHour')
+    .then(() => setTimeout(() => this.props.getPrices('BCH', 'oneHour')
+    .then(() => setTimeout(() => this.props.getPrices('ETH', 'oneHour')
+    .then(() => setTimeout(() => this.props.getPrices('LTC', 'oneHour'), 334)), 334)), 334));
   }
 
   openModal(e) {
@@ -110,3 +98,20 @@ class SplashPage extends React.Component {
 }
 
 export default withRouter(SplashPage);
+
+// let granularities = this.state.granularities;
+// let coins = this.state.coins;
+//
+// let coinGranularities = []
+// for (let g = 0; g < 5; g++) {
+//   for (let c = 0; c < 4; c++) {
+//     coinGranularities.push({ coin: coins[c], granularity: granularities[g] });
+//   }
+// }
+
+// for (let i = 0, p = Promise.resolve(); i < coinGranularities.length; i++) {
+//   const coin = coinGranularities[i].coin;
+//   const granularity = coinGranularities[i].granularity;
+//
+//   p = p.then(() => new Promise(resolve => setTimeout(() => resolve(), 350))).then(() => { return this.props.getPrices(coin, granularity);});
+// }
