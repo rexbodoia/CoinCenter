@@ -103,7 +103,7 @@ class PortfolioChart extends React.Component {
         {this.renderChart(granularity)}
         <div className='portfolio-chart-dates'>
           <ul>
-            {timeframeFunctions.renderDates(this.state.timeframe)}
+            {timeframeFunctions.renderDates(this.state.timeframe, '.portfolio-chart-dates')}
           </ul>
         </div>
       </div>

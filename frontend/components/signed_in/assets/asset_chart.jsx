@@ -85,12 +85,11 @@ class AssetChart extends React.Component {
           <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
           <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
           <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
-          {/* <li onClick={(e) => this.changeTimeframe('all')} id='all'>ALL</li> */}
         </ul>
         {this.renderChart(granularity)}
-        <div className='portfolio-chart-dates'>
+        <div className='asset-chart-dates'>
           <ul>
-            {timeframeFunctions.renderDates(this.state.timeframe)}
+            {timeframeFunctions.renderDates(this.state.timeframe, '.asset-chart-dates')}
           </ul>
         </div>
       </div>

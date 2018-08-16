@@ -49,20 +49,20 @@ const stringifyDate = (date) => {
   return [string.slice(4, 7), string.slice(8, 10)];
 }
 
-const sortDates = (timeframe) => {
+const sortDates = (timeframe, className) => {
   const today = new Date();
   let stringified = stringifyDate(today);
 
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
 
-  $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+  $(className).find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
 
   for (let i = 0; i < 6; i++) {
     let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
     let stringified = stringifyDate(nextDate);
 
-    $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+    $(className).find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
   }
 }
 
@@ -94,7 +94,7 @@ const decrementMinutes = (hour, minutes, amount) => {
   return [hour, minutes];
 }
 
-const sortTimes = (timeframe) => {
+const sortTimes = (timeframe, className) => {
   let d = new Date();
   let hour = d.getHours();
 
@@ -111,29 +111,29 @@ const sortTimes = (timeframe) => {
       minutes = '0' + minutes;
     }
 
-    $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+    $(className).find('ul').prepend(`<li>${hour}:${minutes}</li>`);
     for(let i = 0; i < 6; i++) {
       [hour, minutes] = decrementMinutes(hour, minutes, 10);
 
-      $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+      $(className).find('ul').prepend(`<li>${hour}:${minutes}</li>`);
     }
 
   } else {
-    $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:00</li>`);
+    $(className).find('ul').prepend(`<li>${hour}:00</li>`);
     for (let i = 0; i < 6; i++) {
       hour = decrementHour(hour, 4);
 
-      $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:00</li>`);
+      $(className).find('ul').prepend(`<li>${hour}:00</li>`);
     }
   }
 }
 
-export const renderDates = (timeframe) => {
-  $('.portfolio-chart-dates').find('ul').empty();
+export const renderDates = (timeframe, className) => {
+  $(className).find('ul').empty();
 
   if (['week', 'month', 'year'].includes(timeframe)) {
-    sortDates(timeframe);
+    sortDates(timeframe, className);
   } else{
-    sortTimes(timeframe);
+    sortTimes(timeframe, className);
   }
 }
