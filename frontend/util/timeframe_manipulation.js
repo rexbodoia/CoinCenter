@@ -87,6 +87,9 @@ const decrementMinutes = (hour, minutes, amount) => {
     minutes += 60;
     hour = decrementHour(hour, 1);
   }
+  if (minutes < 10) {
+    minutes = '0' + minutes;
+  }
 
   return [hour, minutes];
 }
@@ -103,6 +106,10 @@ const sortTimes = (timeframe) => {
 
   if (timeframe === 'hour') {
     let minutes = new Date().getMinutes();
+
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
 
     $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:${minutes}</li>`);
     for(let i = 0; i < 6; i++) {
