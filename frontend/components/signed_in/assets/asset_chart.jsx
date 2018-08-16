@@ -22,6 +22,7 @@ class AssetChart extends React.Component {
     this.coin = this.props.coin;
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
+    this.calculatePrice = this.calculatePrice.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +56,20 @@ class AssetChart extends React.Component {
     }
   }
 
+  calculatePrice(granularity) {
+    if (Object.keys(this.props.prices[granularity]).includes(this.coin)){
+      let arr = [this.props.prices[granularity][this.coin][0]];
+      return filterPrices(arr, 1)[0].price
+    } else {
+      return 0;
+    }
+  }
+
+  calculateDec(price, integer) {
+    let decimal = (price - integer).toFixed(2).toString();
+    return '.' + decimal.slice(-2);
+  }
+
   changeTimeframe(timeframe) {
     $(`#${this.state.timeframe}`).css('color', 'rgb(155, 166, 178)');
     this.setState({ timeframe });
@@ -66,6 +81,9 @@ class AssetChart extends React.Component {
 
   render () {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
+    let price = this.calculatePrice(granularity);
+    let integer = Math.floor(price);
+    let decimal = this.calculateDec(price, integer);
 
     return (
       <div className='portfolio-chart-container'>
@@ -74,8 +92,8 @@ class AssetChart extends React.Component {
             <h1>{this.coins[this.coin]}</h1>
             <div className='portfolio-chart-number'>
               <h3>$</h3>
-              <h2>0</h2>
-              <h3 id='decimal'>.00</h3>
+              <h2>{integer}</h2>
+              <h3>{decimal}</h3>
             </div>
           </div>
         {/* </div> */}
