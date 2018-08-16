@@ -8,14 +8,15 @@ class ChartPreviews extends React.Component {
   }
 
   render () {
-    if (Object.keys(this.props.prices).includes('fifteenMinutes') && Object.values(this.props.prices.fifteenMinutes).length >= 4) {
+    if (Object.keys(this.props.prices).includes('oneHour') && Object.values(this.props.prices.oneHour).length >= 4) {
 
-      let prices = this.props.prices.fifteenMinutes;
+      let prices = this.props.prices.oneHour;
 
-      const btcPrices = filterPrices(prices.BTC);
-      const bchPrices = filterPrices(prices.BCH);
-      const ethPrices = filterPrices(prices.ETH);
-      const ltcPrices = filterPrices(prices.LTC);
+      const btcPrices = filterPrices(prices.BTC, 24);
+      const bchPrices = filterPrices(prices.BCH, 24);
+      const ethPrices = filterPrices(prices.ETH, 24);
+      const ltcPrices = filterPrices(prices.LTC, 24);
+      
       return (
         <div className='chart-previews-container'>
           <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} />

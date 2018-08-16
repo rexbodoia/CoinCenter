@@ -1,8 +1,4 @@
 export const timeGranConverter = (arg) => {
-  // if (arg === 'all') {
-  //   return this.longestBalance(this.state.balances);
-  // }
-
   const map = {
     'hour': 'oneMinute',
     'day': 'fifteenMinutes',
@@ -18,14 +14,14 @@ export const timeGranConverter = (arg) => {
   return map[arg];
 }
 
-export const getTimeframeLength = (timeframe) => {
+export const findNumDataPoints = (timeframe) => {
   if (timeframe === 'all') {
     return this.longestBalance(this.state.balances);
   }
 
   const timeframeLengths = {
     'hour': 60,
-    'day': 96,
+    'day': 98,
     'week': 168,
     'month': 120,
     'year': 365
@@ -33,21 +29,33 @@ export const getTimeframeLength = (timeframe) => {
   return timeframeLengths[timeframe];
 }
 
-export const stringifyDate = (date) => {
+const getTimeframeLength = (timeframe) => {
+  if (timeframe === 'all') {
+    return this.longestBalance(this.state.balances);
+  }
+
+  const timeframeLengths = {
+    'hour': 60,
+    'day': 28,
+    'week': 7,
+    'month': 31,
+    'year': 12
+  }
+  return timeframeLengths[timeframe];
+}
+
+const stringifyDate = (date) => {
   let string = date.toString()
   return [string.slice(4, 7), string.slice(8, 10)];
 }
 
-export const renderDates = (timeframe) => {
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
+const sortDates = (timeframe) => {
   const today = new Date();
   let stringified = stringifyDate(today);
 
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
 
-  $('.portfolio-chart-dates').find('ul').empty();
   $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
 
   for (let i = 0; i < 6; i++) {
@@ -55,5 +63,70 @@ export const renderDates = (timeframe) => {
     let stringified = stringifyDate(nextDate);
 
     $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
+  }
+}
+
+const decrementHour = (hour, amount) => {
+  hour -= amount;
+
+  if (hour > 12) {
+    hour -= 12;
+  } else if (hour < 0) {
+    hour += 12;
+  } else if (hour === 0) {
+    hour = 12;
+  }
+
+  return hour;
+}
+
+const decrementMinutes = (hour, minutes, amount) => {
+  minutes -= amount;
+
+  if (minutes < 0) {
+    minutes += 60;
+    hour = decrementHour(hour, 1);
+  }
+
+  return [hour, minutes];
+}
+
+const sortTimes = (timeframe) => {
+  let d = new Date();
+  let hour = d.getHours();
+
+  if (hour > 12) {
+    hour -= 12;
+  } else if (hour === 0) {
+    hour = 12;
+  }
+
+  if (timeframe === 'hour') {
+    let minutes = new Date().getMinutes();
+
+    $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+    for(let i = 0; i < 6; i++) {
+      [hour, minutes] = decrementMinutes(hour, minutes, 10);
+
+      $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:${minutes}</li>`);
+    }
+
+  } else {
+    $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:00</li>`);
+    for (let i = 0; i < 6; i++) {
+      hour = decrementHour(hour, 4);
+
+      $('.portfolio-chart-dates').find('ul').prepend(`<li>${hour}:00</li>`);
+    }
+  }
+}
+
+export const renderDates = (timeframe) => {
+  $('.portfolio-chart-dates').find('ul').empty();
+
+  if (['week', 'month', 'year'].includes(timeframe)) {
+    sortDates(timeframe);
+  } else{
+    sortTimes(timeframe);
   }
 }

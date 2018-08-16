@@ -1,5 +1,5 @@
 export const filterPrices = (prices, length) => {
-  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(-length);
+  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
 }
 
 export const calculateCoinValues = (coinAmounts, prices) => {
@@ -61,57 +61,3 @@ export const compileBalanceValues = coinValuesArray => {
 
   return portfolioValues;
 }
-
-// export const calculateBalanceAmounts = transactions => {
-//   let eth = 0.0;
-//   let bch = 0.0;
-//   let ltc = 0.0;
-//   let btc = 0.0;
-//
-//   let balances = [];
-//
-//   for (let i = 0; i < transactions.length; i++) {
-//     switch (transactions[i].coin_id) {
-//       case 1:
-//         eth += transactions[i].amount;
-//       case 2:
-//         bch += transactions[i].amount;
-//       case 3:
-//         ltc += transactions[i].amount;
-//       case 4:
-//         btc += transactions[i].amount;
-//       default:
-//         balances.push({ time: transactions[i].date, amounts: [eth, bch, ltc, btc] });
-//     }
-//   }
-//
-//   return balances;
-// }
-
-// export const calculateBalanceValues = (balances, prices) => {
-//   let balanceValues = [];
-//
-//   if (balances.length === 0) {
-//     return balanceValues;
-//   }
-//
-//   let b = 0;
-//   let lastBalanceTime = balances[b].time;
-//
-//   for (let p = 0; p < prices.length; p++) {
-//     let priceTime = prices[p].time;
-//     let nextBalanceTime = balances[b + 1].time;
-//
-//     if (nextBalanceTime < priceTime) {
-//       lastBalanceTime = nextBalanceTime;
-//       b += 1;
-//     }
-//
-//     let amounts = balances[b].amounts
-//     for (let i = 0; i < 4; i++) {
-//       balanceValues.push({ time: prices[p].time, amount: amounts[i] * prices[p].price });
-//     }
-//   }
-//
-//   return balanceValues;
-// }

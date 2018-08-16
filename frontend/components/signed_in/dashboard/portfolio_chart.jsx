@@ -2,7 +2,7 @@ import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
 import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices } from '../../../util/calculations';
-import { timeGranConverter, getTimeframeLength, stringifyDate, changeTimeframe, renderDates } from '../../../util/timeframe_manipulation';
+import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class PortfolioChart extends React.Component {
   calculatePortfolioHistory(granularity) {
     if (Object.keys(this.props.prices).includes(granularity) && Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
       let timeframe = this.state.timeframe;
-      let length = getTimeframeLength(timeframe);
+      let length = timeframeFunctions.findNumDataPoints(timeframe);
 
       let bchData = filterPrices(this.props.prices[granularity].BCH, length);
       let btcData = filterPrices(this.props.prices[granularity].BTC, length);
@@ -75,12 +75,12 @@ class PortfolioChart extends React.Component {
     this.setState({ timeframe });
     $(`#${timeframe}`).css('color', 'rgb(6, 103, 208)');
 
-    let granularity = timeGranConverter(timeframe);
+    let granularity = timeframeFunctions.timeGranConverter(timeframe);
     this.retrievePrices(granularity);
   }
 
   render () {
-    let granularity = timeGranConverter(this.state.timeframe);
+    let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
 
     return (
       <div className='portfolio-chart-container'>
@@ -98,12 +98,12 @@ class PortfolioChart extends React.Component {
           <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
           <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
           <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
-          <li onClick={(e) => this.changeTimeframe('all')} id='all'>ALL</li>
+          {/* <li onClick={(e) => this.changeTimeframe('all')} id='all'>ALL</li> */}
         </ul>
         {this.renderChart(granularity)}
         <div className='portfolio-chart-dates'>
           <ul>
-            {renderDates(this.state.timeframe)}
+            {timeframeFunctions.renderDates(this.state.timeframe)}
           </ul>
         </div>
       </div>
