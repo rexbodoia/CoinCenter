@@ -5,7 +5,15 @@ import { filterPrices } from '../../../../util/calculations';
 class ChartPreviews extends React.Component {
   constructor(props) {
     super(props);
+
+    // this.redirect = this.redirect.bind(this);
   }
+
+  // redirect(coin) {
+  //   return (e) => {
+  //     this.props.history.push(`/assets/${coin}`);
+  //   }
+  // }
 
   render () {
     if (Object.keys(this.props.prices).includes('oneHour') && Object.values(this.props.prices.oneHour).length >= 4) {
@@ -16,13 +24,21 @@ class ChartPreviews extends React.Component {
       const bchPrices = filterPrices(prices.BCH, 24);
       const ethPrices = filterPrices(prices.ETH, 24);
       const ltcPrices = filterPrices(prices.LTC, 24);
-      
+
       return (
         <div className='chart-previews-container'>
-          <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} />
-          <ChartPreviewItem coin={'Bitcoin Cash'} prices={bchPrices} />
-          <ChartPreviewItem coin={'Ethereum'} prices={ethPrices} />
-          <ChartPreviewItem coin={'Litecoin'} prices={ltcPrices} />
+          {/* <div onClick={this.redirect('BTC')}> */}
+            <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} history={this.props.history} />
+          {/* </div> */}
+          {/* <div onClick={this.redirect('BCH')}> */}
+            <ChartPreviewItem coin={'Bitcoin Cash'} prices={bchPrices} history={this.props.history} />
+          {/* </div>
+          <div onClick={this.redirect('ETH')}> */}
+            <ChartPreviewItem coin={'Ehtereum'} prices={ethPrices} history={this.props.history} />
+          {/* </div>
+          <div onClick={this.redirect('LTC')}> */}
+            <ChartPreviewItem coin={'Litecoin'} prices={ltcPrices} history={this.props.history} />
+          {/* </div> */}
         </div>
       );
     } else {

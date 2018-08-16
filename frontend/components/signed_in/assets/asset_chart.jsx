@@ -12,6 +12,13 @@ class AssetChart extends React.Component {
       timeframe: 'month'
     }
 
+    this.coins = {
+      BTC: 'Bitcoin',
+      BCH: 'Bitcoin Cash',
+      ETH: 'Ethereum',
+      LTC: 'Litecoin'
+    }
+
     this.coin = this.props.coin;
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
@@ -64,7 +71,7 @@ class AssetChart extends React.Component {
       <div className='portfolio-chart-container'>
         {/* <div> */}
           <div className='portfolio-chart-header'>
-            <h1>Your portfolio value</h1>
+            <h1>{this.coins[this.coin]}</h1>
             <div className='portfolio-chart-number'>
               <h3>$</h3>
               <h2>0</h2>

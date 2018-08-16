@@ -6,11 +6,26 @@ class ChartPreviewItem extends React.Component {
     super(props);
 
     this.coin = this.props.coin;
+    
     this.colors = {
       'Bitcoin': "rgb(247, 170, 4)",
       'Bitcoin Cash': "rgb(134, 175, 58)",
       'Ethereum': "rgb(86, 116, 226)",
       'Litecoin': "rgb(191, 189, 189)"
+    }
+    this.coins = {
+      'Bitcoin': 'BTC',
+      'Bitcoin Cash': 'BCH',
+      'Ethereum': 'ETH',
+      'Litecoin': 'LTC'
+    }
+
+    this.redirect = this.redirect.bind(this);
+  }
+
+  redirect(coin) {
+    return (e) => {
+      this.props.history.push(`/assets/${coin}`);
     }
   }
 
@@ -31,8 +46,9 @@ class ChartPreviewItem extends React.Component {
     if (percentDiff >= 0) {
       percentDiff = '+' + percentDiff;
     }
+
     return (
-      <div className='chart-preview-container'>
+      <div className='chart-preview-container' onClick={this.redirect(this.coins[this.coin])}>
         {/* <button className='chart-preview-button'>View asset</button> */}
         <div className='chart-preview-header'>
           <div className='chart-preview-title'>
