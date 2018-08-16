@@ -14,10 +14,6 @@ class ChartPreviewItem extends React.Component {
     }
   }
 
-  componentDidMount() {
-
-  }
-
   // handleHover(e) {
   //   $('chart-preview-container').addClass('chart-preview-hovered');
   //   $('chart-preview-container').removeClass('chart-preview-unhovered');
@@ -49,7 +45,7 @@ class ChartPreviewItem extends React.Component {
           </div>
         </div>
 
-        <AreaChart width={294} height={120} data={this.props.prices} /*onMouseEnter={this.handleHover}*/>
+        <AreaChart width={294} height={120} data={data} /*onMouseEnter={this.handleHover}*/>
 
           <Area type="monotone" dataKey="price" fill="white" fillOpacity={1} stroke={this.colors[this.coin]} strokeWidth={1.6}/>
           <YAxis hide={true} domain={[dataMin => dataMin, dataMax => dataMax]} />

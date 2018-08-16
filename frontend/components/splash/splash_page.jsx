@@ -2,22 +2,22 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SignupHeader from '../session/signup_header';
 import AuthFormsContainer from '../session/auth_forms_container';
-import { throttle } from 'lodash';
 
 class SplashPage extends React.Component {
   constructor(props) {
     super(props);
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.update = this.update.bind(this);
-    this.retrievePrices = this.retrievePrices.bind(this);
     this.state = {
       open: false,
       email: '',
       coins: ['BTC', 'BCH' ,'ETH', 'LTC'],
       granularities: ['fifteenMinutes', 'sixHours', 'oneHour', 'oneMinute', 'oneDay']
     };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.update = this.update.bind(this);
+    this.retrievePrices = this.retrievePrices.bind(this);
   }
 
   componentDidMount() {

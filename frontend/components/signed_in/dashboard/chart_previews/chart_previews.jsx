@@ -1,44 +1,21 @@
 import React from 'react';
 import ChartPreviewItem from './chart_preview_item';
+import { filterPrices } from '../../../../util/calculations';
 
 class ChartPreviews extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      btcPrices: null,
-      bchPrices: null,
-      ethPrices: null,
-      ltcPrices: null,
-    }
-
-    this.retrievePrices = this.retrievePrices.bind(this);
   }
-
-  componentDidMount() {
-    setTimeout(() => this.retrievePrices(), 1000);
-  }
-
-  retrievePrices() {
-    // this.props.getPrices('BTC', 'oneHour').then(btcPrices => this.setState({ btcPrices: btcPrices.prices }));
-    //
-    // setTimeout(() => this.props.getPrices('BCH', 'oneHour').then(bchPrices => this.setState({ bchPrices: bchPrices.prices })), 400);
-    //
-    // setTimeout(() => this.props.getPrices('ETH', 'oneHour').then(ethPrices => this.setState({ ethPrices: ethPrices.prices })), 400);
-    //
-    // setTimeout(() => this.props.getPrices('LTC', 'oneHour').then(ltcPrices => this.setState({ ltcPrices: ltcPrices.prices })), 400);
-  }
-
-  // filterPrices(prices) {
-  //   return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(24).reverse();
-  // }
 
   render () {
-    if(this.state.btcPrices && this.state.bchPrices && this.state.ethPrices && this.state.ltcPrices){
-      const btcPrices = this.filterPrices(this.state.btcPrices);
-      const bchPrices = this.filterPrices(this.state.bchPrices);
-      const ethPrices = this.filterPrices(this.state.ethPrices);
-      const ltcPrices = this.filterPrices(this.state.ltcPrices);
+    if (Object.keys(this.props.prices).includes('fifteenMinutes') && Object.values(this.props.prices.fifteenMinutes).length >= 4) {
+
+      let prices = this.props.prices.fifteenMinutes;
+
+      const btcPrices = filterPrices(prices.BTC);
+      const bchPrices = filterPrices(prices.BCH);
+      const ethPrices = filterPrices(prices.ETH);
+      const ltcPrices = filterPrices(prices.LTC);
       return (
         <div className='chart-previews-container'>
           <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} />
