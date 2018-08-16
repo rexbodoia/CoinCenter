@@ -42,7 +42,7 @@ export const renderDates = (timeframe) => {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
   const today = new Date();
-  let stringified = this.stringifyDate(today);
+  let stringified = stringifyDate(today);
 
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
@@ -52,7 +52,7 @@ export const renderDates = (timeframe) => {
 
   for (let i = 0; i < 6; i++) {
     let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
-    let stringified = this.stringifyDate(nextDate);
+    let stringified = stringifyDate(nextDate);
 
     $('.portfolio-chart-dates').find('ul').prepend(`<li>${stringified[0]} ${stringified[1]}</li>`);
   }
