@@ -7,6 +7,10 @@
   display: flex;
 }
 
+.chart-previews-container .recharts-surface:hover {
+  cursor: pointer;
+}
+
 .chart-preview-container {
   height: 210px;
   border: 1px solid rgb(218, 225, 233);
@@ -19,8 +23,6 @@
 .chart-preview-container:hover {
   cursor: pointer;
 }
-
-/* rgb(97, 202, 0) */
 
 .chart-preview-hovered {
   /* cursor: pointer; */
