@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import SignupHeader from '../session/signup_header';
 import AuthFormsContainer from '../session/auth_forms_container';
+import { throttle } from 'lodash';
 
 class SplashPage extends React.Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class SplashPage extends React.Component {
   componentDidMount() {
     document.body.style.backgroundColor = 'white';
     if(Object.values(this.props.prices).length === 0){
-      // this.retrievePrices();
+      this.retrievePrices();
     }
   }
 
@@ -31,17 +32,58 @@ class SplashPage extends React.Component {
   }
 
   retrievePrices() {
-    // for (let coin = 0; coin < 4; coin++) {
-    //   let coin = this.state.coins[coin]
+    let granularities = this.state.granularities;
+    let coins = this.state.coins;
+
+    // let counter = 0;
+    // let getPricesWrapper = (coin, granularity) => {
+    //   this.props.getPrices(coin, granularity).then(() =>{
+    //     counter += 1;
+    //   })
+    // }
     //
-    //   for (let granularity = 0; granularity < 5; granularity++) {
-    //     let granularity = this.state.granularities[granularity];
-    //
-    //     setTimeout(() => this.props.getPrices(coin, granularity), (coin + 1) * (granularity + 1) * 1500);
-    //
+    // let throttledGetPrices = throttle(getPricesWrapper, 1000, { 'leading': true });
+
+    let coinGranularities = []
+    for (let g = 0; g < 5; g++) {
+      for (let c = 0; c < 4; c++) {
+        coinGranularities.push({ coin: coins[c], granularity: granularities[g] });
+      }
+    }
+
+    for (let i = 0, p = Promise.resolve(); i < coinGranularities.length; i++) {
+      const coin = coinGranularities[i].coin;
+      const granularity = coinGranularities[i].granularity;
+      
+      p = p.then(() => new Promise(resolve => setTimeout(() => resolve(), 350))).then(() => { return this.props.getPrices(coin, granularity);});
+    }
+  }
+
+    // for (let i = 0; i < coinGranularities.length; i++) {
+    //   while(i == counter) {
+    //     throttledGetPrices(coinGranularities[i].coin, coinGranularities[i].granularity);
     //   }
     // }
-  }
+  // this.props.getPrices(coins[coin], granularities[granularity])
+  //   .then(setTimeout(() => {
+  //
+  //   }, ))
+
+  // const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
+  //
+  // (async function granularities() {
+  //   for (let g = 0; g < 2; g++) {
+  //     await delay(350);
+  //     (async function coins() {
+  //       for (let c = 0; c < 1; c++) {
+  //         await delay(350);
+  //         this.props.getPrices(coins[c], granularities[g]);
+  //       }
+  //     })();
+  //   }
+  // })();
+
+  // setTimeout(() => this.props.getPrices(coin, granularity), (coin + 1) * (granularity + 1) * 1500);
 
   openModal(e) {
     e.preventDefault();
