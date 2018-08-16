@@ -15,10 +15,6 @@ export const timeGranConverter = (arg) => {
 }
 
 export const findNumDataPoints = (timeframe) => {
-  if (timeframe === 'all') {
-    return this.longestBalance(this.state.balances);
-  }
-
   const timeframeLengths = {
     'hour': 60,
     'day': 98,
@@ -30,10 +26,6 @@ export const findNumDataPoints = (timeframe) => {
 }
 
 const getTimeframeLength = (timeframe) => {
-  if (timeframe === 'all') {
-    return this.longestBalance(this.state.balances);
-  }
-
   const timeframeLengths = {
     'hour': 60,
     'day': 28,
@@ -130,7 +122,8 @@ const sortTimes = (timeframe, className) => {
 
 export const renderDates = (timeframe, className) => {
   $(className).find('ul').empty();
-
+  console.log(timeframe);
+  console.log(className);
   if (['week', 'month', 'year'].includes(timeframe)) {
     sortDates(timeframe, className);
   } else{

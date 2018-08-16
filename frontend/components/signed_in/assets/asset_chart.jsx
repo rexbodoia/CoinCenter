@@ -28,6 +28,7 @@ class AssetChart extends React.Component {
   componentDidMount() {
     $('#month').css('color', 'rgb(6, 103, 208)');
     this.retrievePrices('sixHours');
+    this.state = { timeframe: 'month' };
   }
 
   retrievePrices(granularity) {
@@ -87,16 +88,14 @@ class AssetChart extends React.Component {
 
     return (
       <div className='portfolio-chart-container'>
-        {/* <div> */}
-          <div className='portfolio-chart-header'>
-            <h1>{this.coins[this.coin]}</h1>
-            <div className='portfolio-chart-number'>
-              <h3>$</h3>
-              <h2>{integer}</h2>
-              <h3>{decimal}</h3>
-            </div>
+        <div className='portfolio-chart-header'>
+          <h1>{this.coins[this.coin]}</h1>
+          <div className='portfolio-chart-number'>
+            <h3>$</h3>
+            <h2>{integer}</h2>
+            <h3>{decimal}</h3>
           </div>
-        {/* </div> */}
+        </div>
         <ul className='portfolio-chart-time-frames'>
           <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
           <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>

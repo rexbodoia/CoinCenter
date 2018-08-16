@@ -22,7 +22,7 @@ class ChartPreviews extends React.Component {
         <div className='chart-previews-container'>
           <ChartPreviewItem coin={'Bitcoin'} prices={btcPrices} history={this.props.history} />
           <ChartPreviewItem coin={'Bitcoin Cash'} prices={bchPrices} history={this.props.history} />
-          <ChartPreviewItem coin={'Ehtereum'} prices={ethPrices} history={this.props.history} />
+          <ChartPreviewItem coin={'Ethereum'} prices={ethPrices} history={this.props.history} />
           <ChartPreviewItem coin={'Litecoin'} prices={ltcPrices} history={this.props.history} />
         </div>
       );
