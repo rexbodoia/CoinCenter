@@ -20,15 +20,15 @@ class PortfolioChart extends React.Component {
 
   componentDidMount() {
     this.props.getTransactions(this.props.id);
-    // this.retrievePrices('sixHours');
+    this.retrievePrices('sixHours');
   }
 
   retrievePrices(granularity) {
     if (!Object.keys(this.props.prices).includes(granularity)) {
       this.props.getPrices('BTC', granularity)
-        .then(setTimeout(() => this.props.getPrices('BCH', granularity)
-        .then(setTimeout(() => this.props.getPrices('ETH', granularity)
-        .then(setTimeout(() => this.props.getPrices('LTC', granularity), 350)), 350)), 350));
+        .then(() => setTimeout(() => this.props.getPrices('BCH', granularity)
+        .then(() => setTimeout(() => this.props.getPrices('ETH', granularity)
+        .then(() => setTimeout(() => this.props.getPrices('LTC', granularity), 334)), 334)), 334));
     }
   }
 

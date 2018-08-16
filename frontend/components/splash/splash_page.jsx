@@ -35,15 +35,6 @@ class SplashPage extends React.Component {
     let granularities = this.state.granularities;
     let coins = this.state.coins;
 
-    // let counter = 0;
-    // let getPricesWrapper = (coin, granularity) => {
-    //   this.props.getPrices(coin, granularity).then(() =>{
-    //     counter += 1;
-    //   })
-    // }
-    //
-    // let throttledGetPrices = throttle(getPricesWrapper, 1000, { 'leading': true });
-
     let coinGranularities = []
     for (let g = 0; g < 5; g++) {
       for (let c = 0; c < 4; c++) {
@@ -54,36 +45,10 @@ class SplashPage extends React.Component {
     for (let i = 0, p = Promise.resolve(); i < coinGranularities.length; i++) {
       const coin = coinGranularities[i].coin;
       const granularity = coinGranularities[i].granularity;
-      
+
       p = p.then(() => new Promise(resolve => setTimeout(() => resolve(), 350))).then(() => { return this.props.getPrices(coin, granularity);});
     }
   }
-
-    // for (let i = 0; i < coinGranularities.length; i++) {
-    //   while(i == counter) {
-    //     throttledGetPrices(coinGranularities[i].coin, coinGranularities[i].granularity);
-    //   }
-    // }
-  // this.props.getPrices(coins[coin], granularities[granularity])
-  //   .then(setTimeout(() => {
-  //
-  //   }, ))
-
-  // const delay = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
-  //
-  // (async function granularities() {
-  //   for (let g = 0; g < 2; g++) {
-  //     await delay(350);
-  //     (async function coins() {
-  //       for (let c = 0; c < 1; c++) {
-  //         await delay(350);
-  //         this.props.getPrices(coins[c], granularities[g]);
-  //       }
-  //     })();
-  //   }
-  // })();
-
-  // setTimeout(() => this.props.getPrices(coin, granularity), (coin + 1) * (granularity + 1) * 1500);
 
   openModal(e) {
     e.preventDefault();
