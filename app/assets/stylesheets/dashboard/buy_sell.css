@@ -3,14 +3,12 @@
   width: 576px;
   height: 388px;
   border: 1px solid rgb(218, 225, 233);
-  /* padding: 20px; */
 }
 
 .buy-sell-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* border-bottom: 1px solid rgb(218, 225, 233); */
 }
 
 .buy-sell-header h1 {
@@ -29,10 +27,6 @@
 }
 
 .buy-sell-form {
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* align-items: center; */
-  /* justify-content: space-between; */
   padding: 26px;
   padding-top: 0;
 }
@@ -47,7 +41,6 @@
 
 .buy-sell-form .buy-sell-button {
   width: 95%;
-  /* height: 64px; */
   margin-right: 14px;
   margin-left: 14px;
   color: white;
@@ -76,9 +69,13 @@
   justify-content: center;
   align-items: center;
   padding: 20px 8px;
-  border: 1px solid rgb(218, 225, 233);
+  /* border: 1px solid rgb(218, 225, 233); */
   border-radius: 6px;
   width: 90px;
+}
+
+.buy-sell-form-icon:hover {
+  cursor: pointer;
 }
 
 .buy-sell-form-icon img {
@@ -98,4 +95,14 @@
   background-color: rgb(60, 144, 223);
   border-radius: 4px;
   border: none;
+}
+
+.selected-icon {
+  border: 1px solid rgb(75, 173, 2);
+  border-radius: 6px;
+}
+
+.unselected-icon {
+  border: 1px solid rgb(218, 225, 233);
+  border-radius: 6px;
 }
