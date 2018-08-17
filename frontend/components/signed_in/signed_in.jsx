@@ -8,14 +8,12 @@ import BuySell from './dashboard/buy_sell/buy_sell';
 class SignedIn extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(getState().session.id);
   }
 
   render () {
     return (
       <div>
         <NavHeaderContainer />
-        {/* <ChartsContainer /> */}
         <Switch>
           <Route path='/assets/:symbol' component={AssetChartContainer} />
           <Route path='/dashboard' component={DashboardContainer} />
