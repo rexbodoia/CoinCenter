@@ -52,7 +52,6 @@
   font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   /* position: absolute; */
   padding-top: 20px;
-  margin-bottom: 200px;
 }
 
 .asset-chart-container > div {
@@ -149,4 +148,30 @@
   font-weight: inherit;
   color: inherit;
   font-family: inherit;
+}
+
+.asset-description {
+  display: block;
+  background-color: white;
+  border: 1px solid rgb(218, 225, 233);
+  border-top: none;
+  padding: 36px;
+  margin-bottom: 400px;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.asset-description h1 {
+  color: rgb(78, 92, 110);
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  padding-bottom: 12px;
+}
+
+.asset-description p {
+  color: rgb(139, 146, 167);
+  font-size: 16px;
+  font-weight: 500;
+  font-family: inherit;
+  line-height: 1.5;
 }

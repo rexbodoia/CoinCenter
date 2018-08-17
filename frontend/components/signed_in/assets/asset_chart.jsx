@@ -18,6 +18,13 @@ class AssetChart extends React.Component {
       LTC: 'Litecoin'
     }
 
+    this.descriptions = {
+      BTC: 'The world’s first cryptocurrency, bitcoin is stored and exchanged securely on the internet through a digital ledger known as a blockchain. Bitcoins are divisible into smaller units known as satoshis — each satoshi is worth 0.00000001 bitcoin.',
+      LTC: 'Litecoin is a cryptocurrency that uses a faster payment confirmation schedule and a different cryptographic algorithm than Bitcoin.',
+      ETH: 'Ethereum is both a cryptocurrency and a decentralized computing platform. Developers can use Ethereum to create decentralized applications and issue new assets, known as tokens.',
+      BCH: 'Bitcoin Cash is fork of Bitcoin that seeks to add more transaction capacity to the network in order to be useful for everyday transactions.'
+    }
+
     this.coin = this.props.coin;
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
@@ -46,7 +53,7 @@ class AssetChart extends React.Component {
 
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe);
       let data = this.props.prices[granularity][this.coin];
-      data = filterPrices(data, length);
+      data = filterPrices(data, length).reverse();
 
       if (data.length !== 0) {
         return (
@@ -129,6 +136,10 @@ class AssetChart extends React.Component {
               {timeframeFunctions.renderDates(this.state.timeframe, '.asset-chart-dates')}
             </ul>
           </div>
+        </div>
+        <div className='asset-description'>
+          <h1>About {this.coins[this.coin]}</h1>
+          <p>{this.descriptions[this.coin]}</p>
         </div>
       </div>
     );
