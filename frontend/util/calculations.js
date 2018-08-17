@@ -47,13 +47,15 @@ export const findNextTimeIdx = (array, currentTime) => {
 }
 
 export const compileBalanceValues = coinValuesArray => {
+  coinValuesArray = coinValuesArray.filter(subArr => subArr.length > 0);
+
   let portfolioValues = [];
 
   for (let i = 0; i < coinValuesArray[0].length; i++){
     let sum = coinValuesArray[0][i].value;
     let time = coinValuesArray[0][i].time;
 
-    for(let coin = 1; coin < 4; coin++) {
+    for(let coin = 1; coin < coinValuesArray.length; coin++) {
       let nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
       sum += coinValuesArray[coin][nextTimeIdx].value;
     }

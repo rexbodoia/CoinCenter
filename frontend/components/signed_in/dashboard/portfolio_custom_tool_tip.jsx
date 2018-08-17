@@ -6,7 +6,7 @@ class PortfolioCustomToolTip extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.payload.length > 0){
+    if (nextProps.payload && nextProps.payload.length > 0){
       let value = nextProps.payload[0].value;
       let integer = Math.floor(value);
       let decimal = (value - integer).toFixed(2).toString()
