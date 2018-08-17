@@ -4,6 +4,7 @@ import NavHeaderContainer from './navigation/nav_header_container';
 import ChartsContainer from '../charts/charts_container';
 import DashboardContainer from './dashboard/dashboard_container';
 import AssetChartContainer from './assets/asset_chart_container';
+import BuySell from './dashboard/buy_sell/buy_sell';
 
 class SignedIn extends React.Component {
   constructor(props) {
@@ -19,6 +20,7 @@ class SignedIn extends React.Component {
         <Switch>
           <Route path='/assets/:symbol' component={AssetChartContainer} />
           <Route path='/dashboard' component={DashboardContainer} />
+          <Route path='/buy' component={BuySell} />
         </Switch>
       </div>
     );
