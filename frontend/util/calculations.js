@@ -14,7 +14,7 @@ export const calculateCoinValues = (coinAmounts, prices) => {
   let lastBalanceTime = coinAmounts[v].date;
   let nextBalanceTime = lastBalanceTime;
 
-  for (let p = prices.length - 1; p > 0; p--) {
+  for (let p = prices.length - 1; p >= 0; p--) {
     let priceTime = prices[p].time;
 
     if (v + 1 < coinAmounts.length) {

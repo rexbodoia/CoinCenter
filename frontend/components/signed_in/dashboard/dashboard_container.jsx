@@ -5,7 +5,7 @@ import Dashboard from './dashboard';
 import { withRouter } from 'react-router-dom';
 
 const mapStateToProps = state => ({
-  balances: state.entities.balances,
+  transactions: state.entities.transactions,
   prices: state.entities.prices
 });
 

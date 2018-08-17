@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
         <PortfolioChartContainer />
         <ChartPreviewsContainer />
         <div className='dashboard-bottom'>
-          <Portfolio />
+          <Portfolio prices={this.props.prices} transactions={this.props.transactions}/>
           <RecentActivity />
         </div>
       </div>
