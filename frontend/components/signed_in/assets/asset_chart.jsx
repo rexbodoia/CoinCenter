@@ -29,6 +29,7 @@ class AssetChart extends React.Component {
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
+    this.renderOthers = this.renderOthers.bind(this);
   }
 
   componentDidMount() {
@@ -91,6 +92,12 @@ class AssetChart extends React.Component {
     this.retrievePrices(granularity);
   }
 
+  renderOthers() {
+    let coin = this.coin;
+    let others = Object.keys(this.coins).filter(c => c !== coin);
+    return others.map(other => <div className='other-description-item'><p>{this.descriptions[other]}</p></div>);
+  }
+
   render () {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
     let price = this.calculatePrice(granularity);
@@ -140,6 +147,9 @@ class AssetChart extends React.Component {
         <div className='asset-description'>
           <h1>About {this.coins[this.coin]}</h1>
           <p>{this.descriptions[this.coin]}</p>
+        </div>
+        <div className='other-asset-descriptions'>
+          {this.renderOthers()}
         </div>
       </div>
     );
