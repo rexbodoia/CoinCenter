@@ -1,6 +1,7 @@
 import React from 'react';
 import BuyForm from './buy_form';
 import SellForm from './sell_form';
+import BuySellFormIcon from './buy_sell_form_icon';
 
 class BuySell extends React.Component {
   constructor(props) {
@@ -56,6 +57,12 @@ class BuySell extends React.Component {
             {this.renderTab('Sell')}
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
+        </div>
+        <div className='buy-sell-icons'>
+          <BuySellFormIcon coin='Bitcoin' symbol='BTC' />
+          <BuySellFormIcon coin='Bitcoin Cash' symbol='BCH' />
+          <BuySellFormIcon coin='Ethereum' symbol='ETH' />
+          <BuySellFormIcon coin='Litecoin' symbol='LTC' />
         </div>
         <div className='form-container'>
           {this.renderForms()}
