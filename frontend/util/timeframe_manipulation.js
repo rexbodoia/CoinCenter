@@ -52,13 +52,13 @@ const sortDates = (timeframe, className) => {
 
   let dates = []
 
-  dates.unshift(<li>{stringified[0]} {stringified[1]}</li>);
+  dates.unshift(<li key={0}>{stringified[0]} {stringified[1]}</li>);
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 1; i < 7; i++) {
     let nextDate = new Date(today.setDate(today.getDate() - intervalLength));
     let stringified = stringifyDate(nextDate);
 
-    dates.unshift(<li>{stringified[0]} {stringified[1]}</li>);
+    dates.unshift(<li key={i}>{stringified[0]} {stringified[1]}</li>);
   }
   return dates;
 }
@@ -109,20 +109,21 @@ const sortTimes = (timeframe, className) => {
       minutes = '0' + minutes;
     }
 
-    dates.unshift(<li>{hour} {minutes}</li>)
+    dates.unshift(<li key={0}>{hour} {minutes}</li>)
 
-    for(let i = 0; i < 6; i++) {
+    for(let i = 1; i < 7; i++) {
       [hour, minutes] = decrementMinutes(hour, minutes, 10);
 
-      dates.unshift(<li>{hour} {minutes}</li>)
+      dates.unshift(<li key={i}>{hour} {minutes}</li>)
     }
 
   } else {
-    dates.unshift(<li>{hour}:00</li>)
-    for (let i = 0; i < 6; i++) {
+    dates.unshift(<li key={0}>{hour}:00</li>)
+
+    for (let i = 1; i < 7; i++) {
       hour = decrementHour(hour, 4);
 
-      dates.unshift(<li>{hour}:00</li>)
+      dates.unshift(<li key={i}>{hour}:00</li>)
     }
   }
 

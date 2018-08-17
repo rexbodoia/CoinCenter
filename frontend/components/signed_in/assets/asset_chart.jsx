@@ -30,17 +30,19 @@ class AssetChart extends React.Component {
     this.renderChart = this.renderChart.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
     this.renderOthers = this.renderOthers.bind(this);
+    this.renderDifferences = this.renderDifferences.bind(this);
   }
 
   componentDidMount() {
     $('#month').css('color', 'rgb(6, 103, 208)');
     this.retrievePrices('sixHours');
     this.state = { timeframe: 'month' };
-    // if (prices[0].price - prices[prices.length - 1].price >= 0) {
-    //   $('#' + this.coin).css('color', 'rgb(97, 202, 0)');
-    // } else {
-    //   $('#' + this.coin).css('color', 'rgb(255, 73, 73);');
-    // }
+    let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
+    if (Object.keys(this.props.prices[granularity]).includes(this.coin) && prices[0].price - prices[prices.length - 1].price >= 0) {
+      $('#' + this.coin).css('color', 'rgb(97, 202, 0)');
+    } else {
+      $('#' + this.coin).css('color', 'rgb(255, 73, 73);');
+    }
   }
 
   retrievePrices(granularity) {
@@ -104,21 +106,37 @@ class AssetChart extends React.Component {
     </div>);
   }
 
+  renderDifferences(granularity) {
+    if (Object.keys(this.props.prices[granularity]).includes(this.coin)) {
+      let length = timeframeFunctions.findNumDataPoints(this.state.timeframe)
+      let rawPrices = this.props.prices[granularity][this.coin]
+      let data = filterPrices(rawPrices, length);
+      let first = data[0].price;
+      let last = data[data.length - 1].price;
+      let diff = (first - last) / last;
+
+      let absoluteDiff = first - last;
+      let percentDiff = (diff * 100).toFixed(2);
+
+      if (absoluteDiff >= 0) {
+        absoluteDiff = '+' + absoluteDiff;
+      } else {
+        percentDiff = -percentDiff;
+      }
+
+      return [absoluteDiff, percentDiff];
+    } else {
+      return [0,0];
+    }
+  }
+
   render () {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
     let price = this.calculatePrice(granularity);
     let integer = Math.floor(price);
     let decimal = this.calculateDec(price, integer);
-    // let data = this.props.prices;
-    // let first = data[0].price;
-    // let last = data[data.length - 1].price;
-    // let diff = (first - last) / last;
-    //
-    // let percentDiff = (diff * 100).toFixed(2);
-    //
-    // if (percentDiff >= 0) {
-    //   percentDiff = '+' + percentDiff;
-    // }
+
+    let [absoluteDiff, percentDiff] = this.renderDifferences(granularity);
 
     return (
       <div style={{ width: '82%', margin: '0 auto' }}>
@@ -132,8 +150,7 @@ class AssetChart extends React.Component {
               <h3>$</h3>
               <h2>{integer}</h2>
               <h3>{decimal}</h3>
-              {/* <h1>${first.toFixed(2)}</h1>
-              <h2 id={this.coin}>{percentDiff}%</h2> */}
+              <h1>${absoluteDiff.toFixed(2)} ({percentDiff}%)</h1>
             </div>
           </div>
           <ul className='portfolio-chart-time-frames'>

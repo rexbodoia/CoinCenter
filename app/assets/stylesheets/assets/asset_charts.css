@@ -85,9 +85,10 @@
 }
 
 .asset-chart-header h1 {
-  padding: 20px;
+  padding-left: 12px;
+  padding-top: 4px;
   padding-bottom: 0px;
-  font-size: inherit;
+  font-size: 24px;
   font-weight: inherit;
   color: inherit;
   text-transform: uppercase;
