@@ -12,9 +12,14 @@ class BuyForm extends React.Component {
   render() {
     return (
       <form className='buy-sell-form'>
-        <input placeholder='0.00                                   USD' ></input>
+        <input placeholder='0.00                             USD' >
+        </input>
+
         <span className='conversion-symbol'>&#8652;</span>
-        <input placeholder={`0.00                                     ${this.state.coin}`} ></input>
+
+        <input placeholder={`0.00                               ${this.state.coin}`} >
+        </input>
+        <input className='buy-sell-button' type='submit' value={`Buy ${this.state.coin}`}></input>
       </form>
     );
   }

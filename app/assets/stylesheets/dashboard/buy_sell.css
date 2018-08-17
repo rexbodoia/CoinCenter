@@ -29,16 +29,36 @@
 }
 
 .buy-sell-form {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px;
+  /* display: flex; */
+  /* flex-direction: row; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  padding: 26px;
+  padding-top: 0;
 }
 
 .buy-sell-form input {
-  width: 240px;
+  width: 220px;
   border-radius: 6px;
+  display: inline;
+  margin: 0 15px;
+  margin-top: 26px;
+}
+
+.buy-sell-form .buy-sell-button {
+  width: 95%;
+  /* height: 64px; */
+  margin-right: 14px;
+  margin-left: 14px;
+  color: white;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.buy-sell-form .buy-sell-button:hover {
+  cursor: pointer;
+  background-color: #519AFA
 }
 
 .buy-sell-icons {
@@ -47,7 +67,7 @@
   justify-content: space-between;
   width: 85%;
   margin: 0 auto;
-  margin-top: 28px;
+  margin-top: 24px;
 }
 
 .buy-sell-form-icon {
@@ -72,4 +92,10 @@
   font-size: 14px;
   font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   padding-top: 6px;
+}
+
+.buy-sell-button {
+  background-color: rgb(60, 144, 223);
+  border-radius: 4px;
+  border: none;
 }
