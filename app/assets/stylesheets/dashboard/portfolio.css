@@ -37,6 +37,16 @@
   border-bottom: 1px solid rgb(218, 225, 233);
 }
 
+.portfolio-tabs .unselected-portfolio-tab {
+  color: rgb(125, 149, 182);
+  border-bottom: 1px solid rgb(218, 225, 233);
+}
+
+.portfolio-tabs .selected-portfolio-tab {
+  color: rgb(6, 103, 208);
+  border-bottom: 1px solid rgb(6, 103, 208);
+}
+
 .portfolio-tabs span:hover {
   cursor: pointer;
 }
