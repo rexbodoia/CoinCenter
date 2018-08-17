@@ -61,3 +61,8 @@ table {
 .logo:hover {
 	cursor: pointer;
 }
+
+.spinner {
+  display: block;
+  margin: 0 auto;
+}

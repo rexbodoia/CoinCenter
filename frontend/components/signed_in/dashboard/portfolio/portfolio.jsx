@@ -1,4 +1,5 @@
 import React from 'react';
+import PortfolioListContainer from './portfolio_list_container';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class Portfolio extends React.Component {
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
         </div>
+        {/* <PortfolioListContainer /> */}
       </div>
     );
   }

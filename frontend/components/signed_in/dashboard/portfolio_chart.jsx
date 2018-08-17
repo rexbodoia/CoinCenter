@@ -3,6 +3,7 @@ import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
 import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
+import { ClipLoader } from 'react-spinners';
 
 class PortfolioChart extends React.Component {
   constructor(props) {
@@ -66,7 +67,7 @@ class PortfolioChart extends React.Component {
     if(Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
 
       let data = this.calculatePortfolioHistory(granularity);
-      if (data.length !== 0) {
+      if (data.length >= 0) {
         return (
           <AreaChart width={1188} height={160} data={data}>
 
@@ -76,6 +77,17 @@ class PortfolioChart extends React.Component {
           </AreaChart>
         );
       }
+    } else {
+      return (
+        <div style={{ height: 160 }}>
+          <ClipLoader
+            className='spinner'
+            sizeUnit={"px"}
+            size={70}
+            color={'rgb(155, 166, 178)'}
+          />
+        </div>
+      )
     }
   }
 
