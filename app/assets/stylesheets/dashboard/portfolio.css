@@ -3,6 +3,7 @@
   width: 576px;
   height: 388px;
   border: 1px solid rgb(218, 225, 233);
+  margin-bottom: 40px;
 }
 
 .portfolio-header {
@@ -96,6 +97,7 @@
   /* justify-content: space-between; */
   align-items: center;
   text-align: center;
+  padding: 0 20px;
 }
 
 .portfolio-list-item span {
@@ -105,7 +107,7 @@
   color: rgb(78, 92, 110);
   display: inline;
   flex-grow: 2;
-  text-align: left;
+  text-align: center;
 }
 
 .portfolio-list-item h1 {
@@ -113,6 +115,7 @@
   line-height: 1.5;
   font-size: 18px;
   color: rgb(78, 92, 110);
+  padding-left: 12px;
   display: inline;
   flex-grow: 5;
   text-align: left;
@@ -125,7 +128,7 @@
   color: rgb(78, 92, 110);
   display: inline;
   flex-grow: 3;
-  text-align: left;
+  text-align: center;
 }
 
 .portfolio-list-item h3 {
@@ -135,5 +138,5 @@
   color: rgb(155, 166, 178);
   display: inline;
   flex-grow: 2;
-  text-align: left;
+  text-align: right;
 }
