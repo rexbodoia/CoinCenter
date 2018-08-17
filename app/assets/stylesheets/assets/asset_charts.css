@@ -228,3 +228,11 @@
   color: rgb(155, 166, 178);
   display: inline;
 }
+
+.asset-chart-header .green-asset {
+  color: rgb(97, 202, 0);
+}
+
+.asset-chart-header .red-asset {
+  color: rgb(255, 73, 73);
+}
