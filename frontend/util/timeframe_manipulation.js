@@ -49,7 +49,6 @@ const sortDates = (timeframe, className) => {
 
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
-  console.log(intervalLength);
 
   let dates = []
 

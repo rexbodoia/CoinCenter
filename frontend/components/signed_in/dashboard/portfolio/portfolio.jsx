@@ -1,5 +1,5 @@
 import React from 'react';
-import PortfolioListContainer from './portfolio_list_container';
+import PortfolioListItem from './portfolio_list_item';
 import { filterPrices, calculateCoinValues, compileBalanceValues, calculateNetCoinAmounts } from '../../../../util/calculations';
 
 class Portfolio extends React.Component {
@@ -57,10 +57,17 @@ class Portfolio extends React.Component {
   }
 
   render () {
-    // let bchAmounts = this.props.transactions.BHC;
-    // let btcAmounts = this.props.transactions.BTC;
-    // let ethAmounts = this.props.transactions.ETH;
-    // let ltcAmounts = this.props.transactions.LTC;
+    let bchAmounts = [{ amount: 0 }];
+    let btcAmounts = [{ amount: 0 }];
+    let ethAmounts = [{ amount: 0 }];
+    let ltcAmounts = [{ amount: 0 }];
+
+    if(Object.values(this.props.transactions).length === 4){
+      bchAmounts = calculateNetCoinAmounts(this.props.transactions.BCH);
+      btcAmounts = calculateNetCoinAmounts(this.props.transactions.BTC);
+      ethAmounts = calculateNetCoinAmounts(this.props.transactions.ETH);
+      ltcAmounts = calculateNetCoinAmounts(this.props.transactions.LTC);
+    }
 
     return (
       <div className='portfolio-container'>
@@ -73,7 +80,10 @@ class Portfolio extends React.Component {
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
         </div>
-        {/* <PortfolioListContainer /> */}
+        <PortfolioListItem coin={'BCH'} currentBalance={bchAmounts[bchAmounts.length - 1].amount} />
+        <PortfolioListItem coin={'BTC'} currentBalance={btcAmounts[btcAmounts.length - 1].amount} />
+        <PortfolioListItem coin={'ETH'} currentBalance={ethAmounts[ethAmounts.length - 1].amount} />
+        <PortfolioListItem coin={'LTC'} currentBalance={ltcAmounts[ltcAmounts.length - 1].amount} />
         <div className='portfolio-footer'>
           <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
         </div>

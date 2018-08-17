@@ -63,6 +63,10 @@ export const compileBalanceValues = coinValuesArray => {
 }
 
 export const calculateNetCoinAmounts = coinTransactions => {
+  if (coinTransactions.length === 0) {
+    return [{ amount: 0 }];
+  }
+
   let totals = [{ date: coinTransactions[0].date, amount: coinTransactions[0].amount }];
 
   for (let i = 1; i < coinTransactions.length; i++) {

@@ -35,23 +35,3 @@ end
 # times_gen.rand(120).times do |time|
 #   Transaction.create!(date: DateTime.new([2018, 2017, 2016].sample, date_gen.rand(1..12), date_gen.rand(1..28)), coin_id: times_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(5.0))
 # end
-
-
-
-
-
-  # date = Date.new(2018,8,11);
-  # bitcoin = rand_gen.rand(1.0)
-  # ethereum = rand_gen.rand(2.0)
-  # litecoin = rand_gen.rand(20.0)
-  # bitcoin_cash = rand_gen.rand(8.0)
-  #
-  # 365.times do |date_num|
-  #   d = date - date_num
-  #   amount = Price.where(date: d).pluck(:price)
-  #   total = ethereum * amount[0] + bitcoin_cash * amount[1] + litecoin * amount[2] + bitcoin * amount[3]
-  #
-  #   4.times do |coin_num|
-  #     Balance.create!(user_id: user_num + 1, coin_id: coin_num + 1, amount: total, date: d)
-  #   end
-  # end
