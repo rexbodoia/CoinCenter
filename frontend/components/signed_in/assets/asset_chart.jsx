@@ -30,7 +30,7 @@ class AssetChart extends React.Component {
     this.renderChart = this.renderChart.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
     this.renderOthers = this.renderOthers.bind(this);
-    this.renderDifferences = this.renderDifferences.bind(this);
+    this.calculateDifferences = this.calculateDifferences.bind(this);
   }
 
   componentDidMount() {
@@ -100,7 +100,7 @@ class AssetChart extends React.Component {
     </div>);
   }
 
-  renderDifferences(granularity) {
+  calculateDifferences(granularity) {
     if (Object.keys(this.props.prices[granularity]).includes(this.coin)) {
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe)
       let rawPrices = this.props.prices[granularity][this.coin]
@@ -135,8 +135,6 @@ class AssetChart extends React.Component {
     let integer = Math.floor(price);
     let decimal = this.calculateDec(price, integer);
 
-    // let [absoluteDiff, percentDiff] = this.renderDifferences(granularity);
-
     return (
       <div style={{ width: '82%', margin: '0 auto' }}>
         <div className='asset-header'>
@@ -149,7 +147,7 @@ class AssetChart extends React.Component {
               <h3>$</h3>
               <h2>{integer}</h2>
               <h3>{decimal}</h3>
-              {this.renderDifferences(granularity)}
+              {this.calculateDifferences(granularity)}
             </div>
           </div>
           <ul className='portfolio-chart-time-frames'>
