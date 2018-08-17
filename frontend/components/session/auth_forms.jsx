@@ -24,7 +24,7 @@ class AuthForms extends React.Component {
       }
     }
 
-    this.pathname = props.location.pathname
+    // this.pathname = props.location.pathname;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.update = this.update.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
@@ -85,11 +85,12 @@ class AuthForms extends React.Component {
   }
 
   showComponent() {
-    if (this.pathname === '/signup') {
+    console.log(this.props.location);
+    if (this.props.location.pathname === '/signup') {
       return (
         <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );
-    } else if (this.pathname === '/signin') {
+    } else if (this.props.location.pathname === '/signin') {
       return (
         <SigninForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>
       );

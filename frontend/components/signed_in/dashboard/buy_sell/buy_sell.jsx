@@ -8,12 +8,14 @@ class BuySell extends React.Component {
     super(props);
 
     this.state = {
-      tab: 'Buy'
+      tab: 'Buy',
+      icon: 'BTC'
     }
 
     this.selectTab = this.selectTab.bind(this);
     this.renderTab = this.renderTab.bind(this);
     this.renderForms = this.renderForms.bind(this);
+    this.highlightIcon = this.highlightIcon.bind(this);
   }
 
   selectTab(tab) {
@@ -31,6 +33,12 @@ class BuySell extends React.Component {
       return (
         <div className='unselected-portfolio-tab'><span onClick={this.selectTab(tab)}>{tab}</span></div>
       );
+    }
+  }
+
+  highlightIcon(icon) {
+    return (e) => {
+      this.setState({ icon })
     }
   }
 
@@ -59,10 +67,10 @@ class BuySell extends React.Component {
           </div>
         </div>
         <div className='buy-sell-icons'>
-          <BuySellFormIcon coin='Bitcoin' symbol='BTC' />
-          <BuySellFormIcon coin='Bitcoin Cash' symbol='BCH' />
-          <BuySellFormIcon coin='Ethereum' symbol='ETH' />
-          <BuySellFormIcon coin='Litecoin' symbol='LTC' />
+          <BuySellFormIcon coin='Bitcoin' symbol='BTC' onClick={this.highlightIcon('BTC')} className='selected-icon' />
+          <BuySellFormIcon coin='Bitcoin Cash' symbol='BCH' onClick={this.highlightIcon('BCH')} className='unselected-icon' />
+          <BuySellFormIcon coin='Ethereum' symbol='ETH' onClick={this.highlightIcon('ETH')} className='unselected-icon' />
+          <BuySellFormIcon coin='Litecoin' symbol='LTC' onClick={this.highlightIcon('LTC')} className='unselected-icon' />
         </div>
         <div className='form-container'>
           {this.renderForms()}
