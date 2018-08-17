@@ -3,7 +3,7 @@ class Api::TransactionsController < ApplicationController
 
   def create
     @transaction = Transaction.new(transaction_params)
-    if @transaction.save
+    if @transaction.save!
       render '/api/transactions/show'
     else
       render json: ['Something went wrong']
@@ -11,8 +11,12 @@ class Api::TransactionsController < ApplicationController
   end
 
   def index
-    @transactions = Transaction.all
-    render '/api/transactions/index'
+    @transactions = Transaction.where(user_id: params[:user_id])
+    unless @transactions.empty?
+      render '/api/transactions/index'
+    else
+      render json: ['Could not find transactions']
+    end
   end
 
   def show

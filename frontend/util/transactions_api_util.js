@@ -1,13 +1,14 @@
-// export const buyCoin = (coin, amount) => (
-//   $.ajax({
-//     method: 'POST',
-//     url: ''
-//   })
-// );
-
 export const fetchTransactions = user_id => (
   $.ajax({
     method: 'GET',
-    url: `/api/transactions/${user_id}`
+    url: `/api/users/${user_id}/transactions`
+  })
+);
+
+export const sendTransaction = (user_id, transaction) => (
+  $.ajax({
+    method: 'POST',
+    url: `/api/users/${user_id}/transactions`,
+    data: { transaction }
   })
 );
