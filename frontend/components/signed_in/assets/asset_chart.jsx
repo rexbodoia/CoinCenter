@@ -92,10 +92,16 @@ class AssetChart extends React.Component {
     this.retrievePrices(granularity);
   }
 
-  renderOthers() {
+  renderOthers(granularity) {
     let coin = this.coin;
     let others = Object.keys(this.coins).filter(c => c !== coin);
-    return others.map(other => <div className='other-description-item'><p>{this.descriptions[other]}</p></div>);
+    return others.map(other => <div className='other-description-item'>
+      <img src={window.images[other]} display='inline-block'></img>
+      <div><h1>{this.coins[other]} {other}</h1><br></br>
+      <h2>${this.calculatePrice(granularity)}</h2>
+    </div>
+      <p>{this.descriptions[other]}</p>
+    </div>);
   }
 
   render () {
@@ -148,8 +154,9 @@ class AssetChart extends React.Component {
           <h1>About {this.coins[this.coin]}</h1>
           <p>{this.descriptions[this.coin]}</p>
         </div>
+        <h1 id='more-assets'>More Assets</h1><br></br>
         <div className='other-asset-descriptions'>
-          {this.renderOthers()}
+          {this.renderOthers(granularity)}
         </div>
       </div>
     );

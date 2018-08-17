@@ -156,7 +156,7 @@
   border: 1px solid rgb(218, 225, 233);
   border-top: none;
   padding: 36px;
-  margin-bottom: 60px;
+  margin-bottom: 36px;
   font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
@@ -180,6 +180,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-bottom: 100px;
 }
 
 .other-description-item {
@@ -195,4 +196,34 @@
   line-height: 1.5;
   font-size: 16px;
   color: rgb(139, 146, 167);
+}
+
+#more-assets {
+  font-weight: 600;
+  line-height: 1.5;
+  font-size: 16px;
+  padding-left: 32px;
+  color: rgb(78, 92, 110);
+}
+
+.other-description-item > div {
+  display: inline-block;
+  padding-left: 12px;
+  padding-bottom: 16px;
+}
+
+.other-description-item h1 {
+  font-weight: 600;
+  line-height: 1.5;
+  color: rgb(6, 103, 208);
+  font-size: 16px;
+  display: inline;
+}
+
+.other-description-item h2 {
+  font-weight: 500;
+  line-height: 1.5;
+  font-size: 16px;
+  color: rgb(155, 166, 178);
+  display: inline;
 }
