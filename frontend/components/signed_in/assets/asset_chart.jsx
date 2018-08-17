@@ -28,6 +28,11 @@ class AssetChart extends React.Component {
     $('#month').css('color', 'rgb(6, 103, 208)');
     this.retrievePrices('sixHours');
     this.state = { timeframe: 'month' };
+    // if (prices[0].price - prices[prices.length - 1].price >= 0) {
+    //   $('#' + this.coin).css('color', 'rgb(97, 202, 0)');
+    // } else {
+    //   $('#' + this.coin).css('color', 'rgb(255, 73, 73);');
+    // }
   }
 
   retrievePrices(granularity) {
@@ -45,7 +50,7 @@ class AssetChart extends React.Component {
 
       if (data.length !== 0) {
         return (
-          <AreaChart width={1188} height={260} data={data}>
+          <AreaChart width={1188} height={260} padding={0} data={data}>
 
             <Area type="monotone" dataKey="price" fill="rgb(244, 247, 250)" fillOpacity={1} stroke="rgb(6, 103, 208)" strokeWidth={1.4}/>
             <YAxis hide={true} domain={[dataMin => dataMin, dataMax => dataMax]} />
@@ -84,6 +89,16 @@ class AssetChart extends React.Component {
     let price = this.calculatePrice(granularity);
     let integer = Math.floor(price);
     let decimal = this.calculateDec(price, integer);
+    // let data = this.props.prices;
+    // let first = data[0].price;
+    // let last = data[data.length - 1].price;
+    // let diff = (first - last) / last;
+    //
+    // let percentDiff = (diff * 100).toFixed(2);
+    //
+    // if (percentDiff >= 0) {
+    //   percentDiff = '+' + percentDiff;
+    // }
 
     return (
       <div style={{ width: '82%', margin: '0 auto' }}>
@@ -97,6 +112,8 @@ class AssetChart extends React.Component {
               <h3>$</h3>
               <h2>{integer}</h2>
               <h3>{decimal}</h3>
+              {/* <h1>${first.toFixed(2)}</h1>
+              <h2 id={this.coin}>{percentDiff}%</h2> */}
             </div>
           </div>
           <ul className='portfolio-chart-time-frames'>
