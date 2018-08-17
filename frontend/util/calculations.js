@@ -1,16 +1,17 @@
 export const filterPrices = (prices, length) => {
-  let result = prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
+  const result = prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
   return result.filter(object => object.price && object.time);
 }
 
 export const calculateCoinValues = (coinAmounts, prices) => {
-  let result = [];
+  const result = [];
   let c = 0;
   let p = prices.length - 1;
+  let amount = coinAmounts[c];
 
-  while (coinAmounts[c].date > prices[p].date) {
+  while (coinAmounts[c].date > prices[p].time) {
     if (p > 0) {
-      result.push({ time: prices[p].date, value: 0 });
+      result.push({ time: prices[p].time, value: 0 });
       prices.pop();
       p -= 1;
     } else {
@@ -19,18 +20,18 @@ export const calculateCoinValues = (coinAmounts, prices) => {
   }
 
   for (let p = prices.length - 1; p >= 0; p--){
-    if (coinAmounts.length > c + 1 && prices[p].date > coinAmounts[c + 1].date) {
-      coinAmounts[c] = coinAmounts[c + 1];
+    if (coinAmounts.length > c + 1 && prices[p].time > coinAmounts[c + 1].date) {
+      amount = coinAmounts[c + 1];
       c += 1;
     }
-    result.push({ time: prices[p].date, value: coinAmounts[c].amount * prices[p].price });
+    result.push({ time: prices[p].time, value: amount.amount * prices[p].price });
   }
 
   return result;
 }
 
 export const findNextTimeIdx = (array, currentTime) => {
-  let lastTime = [array[0].time, 0];
+  const lastTime = [array[0].time, 0];
 
   for(let idx = 1; idx < array.length; idx++) {
     if (array[idx].time > currentTime) {
@@ -46,14 +47,14 @@ export const findNextTimeIdx = (array, currentTime) => {
 export const compileBalanceValues = coinValuesArray => {
   coinValuesArray = coinValuesArray.filter(subArr => subArr.length > 0);
 
-  let portfolioValues = [];
+  const portfolioValues = [];
 
   for (let i = 0; i < coinValuesArray[0].length; i++){
     let sum = coinValuesArray[0][i].value;
-    let time = coinValuesArray[0][i].time;
+    const time = coinValuesArray[0][i].time;
 
     for(let coin = 1; coin < coinValuesArray.length; coin++) {
-      let nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
+      const nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
       sum += coinValuesArray[coin][nextTimeIdx].value;
     }
     portfolioValues.push({ time, value: sum });
@@ -67,14 +68,28 @@ export const calculateNetCoinAmounts = coinTransactions => {
     return [{ amount: 0 }];
   }
 
-  let totals = [{ date: coinTransactions[0].date, amount: coinTransactions[0].amount }];
+  const totals = [{ time: coinTransactions[0].date, amount: coinTransactions[0].amount }];
 
   for (let i = 1; i < coinTransactions.length; i++) {
-    totals.push({ date: coinTransactions[i].date, amount: totals[i - 1].amount + coinTransactions[i].amount });
+    totals.push({ time: coinTransactions[i].date, amount: totals[i - 1].amount + coinTransactions[i].amount });
   }
 
   return totals;
 }
+//
+// const transactions = [{ date: new Date(2016, 2, 3), amount: 2.5 }, { date: new Date(2016, 8, 5), amount: -1 }, { date: new Date(2016, 10, 17), amount: 2 }];
+//
+// const prices = [
+//   { date: new Date(2016, 1, 1), price: 5000 },
+//   { date: new Date(2016, 3, 1), price: 4000 },
+//   { date: new Date(2016, 5, 1), price: 6000 },
+//   { date: new Date(2016, 7, 1), price: 6000 },
+//   { date: new Date(2016, 9, 1), price: 8000 },
+//   { date: new Date(2016, 11, 1), price: 5000 }
+// ]
+//
+// let amountsEndResult = calculateNetCoinAmounts(transactions);
+// let valuesEndResult = calculateCoinValues(amountsEndResult, prices);
 
 // let coinValues = [];
 // let amount = 0;

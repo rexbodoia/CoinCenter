@@ -69,6 +69,28 @@ class Portfolio extends React.Component {
       ltcAmounts = calculateNetCoinAmounts(this.props.transactions.LTC);
     }
 
+    let bchBalance = bchAmounts[bchAmounts.length - 1].amount;
+    let btcBalance = btcAmounts[btcAmounts.length - 1].amount;
+    let ethBalance = ethAmounts[ethAmounts.length - 1].amount;
+    let ltcBalance = ltcAmounts[ltcAmounts.length - 1].amount;
+
+    let bchValue = 0;
+    let btcValue = 0;
+    let ethValue = 0;
+    let ltcValue = 0;
+
+    let total = 1000000000000;
+
+    if (Object.values(this.props.prices.oneHour).length === 4) {
+      bchValue = this.props.prices.oneHour.BCH[0][3] * bchBalance;
+      btcValue = this.props.prices.oneHour.BTC[0][3] * btcBalance;
+      ethValue = this.props.prices.oneHour.ETH[0][3] * ethBalance;
+      ltcValue = this.props.prices.oneHour.LTC[0][3] * ltcBalance;
+
+      total = bchValue + btcValue + ethValue + ltcValue;
+    }
+
+
     return (
       <div className='portfolio-container'>
         <div className='portfolio-header'>
@@ -80,10 +102,10 @@ class Portfolio extends React.Component {
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
         </div>
-        <PortfolioListItem coin={'BCH'} currentBalance={bchAmounts[bchAmounts.length - 1].amount} />
-        <PortfolioListItem coin={'BTC'} currentBalance={btcAmounts[btcAmounts.length - 1].amount} />
-        <PortfolioListItem coin={'ETH'} currentBalance={ethAmounts[ethAmounts.length - 1].amount} />
-        <PortfolioListItem coin={'LTC'} currentBalance={ltcAmounts[ltcAmounts.length - 1].amount} />
+        <PortfolioListItem coin={'Bitcoin Cash'} symbol={'BCH'} currentBalance={bchBalance} currentValue={bchValue} proportion={bchValue / total * 100} />
+        <PortfolioListItem coin={'Bitcoin'} symbol={'BTC'} currentBalance={btcBalance} currentValue={btcValue} proportion={btcValue / total * 100} />
+        <PortfolioListItem coin={'Ethereum'} symbol={'ETH'} currentBalance={ethBalance} currentValue={ethValue} proportion={ethValue / total * 100} />
+        <PortfolioListItem coin={'Litecoin'} symbol={'LTC'} currentBalance={ltcBalance} currentValue={ltcValue} proportion={ltcValue / total * 100} />
         <div className='portfolio-footer'>
           <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
         </div>
