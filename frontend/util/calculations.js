@@ -4,32 +4,29 @@ export const filterPrices = (prices, length) => {
 }
 
 export const calculateCoinValues = (coinAmounts, prices) => {
-  let coinValues = [];
+  let result = [];
+  let c = 0;
+  let p = prices.length - 1;
 
-  if (coinAmounts.length === 0) {
-    return coinValues;
+  while (coinAmounts[c].date > prices[p].date) {
+    if (p > 0) {
+      result.push({ time: prices[p].date, value: 0 });
+      prices.pop();
+      p -= 1;
+    } else {
+      break;
+    }
   }
 
-  let v = 0;
-  let lastBalanceTime = coinAmounts[v].date;
-  let nextBalanceTime = lastBalanceTime;
-
-  for (let p = prices.length - 1; p >= 0; p--) {
-    let priceTime = prices[p].time;
-
-    if (v + 1 < coinAmounts.length) {
-      nextBalanceTime = coinAmounts[v + 1].date;
+  for (let p = prices.length - 1; p >= 0; p--){
+    if (coinAmounts.length > c + 1 && prices[p].date > coinAmounts[c + 1].date) {
+      coinAmounts[c] = coinAmounts[c + 1];
+      c += 1;
     }
-
-    if (nextBalanceTime < priceTime) {
-      lastBalanceTime = nextBalanceTime;
-      v += 1;
-    }
-
-    let amount = coinAmounts[v].amount;
-    coinValues.push({ time: prices[p].time, value: amount * prices[p].price});
+    result.push({ time: prices[p].date, value: coinAmounts[c].amount * prices[p].price });
   }
-  return coinValues;
+
+  return result;
 }
 
 export const findNextTimeIdx = (array, currentTime) => {
@@ -64,3 +61,41 @@ export const compileBalanceValues = coinValuesArray => {
 
   return portfolioValues;
 }
+
+export const calculateNetCoinAmounts = coinTransactions => {
+  let totals = [{ date: coinTransactions[0].date, amount: coinTransactions[0].amount }];
+
+  for (let i = 1; i < coinTransactions.length; i++) {
+    totals.push({ date: coinTransactions[i].date, amount: totals[i - 1].amount + coinTransactions[i].amount });
+  }
+
+  return totals;
+}
+
+// let coinValues = [];
+// let amount = 0;
+//
+// if (coinAmounts.length === 0) {
+//   return coinValues;
+// }
+//
+// let v = 0;
+// let lastBalanceTime = coinAmounts[v].date;
+// let nextBalanceTime = lastBalanceTime;
+//
+// for (let p = prices.length - 1; p >= 0; p--) {
+//   let priceTime = prices[p].time;
+//
+//   if (v + 1 < coinAmounts.length) {
+//     nextBalanceTime = coinAmounts[v + 1].date;
+//   }
+//
+//   if (nextBalanceTime < priceTime) {
+//     lastBalanceTime = nextBalanceTime;
+//     v += 1;
+//   }
+//
+//   amount += coinAmounts[v].amount;
+//   coinValues.push({ time: prices[p].time, value: amount * prices[p].price});
+// }
+// return coinValues;

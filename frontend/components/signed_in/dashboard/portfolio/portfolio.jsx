@@ -1,6 +1,6 @@
 import React from 'react';
 import PortfolioListContainer from './portfolio_list_container';
-import { filterPrices, calculateCoinValues, compileBalanceValues } from '../../../../util/calculations';
+import { filterPrices, calculateCoinValues, compileBalanceValues, calculateNetCoinAmounts } from '../../../../util/calculations';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -34,16 +34,21 @@ class Portfolio extends React.Component {
   }
 
   calculateCurrentValue() {
-    if(Object.keys(this.props.prices).includes('oneHour') && Object.values(this.props.prices.oneHour).length === 4){
+    if(Object.keys(this.props.prices).includes('oneHour') && Object.values(this.props.prices.oneHour).length === 4 && Object.values(this.props.transactions).length === 4){
       let bchData = filterPrices(this.props.prices['oneHour'].BCH, 1);
       let btcData = filterPrices(this.props.prices['oneHour'].BTC, 1);
       let ethData = filterPrices(this.props.prices['oneHour'].ETH, 1);
       let ltcData = filterPrices(this.props.prices['oneHour'].LTC, 1);
 
-      let bchValues = calculateCoinValues(this.props.transactions.BCH, bchData);
-      let btcValues = calculateCoinValues(this.props.transactions.BTC, btcData);
-      let ethValues = calculateCoinValues(this.props.transactions.ETH, ethData);
-      let ltcValues = calculateCoinValues(this.props.transactions.LTC, ltcData);
+      let bchAmounts = calculateNetCoinAmounts(this.props.transactions.BCH);
+      let btcAmounts = calculateNetCoinAmounts(this.props.transactions.BTC);
+      let ethAmounts = calculateNetCoinAmounts(this.props.transactions.ETH);
+      let ltcAmounts = calculateNetCoinAmounts(this.props.transactions.LTC);
+
+      let bchValues = calculateCoinValues(bchAmounts, bchData);
+      let btcValues = calculateCoinValues(btcAmounts, btcData);
+      let ethValues = calculateCoinValues(ethAmounts, ethData);
+      let ltcValues = calculateCoinValues(ltcAmounts, ltcData);
 
       return compileBalanceValues([bchValues, btcValues, ethValues, ltcValues])[0].value.toFixed(2);
     } else {
@@ -52,6 +57,11 @@ class Portfolio extends React.Component {
   }
 
   render () {
+    // let bchAmounts = this.props.transactions.BHC;
+    // let btcAmounts = this.props.transactions.BTC;
+    // let ethAmounts = this.props.transactions.ETH;
+    // let ltcAmounts = this.props.transactions.LTC;
+
     return (
       <div className='portfolio-container'>
         <div className='portfolio-header'>

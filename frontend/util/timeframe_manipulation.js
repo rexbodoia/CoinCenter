@@ -33,7 +33,7 @@ const getTimeframeLength = (timeframe) => {
     'day': 28,
     'week': 7,
     'month': 31,
-    'year': 12
+    'year': 300
   }
   return timeframeLengths[timeframe];
 }
@@ -49,6 +49,7 @@ const sortDates = (timeframe, className) => {
 
   let length = getTimeframeLength(timeframe);
   let intervalLength = Math.ceil(length / 7);
+  console.log(intervalLength);
 
   let dates = []
 
@@ -60,6 +61,7 @@ const sortDates = (timeframe, className) => {
 
     dates.unshift(<li key={i}>{stringified[0]} {stringified[1]}</li>);
   }
+
   return dates;
 }
 
@@ -109,12 +111,12 @@ const sortTimes = (timeframe, className) => {
       minutes = '0' + minutes;
     }
 
-    dates.unshift(<li key={0}>{hour} {minutes}</li>)
+    dates.unshift(<li key={0}>{hour}:{minutes}</li>)
 
     for(let i = 1; i < 7; i++) {
       [hour, minutes] = decrementMinutes(hour, minutes, 10);
 
-      dates.unshift(<li key={i}>{hour} {minutes}</li>)
+      dates.unshift(<li key={i}>{hour}:{minutes}</li>)
     }
 
   } else {

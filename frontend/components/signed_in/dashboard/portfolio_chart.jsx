@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
-import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices } from '../../../util/calculations';
+import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices, calculateNetCoinAmounts } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 import { ClipLoader } from 'react-spinners';
 
@@ -53,10 +53,15 @@ class PortfolioChart extends React.Component {
       let ethData = filterPrices(this.props.prices[granularity].ETH, length);
       let ltcData = filterPrices(this.props.prices[granularity].LTC, length);
 
-      let bchValues = calculateCoinValues(this.props.amounts.BCH, bchData);
-      let btcValues = calculateCoinValues(this.props.amounts.BTC, btcData);
-      let ethValues = calculateCoinValues(this.props.amounts.ETH, ethData);
-      let ltcValues = calculateCoinValues(this.props.amounts.LTC, ltcData);
+      let bchAmounts = calculateNetCoinAmounts(this.props.amounts.BCH);
+      let btcAmounts = calculateNetCoinAmounts(this.props.amounts.BTC);
+      let ethAmounts = calculateNetCoinAmounts(this.props.amounts.ETH);
+      let ltcAmounts = calculateNetCoinAmounts(this.props.amounts.LTC);
+
+      let bchValues = calculateCoinValues(bchAmounts, bchData);
+      let btcValues = calculateCoinValues(btcAmounts, btcData);
+      let ethValues = calculateCoinValues(ethAmounts, ethData);
+      let ltcValues = calculateCoinValues(ltcAmounts, ltcData);
 
       return compileBalanceValues([bchValues, btcValues, ethValues, ltcValues]);
     }
