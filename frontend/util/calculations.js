@@ -1,5 +1,6 @@
 export const filterPrices = (prices, length) => {
-  return prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
+  let result = prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
+  return result.filter(object => object.price && object.time);
 }
 
 export const calculateCoinValues = (coinAmounts, prices) => {
