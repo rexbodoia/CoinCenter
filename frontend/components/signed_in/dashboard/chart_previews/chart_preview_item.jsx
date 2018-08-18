@@ -1,5 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, YAxis } from 'recharts';
+import { findChartDifferences } from '../../../../util/calculations';
 
 class ChartPreviewItem extends React.Component {
   constructor(props){
@@ -38,11 +39,8 @@ class ChartPreviewItem extends React.Component {
 
   render() {
     const data = this.props.prices;
-    const first = data[0].price;
-    const last = data[data.length - 1].price;
-    const diff = (first - last) / last;
 
-    let percentDiff = (diff * 100).toFixed(2);
+    let percentDiff = findChartDifferences(data)[1];
 
     if (percentDiff >= 0) {
       percentDiff = '+' + percentDiff;
@@ -57,7 +55,7 @@ class ChartPreviewItem extends React.Component {
             <div></div>
           </div>
           <div className='chart-preview-number'>
-            <h1>${first.toFixed(2)}</h1>
+            <h1>${data[0].price.toFixed(2)}</h1>
             <h2 id={this.coins[this.coin]}>{percentDiff}%</h2>
           </div>
         </div>

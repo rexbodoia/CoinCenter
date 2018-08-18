@@ -76,6 +76,15 @@ export const calculateNetCoinAmounts = coinTransactions => {
 
   return totals;
 }
+
+export const findChartDifferences = (data) => {
+  let first = data[0].price;
+  let last = data[data.length - 1].price;
+  let diff = (first - last) / last;
+
+  return [first - last, (diff * 100).toFixed(2)]
+}
+
 //
 // const transactions = [{ date: new Date(2016, 2, 3), amount: 2.5 }, { date: new Date(2016, 8, 5), amount: -1 }, { date: new Date(2016, 10, 17), amount: 2 }];
 //

@@ -1,6 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
-import { filterPrices } from '../../../util/calculations';
+import { filterPrices, findChartDifferences } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 
 class AssetChart extends React.Component {
@@ -26,6 +26,7 @@ class AssetChart extends React.Component {
     }
 
     this.coin = this.props.coin;
+    this.others = Object.keys(this.coins).filter(c => c !== this.coin);
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
     this.calculatePrice = this.calculatePrice.bind(this);
@@ -35,13 +36,16 @@ class AssetChart extends React.Component {
 
   componentDidMount() {
     $('#month').css('color', 'rgb(6, 103, 208)');
-    this.retrievePrices('sixHours');
+    this.props.getPrices(this.coin, 'sixHours')
+      .then(() => setTimeout(() => this.props.getPrices(this.others[0], 'oneMinute')
+      .then(() => setTimeout(() => this.props.getPrices(this.others[1], 'oneMinute')
+      .then(() => setTimeout(() => this.props.getPrices(this.others[2], 'oneMinute'), 334)), 334)), 334));
     this.state = { timeframe: '1M' };
   }
 
   retrievePrices(granularity) {
-    if (!Object.keys(this.props.prices[granularity]).includes(this.coin)) {
-      this.props.getPrices(this.coin, granularity);
+    if (Object.values(this.props.prices[granularity]).length < 4) {
+      this.props.getPrices(this.coin, granularity)
     }
   }
 
@@ -65,9 +69,9 @@ class AssetChart extends React.Component {
     }
   }
 
-  calculatePrice(granularity) {
-    if (Object.keys(this.props.prices[granularity]).includes(this.coin)){
-      let arr = [this.props.prices[granularity][this.coin][0]];
+  calculatePrice(coin, granularity) {
+    if (Object.keys(this.props.prices[granularity]).includes(coin)){
+      let arr = [this.props.prices[granularity][coin][0]];
       return filterPrices(arr, 1)[0].price
     } else {
       return 0;
@@ -97,13 +101,12 @@ class AssetChart extends React.Component {
     }
   }
 
-  renderOthers(granularity) {
+  renderOthers() {
     let coin = this.coin;
-    let others = Object.keys(this.coins).filter(c => c !== coin);
-    return others.map(other => <div className='other-description-item'>
+    return this.others.map(other => <div className='other-description-item'>
       <img src={window.images[other]} display='inline-block'></img>
       <div><h1>{this.coins[other]} {other}</h1><br></br>
-      <h2>${this.calculatePrice(granularity)}</h2>
+      <h2>${this.calculatePrice(other, 'oneMinute')}</h2>
     </div>
       <p>{this.descriptions[other]}</p>
     </div>);
@@ -114,12 +117,8 @@ class AssetChart extends React.Component {
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe)
       let rawPrices = this.props.prices[granularity][this.coin]
       let data = filterPrices(rawPrices, length);
-      let first = data[0].price;
-      let last = data[data.length - 1].price;
-      let diff = (first - last) / last;
 
-      let absoluteDiff = first - last;
-      let percentDiff = (diff * 100).toFixed(2);
+      let [absoluteDiff, percentDiff] = findChartDifferences(data);
 
       if (absoluteDiff >= 0) {
         return (
@@ -140,7 +139,7 @@ class AssetChart extends React.Component {
 
   render () {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
-    let price = this.calculatePrice(granularity);
+    let price = this.calculatePrice(this.coin, granularity);
     let integer = Math.floor(price);
     let decimal = this.calculateDec(price, integer);
 
@@ -179,7 +178,7 @@ class AssetChart extends React.Component {
         </div>
         <h1 id='more-assets'>More Assets</h1><br></br>
         <div className='other-asset-descriptions'>
-          {this.renderOthers(granularity)}
+          {this.renderOthers()}
         </div>
       </div>
     );
