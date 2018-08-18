@@ -10,45 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_15_070559) do
+ActiveRecord::Schema.define(version: 2018_08_18_015359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "balances", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "coin_id", null: false
-    t.float "amount", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "date"
-    t.index ["coin_id"], name: "index_balances_on_coin_id"
-    t.index ["date"], name: "index_balances_on_date"
-    t.index ["user_id"], name: "index_balances_on_user_id"
-  end
-
-  create_table "cards", force: :cascade do |t|
-    t.integer "owner_id", null: false
-    t.string "card_num_digest", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_cards_on_owner_id"
-  end
 
   create_table "coins", force: :cascade do |t|
     t.string "name", null: false
     t.string "ticker_symbol", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "prices", force: :cascade do |t|
-    t.datetime "date", null: false
-    t.integer "coin_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.float "price"
-    t.index ["coin_id"], name: "index_prices_on_coin_id"
   end
 
   create_table "transactions", force: :cascade do |t|
