@@ -101,6 +101,26 @@ class PortfolioChart extends React.Component {
     this.retrievePrices(granularity);
   }
 
+  renderTimeframe(timeframe) {
+    const timeframeAbbrevs = {
+      'hour': '1H',
+      'day': '1D',
+      'week': '1W',
+      'month': '1M',
+      'year': '1Y'
+    }
+
+    if (this.state.timeframe === timeframe) {
+      return (
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='selected-timeframe'>{timeframeAbbrevs[timeframe]}</li>
+      );
+    } else {
+      return (
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='unselected-timeframe'>{timeframeAbbrevs[timeframe]}</li>
+      );
+    }
+  }
+
   render () {
     let granularity = timeframeFunctions.timeGranConverter(this.state.timeframe);
 
@@ -115,11 +135,11 @@ class PortfolioChart extends React.Component {
           </div>
         </div>
         <ul className='portfolio-chart-time-frames'>
-          <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
-          <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
-          <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
-          <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
-          <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
+          {this.renderTimeframe('hour')}
+          {this.renderTimeframe('day')}
+          {this.renderTimeframe('week')}
+          {this.renderTimeframe('month')}
+          {this.renderTimeframe('year')}
         </ul>
         {this.renderChart(granularity)}
         <div className='portfolio-chart-dates'>
