@@ -8,7 +8,6 @@
   vertical-align: middle;
   border: 1px solid rgb(218, 225, 233);
   border-radius: 4px;
-  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .asset-header h1 {
@@ -49,8 +48,6 @@
   font-size: 14px;
   font-weight: 500;
   color: rgb(125, 149, 182);
-  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  /* position: absolute; */
   padding-top: 20px;
 }
 
@@ -158,7 +155,6 @@
   border-top: none;
   padding: 36px;
   margin-bottom: 36px;
-  font-family: "Avenir Next", -apple-system, 'BlinkMacSystemFont', "Segoe UI", 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .asset-description h1 {
