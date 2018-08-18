@@ -1,6 +1,6 @@
 import React from 'react';
 import PortfolioListItem from './portfolio_list_item';
-import { filterPrices, calculateCoinValues, compileBalanceValues, calculateNetCoinAmounts, calculationHelper } from '../../../../util/calculations';
+import * as Calculations from '../../../../util/calculations';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Portfolio extends React.Component {
       this.selectTab = this.selectTab.bind(this);
       this.renderTab = this.renderTab.bind(this);
       this.calculateCurrentValue = this.calculateCurrentValue.bind(this);
-      this.calculationHelper = calculationHelper.bind(this);
   }
 
   selectTab(tab) {
@@ -36,7 +35,7 @@ class Portfolio extends React.Component {
 
   calculateCurrentValue() {
     if(Object.keys(this.props.prices).includes('oneHour') && Object.values(this.props.prices.oneHour).length === 4 && Object.values(this.props.transactions).length === 4){
-      return compileBalanceValues(calculationHelper(this.props.prices, this.props.transactions, 'oneHour', 1))[0].value.toFixed(2);
+      return Calculations.compileBalanceValues(Calculations.calculationHelper(this.props.prices, this.props.transactions, 'oneHour', 1))[0].value.toFixed(2);
     } else {
       return '0.00';
     }
@@ -49,10 +48,10 @@ class Portfolio extends React.Component {
     let ltcAmounts = [{ amount: 0 }];
 
     if(Object.values(this.props.transactions).length === 4){
-      bchAmounts = calculateNetCoinAmounts(this.props.transactions.BCH);
-      btcAmounts = calculateNetCoinAmounts(this.props.transactions.BTC);
-      ethAmounts = calculateNetCoinAmounts(this.props.transactions.ETH);
-      ltcAmounts = calculateNetCoinAmounts(this.props.transactions.LTC);
+      bchAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.BCH);
+      btcAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.BTC);
+      ethAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.ETH);
+      ltcAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.LTC);
     }
 
     let bchBalance = bchAmounts[bchAmounts.length - 1].amount;

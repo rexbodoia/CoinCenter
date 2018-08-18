@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
-import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices, calculateNetCoinAmounts, calculationHelper } from '../../../util/calculations';
+import { compileBalanceValues, calculationHelper } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 import { ClipLoader } from 'react-spinners';
 
