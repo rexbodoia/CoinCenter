@@ -85,7 +85,6 @@ class AuthForms extends React.Component {
   }
 
   showComponent() {
-    console.log(this.props.location);
     if (this.props.location.pathname === '/signup') {
       return (
         <SignupForm handleSubmit={this.handleSubmit} update={this.update} handleDemo={this.handleDemo} errors={this.errors}/>

@@ -16,6 +16,7 @@ class PortfolioChart extends React.Component {
     this.retrievePrices = this.retrievePrices.bind(this);
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
+    this.calculationHelper = this.calculationHelper.bind(this);
     this.calculatePortfolioHistory = this.calculatePortfolioHistory.bind(this);
   }
 
@@ -43,27 +44,22 @@ class PortfolioChart extends React.Component {
     }
   }
 
+  calculationHelper(granularity, length){
+    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+    let values = [];
+    for (let i = 0; i < coins.length - 1; i++) {
+      let prices = filterPrices(this.props.prices[granularity][coins[i]], length);
+      let amounts = calculateNetCoinAmounts(this.props.amounts[coins[i]]);
+      values.push(calculateCoinValues(amounts, prices));
+    }
+    return values;
+  }
+
   calculatePortfolioHistory(granularity) {
     if (Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
-      let timeframe = this.state.timeframe;
-      let length = timeframeFunctions.findNumDataPoints(timeframe);
+      let length = timeframeFunctions.findNumDataPoints(this.state.timeframe);
 
-      let bchData = filterPrices(this.props.prices[granularity].BCH, length);
-      let btcData = filterPrices(this.props.prices[granularity].BTC, length);
-      let ethData = filterPrices(this.props.prices[granularity].ETH, length);
-      let ltcData = filterPrices(this.props.prices[granularity].LTC, length);
-
-      let bchAmounts = calculateNetCoinAmounts(this.props.amounts.BCH);
-      let btcAmounts = calculateNetCoinAmounts(this.props.amounts.BTC);
-      let ethAmounts = calculateNetCoinAmounts(this.props.amounts.ETH);
-      let ltcAmounts = calculateNetCoinAmounts(this.props.amounts.LTC);
-
-      let bchValues = calculateCoinValues(bchAmounts, bchData);
-      let btcValues = calculateCoinValues(btcAmounts, btcData);
-      let ethValues = calculateCoinValues(ethAmounts, ethData);
-      let ltcValues = calculateCoinValues(ltcAmounts, ltcData);
-
-      return compileBalanceValues([bchValues, btcValues, ethValues, ltcValues]);
+      return compileBalanceValues(this.calculationHelper(granularity, length));
     }
     return [];
   }

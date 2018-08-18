@@ -94,4 +94,5 @@
 
 .portfolio-chart-time-frames > li:hover {
   cursor: pointer;
+  color: rgb(90, 90, 90);
 }
