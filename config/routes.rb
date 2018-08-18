@@ -8,12 +8,6 @@ Rails.application.routes.draw do
     end
 
     resource :session, only: [:create, :destroy]
-
     resources :cards, except: [:new, :edit]
-
-
-    resources :balances, only: [:update, :index, :show]
-
-    resources :prices, only: [:create, :index, :show]
   end
 end
