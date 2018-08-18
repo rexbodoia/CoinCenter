@@ -1,7 +1,7 @@
 import React from 'react';
 import { AreaChart, Area, Tooltip, YAxis } from 'recharts';
 import PortfolioCustomToolTip from './portfolio_custom_tool_tip';
-import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices, calculateNetCoinAmounts } from '../../../util/calculations';
+import { calculateCoinValues, findNextTimeIdx, compileBalanceValues, filterPrices, calculateNetCoinAmounts, calculationHelper } from '../../../util/calculations';
 import * as timeframeFunctions from '../../../util/timeframe_manipulation';
 import { ClipLoader } from 'react-spinners';
 
@@ -16,7 +16,6 @@ class PortfolioChart extends React.Component {
     this.retrievePrices = this.retrievePrices.bind(this);
     this.changeTimeframe = this.changeTimeframe.bind(this);
     this.renderChart = this.renderChart.bind(this);
-    this.calculationHelper = this.calculationHelper.bind(this);
     this.calculatePortfolioHistory = this.calculatePortfolioHistory.bind(this);
   }
 
@@ -43,22 +42,11 @@ class PortfolioChart extends React.Component {
     }
   }
 
-  calculationHelper(granularity, length){
-    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
-    let values = [];
-    for (let i = 0; i < coins.length - 1; i++) {
-      let prices = filterPrices(this.props.prices[granularity][coins[i]], length);
-      let amounts = calculateNetCoinAmounts(this.props.amounts[coins[i]]);
-      values.push(calculateCoinValues(amounts, prices));
-    }
-    return values;
-  }
-
   calculatePortfolioHistory(granularity) {
     if (Object.values(this.props.prices[granularity]).length >= 4 && Object.values(this.props.amounts).length >= 4) {
       let length = timeframeFunctions.findNumDataPoints(this.state.timeframe);
 
-      return compileBalanceValues(this.calculationHelper(granularity, length));
+      return compileBalanceValues(calculationHelper(this.props.prices, this.props.amounts, granularity, length));
     }
     return [];
   }

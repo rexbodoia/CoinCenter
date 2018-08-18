@@ -85,6 +85,17 @@ export const findChartDifferences = (data) => {
   return [first - last, (diff * 100).toFixed(2)]
 }
 
+export const calculationHelper = (propsPrices, propsAmounts, granularity, length) => {
+    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+    let values = [];
+    for (let i = 0; i < coins.length - 1; i++) {
+      let prices = filterPrices(propsPrices[granularity][coins[i]], length);
+      let amounts = calculateNetCoinAmounts(propsAmounts[coins[i]]);
+      values.push(calculateCoinValues(amounts, prices));
+    }
+    return values;
+  }
+
 //
 // const transactions = [{ date: new Date(2016, 2, 3), amount: 2.5 }, { date: new Date(2016, 8, 5), amount: -1 }, { date: new Date(2016, 10, 17), amount: 2 }];
 //
