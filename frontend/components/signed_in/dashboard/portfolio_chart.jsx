@@ -10,7 +10,7 @@ class PortfolioChart extends React.Component {
     super(props);
 
     this.state = {
-      timeframe: 'month'
+      timeframe: '1M'
     }
 
     this.retrievePrices = this.retrievePrices.bind(this);
@@ -21,7 +21,6 @@ class PortfolioChart extends React.Component {
   }
 
   componentDidMount() {
-    $('#month').css('color', 'rgb(6, 103, 208)');
     this.props.getTransactions(this.props.id);
     this.retrievePrices('sixHours');
   }
@@ -93,30 +92,19 @@ class PortfolioChart extends React.Component {
   }
 
   changeTimeframe(timeframe) {
-    $(`#${this.state.timeframe}`).css('color', 'rgb(155, 166, 178)');
     this.setState({ timeframe });
-    $(`#${timeframe}`).css('color', 'rgb(6, 103, 208)');
-
     let granularity = timeframeFunctions.timeGranConverter(timeframe);
     this.retrievePrices(granularity);
   }
 
   renderTimeframe(timeframe) {
-    const timeframeAbbrevs = {
-      'hour': '1H',
-      'day': '1D',
-      'week': '1W',
-      'month': '1M',
-      'year': '1Y'
-    }
-
     if (this.state.timeframe === timeframe) {
       return (
-        <li onClick={(e) => this.changeTimeframe(timeframe)} className='selected-timeframe'>{timeframeAbbrevs[timeframe]}</li>
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='selected-timeframe'>{timeframe}</li>
       );
     } else {
       return (
-        <li onClick={(e) => this.changeTimeframe(timeframe)} className='unselected-timeframe'>{timeframeAbbrevs[timeframe]}</li>
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='unselected-timeframe'>{timeframe}</li>
       );
     }
   }
@@ -134,12 +122,12 @@ class PortfolioChart extends React.Component {
             <h3 id='decimal'>.00</h3>
           </div>
         </div>
-        <ul className='portfolio-chart-time-frames'>
-          {this.renderTimeframe('hour')}
-          {this.renderTimeframe('day')}
-          {this.renderTimeframe('week')}
-          {this.renderTimeframe('month')}
-          {this.renderTimeframe('year')}
+        <ul className='chart-timeframes'>
+          {this.renderTimeframe('1H')}
+          {this.renderTimeframe('1D')}
+          {this.renderTimeframe('1W')}
+          {this.renderTimeframe('1M')}
+          {this.renderTimeframe('1Y')}
         </ul>
         {this.renderChart(granularity)}
         <div className='portfolio-chart-dates'>

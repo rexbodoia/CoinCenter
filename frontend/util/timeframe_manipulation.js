@@ -2,38 +2,38 @@ import React from 'react';
 
 export const timeGranConverter = (arg) => {
   const map = {
-    'hour': 'oneMinute',
-    'day': 'fifteenMinutes',
-    'week': 'oneHour',
-    'month': 'sixHours',
-    'year': 'oneDay',
-    'oneMinute': 'hour',
-    'fifteenMinutes': 'day',
-    'oneHour': 'week',
-    'sixHours': 'month',
-    'oneDay': 'year'
+    '1H': 'oneMinute',
+    '1D': 'fifteenMinutes',
+    '1W': 'oneHour',
+    '1M': 'sixHours',
+    '1Y': 'oneDay',
+    'oneMinute': '1H',
+    'fifteenMinutes': '1D',
+    'oneHour': '1W',
+    'sixHours': '1M',
+    'oneDay': '1Y'
   }
   return map[arg];
 }
 
 export const findNumDataPoints = (timeframe) => {
   const timeframeLengths = {
-    'hour': 60,
-    'day': 98,
-    'week': 168,
-    'month': 120,
-    'year': 365
+    '1H': 60,
+    '1D': 98,
+    '1W': 168,
+    '1M': 120,
+    '1Y': 365
   }
   return timeframeLengths[timeframe];
 }
 
 const getTimeframeLength = (timeframe) => {
   const timeframeLengths = {
-    'hour': 60,
-    'day': 28,
-    'week': 7,
-    'month': 31,
-    'year': 300
+    '1H': 60,
+    '1D': 28,
+    '1W': 7,
+    '1M': 31,
+    '1Y': 300
   }
   return timeframeLengths[timeframe];
 }
@@ -103,7 +103,7 @@ const sortTimes = (timeframe, className) => {
     hour = 12;
   }
 
-  if (timeframe === 'hour') {
+  if (timeframe === '1H') {
     let minutes = new Date().getMinutes();
 
     if (minutes < 10) {
@@ -132,7 +132,7 @@ const sortTimes = (timeframe, className) => {
 }
 
 export const renderDates = (timeframe, className) => {
-  if (['week', 'month', 'year'].includes(timeframe)) {
+  if (['1W', '1M', '1Y'].includes(timeframe)) {
     return sortDates(timeframe, className);
   } else{
     return sortTimes(timeframe, className);

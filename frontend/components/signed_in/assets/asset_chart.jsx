@@ -8,7 +8,7 @@ class AssetChart extends React.Component {
     super(props);
 
     this.state = {
-      timeframe: 'month'
+      timeframe: '1M'
     }
 
     this.coins = {
@@ -36,7 +36,7 @@ class AssetChart extends React.Component {
   componentDidMount() {
     $('#month').css('color', 'rgb(6, 103, 208)');
     this.retrievePrices('sixHours');
-    this.state = { timeframe: 'month' };
+    this.state = { timeframe: '1M' };
   }
 
   retrievePrices(granularity) {
@@ -80,12 +80,21 @@ class AssetChart extends React.Component {
   }
 
   changeTimeframe(timeframe) {
-    $(`#${this.state.timeframe}`).css('color', 'rgb(155, 166, 178)');
     this.setState({ timeframe });
-    $(`#${timeframe}`).css('color', 'rgb(6, 103, 208)');
-
     let granularity = timeframeFunctions.timeGranConverter(timeframe);
     this.retrievePrices(granularity);
+  }
+
+  renderTimeframe(timeframe) {
+    if (this.state.timeframe === timeframe) {
+      return (
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='selected-timeframe'>{timeframe}</li>
+      );
+    } else {
+      return (
+        <li onClick={(e) => this.changeTimeframe(timeframe)} className='unselected-timeframe'>{timeframe}</li>
+      );
+    }
   }
 
   renderOthers(granularity) {
@@ -150,12 +159,12 @@ class AssetChart extends React.Component {
               {this.calculateDifferences(granularity)}
             </div>
           </div>
-          <ul className='portfolio-chart-time-frames'>
-            <li onClick={(e) => this.changeTimeframe('hour')} id='hour'>1H</li>
-            <li onClick={(e) => this.changeTimeframe('day')} id='day'>1D</li>
-            <li onClick={(e) => this.changeTimeframe('week')} id='week'>1W</li>
-            <li onClick={(e) => this.changeTimeframe('month')} id='month'>1M</li>
-            <li onClick={(e) => this.changeTimeframe('year')} id='year'>1Y</li>
+          <ul className='chart-timeframes'>
+            {this.renderTimeframe('1H')}
+            {this.renderTimeframe('1D')}
+            {this.renderTimeframe('1W')}
+            {this.renderTimeframe('1M')}
+            {this.renderTimeframe('1Y')}
           </ul>
           {this.renderChart(granularity)}
           <div className='asset-chart-dates'>

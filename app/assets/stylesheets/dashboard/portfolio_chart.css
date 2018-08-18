@@ -77,7 +77,7 @@
   font-family: inherit;
 }
 
-.portfolio-chart-time-frames {
+.chart-timeframes {
   display: flex;
   flex-direction: row;
   position: relative;
@@ -85,7 +85,7 @@
   left: 490px;
 }
 
-.portfolio-chart-time-frames > li {
+.chart-timeframes > li {
   padding: 0 4px;
   font-size: 13px;
 }
