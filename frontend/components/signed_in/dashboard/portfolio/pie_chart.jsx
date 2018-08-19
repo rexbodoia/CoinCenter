@@ -25,7 +25,7 @@ class PortfolioPieChart extends React.Component {
       <PieChart width={578} height={335}>
         <Pie data={this.data} dataKey="value" nameKey="coin" cx="50%" cy="50%" innerRadius={130} outerRadius={140} fill="#82ca9d">
           {this.data.map((entry, idx) => <Cell key={idx} fill={this.colors[idx]} />)}
-          <Label value={`$${value}`} position='center' fontSize={36} /><br></br>
+          <Label value={`$${value}`} position='center' fontSize={40} />
         </Pie>
       </PieChart>
     );
