@@ -18,6 +18,6 @@ export const fetchTransactions = id => dispatch => (
 );
 
 
-export const sendTransaction = transaction => dispatch (
+export const sendTransaction = transaction => dispatch => (
   ApiUtil.sendTransaction(transaction).then(transaction => dispatch(createTransaction(transaction)))
 )

@@ -5,10 +5,10 @@ export const fetchTransactions = user_id => (
   })
 );
 
-export const sendTransaction = (user_id, transaction) => (
+export const sendTransaction = transaction => (
   $.ajax({
     method: 'POST',
-    url: `/api/users/${user_id}/transactions`,
+    url: `/api/users/${transaction.user_id}/transactions`,
     data: { transaction }
   })
 );

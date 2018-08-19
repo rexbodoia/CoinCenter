@@ -1,5 +1,5 @@
 import React from 'react';
-import BuySellForm from './buy_sell_form';
+import BuySellFormContainer from './buy_sell_form_container';
 import BuySellFormIcon from './buy_sell_form_icon';
 
 class BuySell extends React.Component {
@@ -57,11 +57,11 @@ class BuySell extends React.Component {
   renderForms() {
     if (this.state.tab === 'Buy') {
       return (
-        <BuySellForm action='Buy' />
+        <BuySellFormContainer action='Buy' />
       );
     } else {
       return (
-        <BuySellForm action='Sell' />
+        <BuySellFormContainer action='Sell' />
       );
     }
   }

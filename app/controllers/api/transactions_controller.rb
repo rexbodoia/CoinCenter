@@ -2,9 +2,10 @@ class Api::TransactionsController < ApplicationController
   before_action :require_login
 
   def create
-    @transaction = Transaction.new(transaction_params)
-    if @transaction.save!
-      render '/api/transactions/show'
+    transaction = Transaction.new(transaction_params)
+    if transaction.save!
+      @transactions = Transaction.where(user_id: params[:user_i])
+      render '/api/transactions/index'
     else
       render json: ['Something went wrong']
     end
@@ -14,15 +15,6 @@ class Api::TransactionsController < ApplicationController
     @transactions = Transaction.where(user_id: params[:user_id])
     unless @transactions.empty?
       render '/api/transactions/index'
-    else
-      render json: ['Could not find transactions']
-    end
-  end
-
-  def show
-    @transactions = Transaction.where(user_id: params[:id])
-    unless @transactions.empty?
-      render '/api/transactions/show'
     else
       render json: ['Could not find transactions']
     end
