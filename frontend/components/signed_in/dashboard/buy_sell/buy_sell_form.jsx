@@ -12,18 +12,23 @@ class BuySellForm extends React.Component {
     }
 
     this.coin_ids = {
-      'ETH': 0,
-      'BCH': 1,
-      'LTC': 2,
-      'BTC': 3
+      'ETH': 1,
+      'BCH': 2,
+      'LTC': 3,
+      'BTC': 4
     }
 
     this.submitForm = this.submitForm.bind(this);
+    this.update = this.update.bind(this);
   }
 
   submitForm(e) {
     e.preventDefault();
     let amount = this.state.amount;
+
+    if (amount === 0) {
+      return null;
+    }
 
     if (this.state.action === 'Sell') {
       amount = 0 - amount;
@@ -40,13 +45,15 @@ class BuySellForm extends React.Component {
   }
 
   update(e) {
-    this.setState({ amount: e.target.value });
+    if (!isNaN(parseFloat(e.target.value))) {
+      this.setState({ amount: parseFloat(e.target.value) });
+    }
   }
 
   render() {
     return (
       <form className='buy-sell-form' onSubmit={this.submitForm}>
-        <input placeholder='0.00                             USD' >
+        <input onChange={this.update} placeholder='0.00                             USD' >
         </input>
 
         <span className='conversion-symbol'>&#8652;</span>
