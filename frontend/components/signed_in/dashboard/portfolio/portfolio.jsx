@@ -2,6 +2,7 @@ import React from 'react';
 import PortfolioListItem from './portfolio_list_item';
 import * as Calculations from '../../../../util/calculations';
 import { PieChart, Pie, Cell } from 'recharts';
+import { ClipLoader } from 'react-spinners';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -74,22 +75,35 @@ class Portfolio extends React.Component {
   }
 
   renderPieChart(values) {
-    let data = [];
-    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+    if (values.every(el => el === 0)) {
+      return (
+        <div className='pie-chart-spinner'>
+          <ClipLoader
+            className='spinner'
+            sizeUnit={"px"}
+            size={70}
+            color={'rgb(155, 166, 178)'}
+          />
+        </div>
+      );
+    } else {
+      let data = [];
+      const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
 
-    const colors = ["rgb(134, 175, 58)", "rgb(247, 170, 4)", "rgb(86, 116, 226)", "rgb(191, 189, 189)"];
+      const colors = ["rgb(134, 175, 58)", "rgb(247, 170, 4)", "rgb(86, 116, 226)", "rgb(191, 189, 189)"];
 
-    values.forEach((value, idx) => {
-      data.push({ coin: coins[idx], value })
-    });
+      values.forEach((value, idx) => {
+        data.push({ coin: coins[idx], value })
+      });
 
-    return (
-      <PieChart width={578} height={335}>
-        <Pie data={data} dataKey="value" nameKey="coin" cx="50%" cy="50%" innerRadius={130} outerRadius={140} fill="#82ca9d">
-          {data.map((entry, idx) => <Cell key={idx} fill={colors[idx]} />)}
-        </Pie>
-      </PieChart>
-    );
+      return (
+        <PieChart width={578} height={335}>
+          <Pie data={data} dataKey="value" nameKey="coin" cx="50%" cy="50%" innerRadius={130} outerRadius={140} fill="#82ca9d">
+            {data.map((entry, idx) => <Cell key={idx} fill={colors[idx]} />)}
+          </Pie>
+        </PieChart>
+      );
+    }
   }
 
   renderPortfolioList(balances, values, total) {

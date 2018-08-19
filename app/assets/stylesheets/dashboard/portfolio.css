@@ -137,3 +137,10 @@
   flex-grow: 2;
   text-align: right;
 }
+
+.pie-chart-spinner {
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
