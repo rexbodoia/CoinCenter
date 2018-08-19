@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { fetchBalances } from '../../../actions/balances_actions';
 import { fetchPrices } from '../../../actions/prices_actions';
 import { fetchTransactions } from '../../../actions/transactions_actions';
 import PortfolioChart from './portfolio_chart';

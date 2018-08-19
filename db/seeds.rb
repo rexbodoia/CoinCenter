@@ -11,8 +11,6 @@ Coin.create(name: 'Bitcoin Cash', ticker_symbol: :BCH)
 Coin.create(name: 'Litecoin', ticker_symbol: :LTC)
 Coin.create(name: 'Bitcoin', ticker_symbol: :BTC)
 
-# times_gen = Random.new;
-# date_gen = Random.new
 amount_gen = Random.new;
 
 30.times do |user_num|
@@ -21,13 +19,13 @@ amount_gen = Random.new;
   prob_gen = Random.new
   match_gen = Random.new
 
-  marker = prob_gen.rand(30)
+  marker = prob_gen.rand(15)
   today = Date.new(2018,8,17)
 
-  (0..500).each do |days_back|
+  (0..300).each do |days_back|
     if match_gen.rand(30) == marker
       new_date = (today - days_back).to_datetime
-      Transaction.create!(date: new_date, coin_id: prob_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(5.0))
+      Transaction.create!(date: new_date, coin_id: prob_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(2.0))
     end
   end
 end
