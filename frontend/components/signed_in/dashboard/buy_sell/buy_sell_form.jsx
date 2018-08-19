@@ -1,6 +1,6 @@
 import React from 'react';
 
-class SellForm extends React.Component {
+class BuySellForm extends React.Component {
   constructor(props){
     super(props);
 
@@ -19,10 +19,10 @@ class SellForm extends React.Component {
 
         <input placeholder={`0.00                               ${this.state.coin}`} >
         </input>
-        <input className='buy-sell-button' type='submit' value={`Sell ${this.state.coin}`}></input>
+        <input className='buy-sell-button' type='submit' value={`${this.props.action} ${this.state.coin}`}></input>
       </form>
     );
   }
 }
 
-export default SellForm;
+export default BuySellForm;
