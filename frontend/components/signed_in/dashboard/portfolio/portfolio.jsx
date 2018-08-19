@@ -13,6 +13,7 @@ class Portfolio extends React.Component {
       this.selectTab = this.selectTab.bind(this);
       this.renderTab = this.renderTab.bind(this);
       this.calculateCurrentValue = this.calculateCurrentValue.bind(this);
+      this.calculate = this.calculate.bind(this);
   }
 
   selectTab(tab) {
@@ -59,45 +60,38 @@ class Portfolio extends React.Component {
     );
   }
 
+  calculate() {
+    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+
+    let balances = [0,0,0,0];
+    let values = [0,0,0,0];
+    let transactions = this.props.transactions;
+    let prices = this.props.prices.oneHour;
+
+    for (let i = 0; i < coins.length; i++) {
+      let amounts = [{ amount: 0 }];
+      let value = 0;
+
+      if (Object.values(this.props.transactions).length === 4) {
+        amounts = Calculations.calculateNetCoinAmounts(transactions[coins[i]]);
+      }
+      balances[i] = (amounts[amounts.length - 1].amount);
+
+      if (Object.values(prices).length === 4) {
+        values[i] = (prices[coins[i]][0][3] * balances[i]);
+      }
+    }
+
+    let total = 10000000000;
+    if (!values.every(el => el === 0)) {
+      total = values.reduce((acc, curr) => acc + curr, 0);
+    }
+
+    return [balances, values, total];
+  }
+
   render () {
-    let balances = [];
-    let values = [];
-
-    let bchAmounts = [{ amount: 0 }];
-    let btcAmounts = [{ amount: 0 }];
-    let ethAmounts = [{ amount: 0 }];
-    let ltcAmounts = [{ amount: 0 }];
-
-    if(Object.values(this.props.transactions).length === 4){
-      bchAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.BCH);
-      btcAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.BTC);
-      ethAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.ETH);
-      ltcAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.LTC);
-    }
-
-    balances.push(bchAmounts[bchAmounts.length - 1].amount);
-    balances.push(btcAmounts[btcAmounts.length - 1].amount);
-    balances.push(ethAmounts[ethAmounts.length - 1].amount);
-    balances.push(ltcAmounts[ltcAmounts.length - 1].amount);
-
-    let bchValue = 0;
-    let btcValue = 0;
-    let ethValue = 0;
-    let ltcValue = 0;
-
-    let total = 1000000000000;
-
-    if (Object.values(this.props.prices.oneHour).length === 4) {
-      bchValue = this.props.prices.oneHour.BCH[0][3] * balances[0];
-      btcValue = this.props.prices.oneHour.BTC[0][3] * balances[1];
-      ethValue = this.props.prices.oneHour.ETH[0][3] * balances[2];
-      ltcValue = this.props.prices.oneHour.LTC[0][3] * balances[3];
-
-      total = bchValue + btcValue + ethValue + ltcValue;
-    }
-
-    values = [bchValue, btcValue, ethValue, ltcValue]
-
+    let [balances, values, total] = this.calculate();
     return (
       <div className='portfolio-container'>
         <div className='portfolio-header'>
