@@ -41,7 +41,28 @@ class Portfolio extends React.Component {
     }
   }
 
+  renderPieChart() {
+
+  }
+
+  renderPortfolioList(balances, values, total) {
+    return (
+      <div>
+        <PortfolioListItem coin={'Bitcoin Cash'} symbol={'BCH'} currentBalance={balances[0]} currentValue={values[0]} proportion={values[0] / total * 100} />
+        <PortfolioListItem coin={'Bitcoin'} symbol={'BTC'} currentBalance={balances[1]} currentValue={values[1]} proportion={values[1] / total * 100} />
+        <PortfolioListItem coin={'Ethereum'} symbol={'ETH'} currentBalance={balances[2]} currentValue={values[2]} proportion={values[2] / total * 100} />
+        <PortfolioListItem coin={'Litecoin'} symbol={'LTC'} currentBalance={balances[3]} currentValue={values[3]} proportion={values[3] / total * 100} />
+        <div className='portfolio-footer'>
+          <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
+        </div>
+      </div>
+    );
+  }
+
   render () {
+    let balances = [];
+    let values = [];
+
     let bchAmounts = [{ amount: 0 }];
     let btcAmounts = [{ amount: 0 }];
     let ethAmounts = [{ amount: 0 }];
@@ -54,10 +75,10 @@ class Portfolio extends React.Component {
       ltcAmounts = Calculations.calculateNetCoinAmounts(this.props.transactions.LTC);
     }
 
-    let bchBalance = bchAmounts[bchAmounts.length - 1].amount;
-    let btcBalance = btcAmounts[btcAmounts.length - 1].amount;
-    let ethBalance = ethAmounts[ethAmounts.length - 1].amount;
-    let ltcBalance = ltcAmounts[ltcAmounts.length - 1].amount;
+    balances.push(bchAmounts[bchAmounts.length - 1].amount);
+    balances.push(btcAmounts[btcAmounts.length - 1].amount);
+    balances.push(ethAmounts[ethAmounts.length - 1].amount);
+    balances.push(ltcAmounts[ltcAmounts.length - 1].amount);
 
     let bchValue = 0;
     let btcValue = 0;
@@ -67,14 +88,15 @@ class Portfolio extends React.Component {
     let total = 1000000000000;
 
     if (Object.values(this.props.prices.oneHour).length === 4) {
-      bchValue = this.props.prices.oneHour.BCH[0][3] * bchBalance;
-      btcValue = this.props.prices.oneHour.BTC[0][3] * btcBalance;
-      ethValue = this.props.prices.oneHour.ETH[0][3] * ethBalance;
-      ltcValue = this.props.prices.oneHour.LTC[0][3] * ltcBalance;
+      bchValue = this.props.prices.oneHour.BCH[0][3] * balances[0];
+      btcValue = this.props.prices.oneHour.BTC[0][3] * balances[1];
+      ethValue = this.props.prices.oneHour.ETH[0][3] * balances[2];
+      ltcValue = this.props.prices.oneHour.LTC[0][3] * balances[3];
 
       total = bchValue + btcValue + ethValue + ltcValue;
     }
 
+    values = [bchValue, btcValue, ethValue, ltcValue]
 
     return (
       <div className='portfolio-container'>
@@ -87,13 +109,7 @@ class Portfolio extends React.Component {
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
         </div>
-        <PortfolioListItem coin={'Bitcoin Cash'} symbol={'BCH'} currentBalance={bchBalance} currentValue={bchValue} proportion={bchValue / total * 100} />
-        <PortfolioListItem coin={'Bitcoin'} symbol={'BTC'} currentBalance={btcBalance} currentValue={btcValue} proportion={btcValue / total * 100} />
-        <PortfolioListItem coin={'Ethereum'} symbol={'ETH'} currentBalance={ethBalance} currentValue={ethValue} proportion={ethValue / total * 100} />
-        <PortfolioListItem coin={'Litecoin'} symbol={'LTC'} currentBalance={ltcBalance} currentValue={ltcValue} proportion={ltcValue / total * 100} />
-        <div className='portfolio-footer'>
-          <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
-        </div>
+        {this.renderPortfolioList(balances, values, total)}
       </div>
     );
   }
