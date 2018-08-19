@@ -1,6 +1,7 @@
 import React from 'react';
 import PortfolioListItem from './portfolio_list_item';
 import * as Calculations from '../../../../util/calculations';
+import { PieChart, Pie, Cell } from 'recharts';
 
 class Portfolio extends React.Component {
   constructor(props) {
@@ -12,8 +13,9 @@ class Portfolio extends React.Component {
 
       this.selectTab = this.selectTab.bind(this);
       this.renderTab = this.renderTab.bind(this);
-      this.calculateCurrentValue = this.calculateCurrentValue.bind(this);
       this.calculate = this.calculate.bind(this);
+      this.renderContent = this.renderContent.bind(this);
+      this.calculateCurrentValue = this.calculateCurrentValue.bind(this);
   }
 
   selectTab(tab) {
@@ -42,24 +44,6 @@ class Portfolio extends React.Component {
     }
   }
 
-  renderPieChart() {
-
-  }
-
-  renderPortfolioList(balances, values, total) {
-    return (
-      <div>
-        <PortfolioListItem coin={'Bitcoin Cash'} symbol={'BCH'} currentBalance={balances[0]} currentValue={values[0]} proportion={values[0] / total * 100} />
-        <PortfolioListItem coin={'Bitcoin'} symbol={'BTC'} currentBalance={balances[1]} currentValue={values[1]} proportion={values[1] / total * 100} />
-        <PortfolioListItem coin={'Ethereum'} symbol={'ETH'} currentBalance={balances[2]} currentValue={values[2]} proportion={values[2] / total * 100} />
-        <PortfolioListItem coin={'Litecoin'} symbol={'LTC'} currentBalance={balances[3]} currentValue={values[3]} proportion={values[3] / total * 100} />
-        <div className='portfolio-footer'>
-          <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
-        </div>
-      </div>
-    );
-  }
-
   calculate() {
     const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
 
@@ -70,7 +54,6 @@ class Portfolio extends React.Component {
 
     for (let i = 0; i < coins.length; i++) {
       let amounts = [{ amount: 0 }];
-      let value = 0;
 
       if (Object.values(this.props.transactions).length === 4) {
         amounts = Calculations.calculateNetCoinAmounts(transactions[coins[i]]);
@@ -90,8 +73,54 @@ class Portfolio extends React.Component {
     return [balances, values, total];
   }
 
-  render () {
+  renderPieChart(values) {
+    let data = [];
+    const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+
+    const colors = ["rgb(134, 175, 58)", "rgb(247, 170, 4)", "rgb(86, 116, 226)", "rgb(191, 189, 189)"];
+
+    values.forEach((value, idx) => {
+      data.push({ coin: coins[idx], value })
+    });
+
+    return (
+      <PieChart width={578} height={335}>
+        <Pie data={data} dataKey="value" nameKey="coin" cx="50%" cy="50%" innerRadius={130} outerRadius={140} fill="#82ca9d">
+          {data.map((entry, idx) => <Cell key={idx} fill={colors[idx]} />)}
+        </Pie>
+      </PieChart>
+    );
+  }
+
+  renderPortfolioList(balances, values, total) {
+    return (
+      <div>
+        <PortfolioListItem coin={'Bitcoin Cash'} symbol={'BCH'} currentBalance={balances[0]} currentValue={values[0]} proportion={values[0] / total * 100} />
+        <PortfolioListItem coin={'Bitcoin'} symbol={'BTC'} currentBalance={balances[1]} currentValue={values[1]} proportion={values[1] / total * 100} />
+        <PortfolioListItem coin={'Ethereum'} symbol={'ETH'} currentBalance={balances[2]} currentValue={values[2]} proportion={values[2] / total * 100} />
+        <PortfolioListItem coin={'Litecoin'} symbol={'LTC'} currentBalance={balances[3]} currentValue={values[3]} proportion={values[3] / total * 100} />
+        <div className='portfolio-footer'>
+          <span>Total Balance &asymp; ${this.calculateCurrentValue()}</span>
+        </div>
+      </div>
+    );
+  }
+
+  renderContent() {
     let [balances, values, total] = this.calculate();
+
+    if (this.state.tab === 'List') {
+      return (
+        this.renderPortfolioList(balances, values, total)
+      );
+    } else {
+      return (
+        this.renderPieChart(values)
+      );
+    }
+  }
+
+  render () {
     return (
       <div className='portfolio-container'>
         <div className='portfolio-header'>
@@ -103,7 +132,7 @@ class Portfolio extends React.Component {
             <div className='portfolio-empty-div' style={{ paddingRight: 8 }}></div>
           </div>
         </div>
-        {this.renderPortfolioList(balances, values, total)}
+        {this.renderContent()}
       </div>
     );
   }
