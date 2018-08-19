@@ -144,3 +144,32 @@
   align-items: center;
   justify-content: center;
 }
+
+.pie-chart-number h1 {
+  font-size: 48px;
+  font-weight: 400;
+  color: rgb(78, 92, 110);
+  display: inline;
+}
+
+.pie-chart h2 {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgb(125, 149, 182);
+  letter-spacing: 2px;
+  padding-left: 16px;
+}
+
+.pie-chart-number h3 {
+  font-size: 30px;
+  color: rgb(78, 92, 110);
+  display: inline;
+  vertical-align: top;
+}
+
+.pie-chart > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}

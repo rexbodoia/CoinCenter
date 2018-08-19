@@ -1,7 +1,6 @@
 import React from 'react';
 import PortfolioListItem from './portfolio_list_item';
 import * as Calculations from '../../../../util/calculations';
-// import { PieChart, Pie, Cell } from 'recharts';
 import { ClipLoader } from 'react-spinners';
 import PortfolioPieChart from './pie_chart';
 
@@ -89,7 +88,15 @@ class Portfolio extends React.Component {
       );
     } else {
       return (
-        <PortfolioPieChart values={values} />
+        <div className='pie-chart'>
+          <PortfolioPieChart values={values} />
+          {/* <div>
+            <div className='pie-chart-number'>
+              <h3>$</h3><h1>{integer}</h1><h3>{decimalString}</h3>
+            </div>
+            <h2>Total Balance</h2>
+          </div> */}
+        </div>
       );
     }
   }
