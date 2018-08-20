@@ -5,7 +5,6 @@ class BuySellForm extends React.Component {
     super(props);
 
     this.state = {
-      action: props.action,
       amount: 0
     }
 
@@ -29,8 +28,8 @@ class BuySellForm extends React.Component {
       return null;
     }
 
-    if (this.state.action === 'Sell') {
-      amount = 0 - amount;
+    if (this.props.action === 'Sell') {
+      amount = -amount;
     }
 
     let transaction = {
