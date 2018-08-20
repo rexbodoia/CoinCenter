@@ -49,33 +49,56 @@ The second challenge I faced had to do with the fact that I calculated the portf
 ```Javascript
 //  frontend/util/calculations.js
 
+import moment from 'moment';
+
+export const calculateCoinValues = (coinAmounts, prices) => {
+  let values = [];
+
+  for (let i = prices.length - 1; i >= 0; i--) {
+      values.push(prices[i].price * coinAmounts[i].amount);
+  }
+
+  return values;
+}
+
 export const filterPrices = (prices, length) => {
   const result = prices.map(subArray => ({ time: subArray[0], price: subArray[3] })).slice(0, length);
   return result.filter(object => object.price && object.time);
 }
 
-export const calculateCoinValues = (coinAmounts, prices) => {
-  const result = [];
-  let c = 0;
-  let p = prices.length - 1;
-  let amount = coinAmounts[c];
+export const calculateNetCoinAmounts = coinTransactions => {
+  if (coinTransactions.length === 0) {
+    return [{ amount: 0 }];
+  }
 
-  while (coinAmounts[c].date > prices[p].time) {
-    if (p > 0) {
-      result.push({ time: prices[p].time, value: 0 });
-      prices.pop();
-      p -= 1;
-    } else {
-      break;
+  const totals = [{ time: coinTransactions[0].date, amount: coinTransactions[0].amount }];
+
+  for (let i = 1; i < coinTransactions.length; i++) {
+    totals.push({ time: coinTransactions[i].date, amount: totals[i - 1].amount + coinTransactions[i].amount });
+  }
+  return totals;
+}
+
+export const amountsAtPriceDates = (coinAmounts, prices) => {
+  let oldestPriceDate = prices[prices.length - 1].time;
+  let lastAmountDateIdx = 0
+
+  for (let i = 1; i < coinAmounts.length; i++) {
+    if (moment(coinAmounts[i].time) < moment.unix(oldestPriceDate)) {
+      lastAmountDateIdx = i;
     }
   }
 
-  for (let p = prices.length - 1; p >= 0; p--){
-    if (coinAmounts.length > c + 1 && prices[p].time > coinAmounts[c + 1].date) {
-      amount = coinAmounts[c + 1];
+  let result = [];
+  let c = lastAmountDateIdx;
+  let lastCoinAmount = coinAmounts[c].amount;
+
+  for (let p = prices.length - 1; p >= 0; p--) {
+    if (moment.unix(prices[p].time) > moment(coinAmounts[c].time) && coinAmounts.length > c + 1) {
+      lastCoinAmount = coinAmounts[c].amount;
       c += 1;
     }
-    result.push({ time: prices[p].time, value: amount.amount * prices[p].price });
+    result.push({ time: prices[p].time, amount: lastCoinAmount });
   }
 
   return result;
@@ -101,30 +124,34 @@ export const compileBalanceValues = coinValuesArray => {
   const portfolioValues = [];
 
   for (let i = 0; i < coinValuesArray[0].length; i++){
-    let sum = coinValuesArray[0][i].value;
-    const time = coinValuesArray[0][i].time;
+    let sum = 0;
 
-    for(let coin = 1; coin < coinValuesArray.length; coin++) {
-      const nextTimeIdx = findNextTimeIdx(coinValuesArray[coin], time);
-      sum += coinValuesArray[coin][nextTimeIdx].value;
+    for(let coin = 0; coin < coinValuesArray.length; coin++) {
+      sum += coinValuesArray[coin][i];
     }
-    portfolioValues.push({ time, value: sum });
+    portfolioValues.push({ time: i, value: sum });
   }
-
   return portfolioValues;
 }
 
-export const calculateNetCoinAmounts = coinTransactions => {
-  if (coinTransactions.length === 0) {
-    return [{ amount: 0 }];
+export const findChartDifferences = (data) => {
+  let first = data[0].price;
+  let last = data[data.length - 1].price;
+  let diff = (first - last) / last;
+
+  return [first - last, (diff * 100).toFixed(2)]
+}
+
+export const calculationHelper = (propsPrices, propsAmounts, granularity, length) => {
+  const coins = ['BCH', 'BTC', 'ETH', 'LTC'];
+  let values = [];
+  for (let i = 0; i < coins.length; i++) {
+    let prices = filterPrices(propsPrices[granularity][coins[i]], length);
+    let oldDateAmounts = calculateNetCoinAmounts(propsAmounts[coins[i]]);
+    let newDateAmounts = amountsAtPriceDates(oldDateAmounts, prices);
+    values.push(calculateCoinValues(newDateAmounts, prices));
   }
 
-  const totals = [{ time: coinTransactions[0].date, amount: coinTransactions[0].amount }];
-
-  for (let i = 1; i < coinTransactions.length; i++) {
-    totals.push({ time: coinTransactions[i].date, amount: totals[i - 1].amount + coinTransactions[i].amount });
-  }
-
-  return totals;
+  return values;
 }
 ``` 
