@@ -19,13 +19,18 @@ amount_gen = Random.new;
   prob_gen = Random.new
   match_gen = Random.new
 
-  marker = prob_gen.rand(15)
+  marker = prob_gen.rand(12)
   today = Date.new(2018,8,17)
 
   (0..300).each do |days_back|
-    if match_gen.rand(30) == marker
+    if match_gen.rand(12) == marker
       new_date = (today - days_back).to_datetime
-      Transaction.create!(date: new_date, coin_id: prob_gen.rand(4) + 1, user_id: user_num + 1, amount: amount_gen.rand(2.0))
+      coin_id = prob_gen.rand(4) + 1
+      if(coin_id == 4)
+        Transaction.create!(date: new_date, coin_id: coin_id, user_id: user_num + 1, amount: amount_gen.rand(1.0))
+      else
+        Transaction.create!(date: new_date, coin_id: coin_id, user_id: user_num + 1, amount: amount_gen.rand(6.0))
+      end
     end
   end
 end
