@@ -18,7 +18,7 @@ CoinCenter uses the Coinbase Pro REST API to retrieve live crypto price data upo
 
 ### Obstacles
 
-There were several difficult aspects involved with completing this project. The first of these challenges was implementing live API calls to [Coinbase Pro](https://docs.pro.coinbase.com/#api). This was difficult for two reasons:
+There were several challenges I encountered while completing this project. The first of these difficulties was implementing live API calls to [Coinbase Pro](https://docs.pro.coinbase.com/#api). This was difficult for two reasons:
 
 The first obstacle was straightforward, but caused some design complications that persisted throughout the website. Like many other REST APIs, Coinbase Pro limits the number of API calls allowed to three per second. This meant that I needed to chain promises with setTimeout() functions of 350 milliseconds that contained my API calls. Furthermore, if I did happen to receive a status 429 for exceed my limit of requests, I needed to handle that error, wait a timeout interval, and then try again:
 
