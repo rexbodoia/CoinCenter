@@ -20,6 +20,7 @@ class BuySellForm extends React.Component {
 
     this.submitForm = this.submitForm.bind(this);
     this.update = this.update.bind(this);
+    this.convert = this.convert.bind(this);
   }
 
   submitForm(e) {
@@ -44,21 +45,29 @@ class BuySellForm extends React.Component {
     this.props.sendTransaction(transaction).then(() => this.props.getTransactions(this.props.user_id))
   }
 
+  convert(dollars) {
+    if(Object.keys(this.props.prices.oneHour).includes(this.state.coin)){
+      return dollars / this.props.prices.oneHour[this.state.coin][0][3];
+    } else {
+      return 0;
+    }
+  }
+
   update(e) {
     if (!isNaN(parseFloat(e.target.value))) {
-      this.setState({ amount: parseFloat(e.target.value) });
+      this.setState({ amount: this.convert(parseFloat(e.target.value)) });
     }
   }
 
   render() {
     return (
       <form className='buy-sell-form' onSubmit={this.submitForm}>
-        <input onChange={this.update} placeholder='0.00                             USD' >
+        <input onChange={this.update} placeholder='0.00                                USD' >
         </input>
 
         <span className='conversion-symbol'>&#8652;</span>
 
-        <input placeholder={`${this.state.amount}                               ${this.state.coin}`} >
+        <input placeholder={`${this.convert(this.state.amount).toFixed(8)}                    ${this.state.coin}`} >
         </input>
         <input className='buy-sell-button' type='submit' value={`${this.props.action} ${this.state.coin}`}></input>
       </form>

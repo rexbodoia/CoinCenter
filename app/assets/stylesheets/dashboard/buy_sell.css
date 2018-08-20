@@ -23,6 +23,8 @@
 .conversion-symbol {
   color: rgb(155, 166, 178);
   font-size: 24px;
+  position: relative;
+  top: 18px;
 }
 
 .buy-sell-form {
