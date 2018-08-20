@@ -5,10 +5,8 @@ class BuySellForm extends React.Component {
     super(props);
 
     this.state = {
-      coin: 'BTC',
       action: props.action,
-      amount: 0,
-
+      amount: 0
     }
 
     this.coin_ids = {
@@ -37,7 +35,7 @@ class BuySellForm extends React.Component {
 
     let transaction = {
       date: new Date(),
-      coin_id: this.coin_ids[this.state.coin],
+      coin_id: this.coin_ids[this.props.coin],
       user_id: this.props.user_id,
       amount
     };
@@ -46,8 +44,8 @@ class BuySellForm extends React.Component {
   }
 
   convert(dollars) {
-    if(Object.keys(this.props.prices.oneHour).includes(this.state.coin)){
-      return dollars / this.props.prices.oneHour[this.state.coin][0][3];
+    if(Object.keys(this.props.prices.oneHour).includes(this.props.coin)){
+      return dollars / this.props.prices.oneHour[this.props.coin][0][3];
     } else {
       return 0;
     }
@@ -67,9 +65,9 @@ class BuySellForm extends React.Component {
 
         <span className='conversion-symbol'>&#8652;</span>
 
-        <input placeholder={`${this.convert(this.state.amount).toFixed(8)}                    ${this.state.coin}`} >
+        <input placeholder={`${this.convert(this.state.amount).toFixed(8)}                    ${this.props.coin}`} >
         </input>
-        <input className='buy-sell-button' type='submit' value={`${this.props.action} ${this.state.coin}`}></input>
+        <input className='buy-sell-button' type='submit' value={`${this.props.action} ${this.props.coin}`}></input>
       </form>
     );
   }

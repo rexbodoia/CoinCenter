@@ -5,7 +5,8 @@ import BuySellForm from './buy_sell_form';
 const mapStateToProps = (state, ownProps) => ({
   user_id: state.session.id,
   action: ownProps.action,
-  prices: state.entities.prices
+  prices: state.entities.prices,
+  coin: ownProps.coin
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -54,14 +54,14 @@ class BuySell extends React.Component {
     }
   }
 
-  renderForms() {
+  renderForms(coin) {
     if (this.state.tab === 'Buy') {
       return (
-        <BuySellFormContainer action='Buy' />
+        <BuySellFormContainer action='Buy' coin={coin} />
       );
     } else {
       return (
-        <BuySellFormContainer action='Sell' />
+        <BuySellFormContainer action='Sell' coin={coin} />
       );
     }
   }
@@ -85,7 +85,7 @@ class BuySell extends React.Component {
           {this.renderIcon('Litecoin', 'LTC')}
         </div>
         <div className='form-container'>
-          {this.renderForms()}
+          {this.renderForms(this.state.icon)}
         </div>
       </div>
     );
