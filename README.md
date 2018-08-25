@@ -8,6 +8,8 @@ CoinCenter is a trading platform for the four most prominent crytocurrencies ins
 
 CoinCenter uses the Coinbase Pro REST API to retrieve live crypto price data upon visiting the page. Recharts, a React charting library was used as a tool for rendering charts of price and value over time for coins and user portfolios, respectively. Moment.js was also used for date conversion because the price data from Coinbase Pro used dates in Unix Epoch Time form, whereas my transactions were stored in my database using Ruby's datetime object. 
 
+![](/app/assets/images/splash.png)
+
 ### Features
 + Coincenter utilizes custom frontend to backend user authentication using BCrypt
 + Demo login with seeded transaction history for any users who want to view only as a guest
