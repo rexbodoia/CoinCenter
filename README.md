@@ -18,6 +18,10 @@ CoinCenter uses the Coinbase Pro REST API to retrieve live crypto price data upo
 + All charts are dynamically time-framed and feature five timeframes with corresponding price granularities
 + Users can create realtime 'dummy' transactions with any of the four coins at its live price
 
+![Portfolio Chart](/app/assets/images/dashboard.png)
+
+![Asset Chart](/app/assets/images/asset.png)
+
 ### Obstacles
 
 There were several challenges I encountered while completing this project. The first of these difficulties was implementing live API calls to [Coinbase Pro](https://docs.pro.coinbase.com/#api). This was difficult for two reasons:
